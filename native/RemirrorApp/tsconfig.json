@@ -1,0 +1,11 @@
+{
+  "extends": "../../base.tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "lib": ["esnext"],
+    "target": "esnext"
+  },
+  "exclude": ["node_modules", "babel.config.js"]
+}

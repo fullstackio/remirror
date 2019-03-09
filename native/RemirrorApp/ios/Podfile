@@ -1,0 +1,48 @@
+platform :ios, '10.0'
+
+target 'RemirrorApp' do
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge',
+    'DevSupport',
+    'RCTText',
+    'RCTNetwork',
+    'RCTWebSocket',
+    'RCTAnimation',
+    'RCTLinkingIOS'
+  ]
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "RNSVG"
+      target.build_configurations.each do |config|
+        config.build_settings['GCC_NO_COMMON_BLOCKS'] = 'NO'
+      end
+    end
+
+    if target.name == "react-native-webgl"
+      target.build_configurations.each do |config|
+        config.build_settings['ENABLE_BITCODE'] = 'YES'
+      end
+    end
+    # Fixes Archive issue
+    # https://github.com/facebook/react-native/issues/12814#issuecomment-321947367
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
+end
+
+# Remove generated UDIDs https://github.com/ivpusic/react-native-image-crop-picker/issues/680#issuecomment-398636839
+install! 'cocoapods',
+  :deterministic_uuids => false
