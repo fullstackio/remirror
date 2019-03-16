@@ -1,0 +1,56 @@
+{
+  "name": "@remirror/extension-tables",
+  "description": "Mention extension for the remirror wysiwyg editor",
+  "license": "MIT",
+  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
+  "homepage": "https://github.com/ifiokjr/remirror/tree/master/@remirror/extension-tables",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifiokjr/remirror.git",
+    "directory": "@remirror/extension-tables"
+  },
+  "version": "0.0.1-alpha.6",
+  "main": "lib/index.js",
+  "module": "lib/dist/extension-tables.esm.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "FIXME build": "run-s build:declaration build:babel",
+    "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
+    "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
+    "dev": "run-p watch:*",
+    "FIXME lint": "tslint --project tsconfig.json --config ../../tslint.json",
+    "test": "jest",
+    "test:live": "cross-env TEST_ENV=live jest",
+    "FIXME typecheck": "tsc -p ./tsconfig.json --noEmit",
+    "watch:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -w",
+    "watch:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap --watch"
+  },
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@remirror/core": "^0.0.1-alpha.6",
+    "prosemirror-tables": "^0.7.10",
+    "@types/prosemirror-tables": "^0.1.3",
+    "prosemirror-utils": "^0.7.7"
+  },
+  "peerDependencies": {
+    "@types/prosemirror-model": "^1.7.0",
+    "@types/prosemirror-state": "^1.2.3",
+    "@types/prosemirror-view": "^1.3.1",
+    "emotion": "^10.0.7",
+    "prosemirror-model": "^1.7.0",
+    "prosemirror-state": "^1.2.2",
+    "prosemirror-view": "^1.8.3",
+    "react": "^16.8.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "umd": "lib/dist/extension-tables.umd.js",
+  "umd:min": "lib/dist/extension-tables.umd.min.js",
+  "umdGlobals": {
+    "@remirror/core": "RemirrorCore"
+  }
+}

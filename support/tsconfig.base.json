@@ -27,6 +27,7 @@
       "@remirror/extension-enhanced-link": ["@remirror/extension-enhanced-link/src/index.ts"],
       "@remirror/extension-epic-mode": ["@remirror/extension-epic-mode/src/index.ts"],
       "@remirror/extension-mention": ["@remirror/extension-mention/src/index.ts"],
+      "@remirror/extension-tables": ["@remirror/extension-tables/src/index.ts"],
       "@remirror/react": ["@remirror/react/src/index.ts"],
       "@remirror/react-ssr": ["@remirror/react-ssr/src/index.ts"],
       "@remirror/renderer-react": ["@remirror/renderer-react/src/index.ts"],
