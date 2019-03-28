@@ -45,20 +45,21 @@ module.exports = {
     return babelConfig;
   },
   modifyBundlerConfig: config => {
-    const loaders = config.plugins[0].config.loaders.map(loader => {
-      if (loader.loader.includes('react-docgen-typescript-loader')) {
-        return {
-          ...loader,
-          options: {
-            propFilter: prop => !prop.parent.fileName.includes('node_modules'),
-            tsconfigPath: workingDir('./support/tsconfig.base.json'),
-          },
-        };
-      }
-      return loader;
-    });
+    console.log('docrcz bundlerconfig:', JSON.stringify(config.plugins, null, 2));
+    // const loaders = config.plugins[0].config.loaders.map(loader => {
+    //   if (loader.loader.includes('react-docgen-typescript-loader')) {
+    //     return {
+    //       ...loader,
+    //       options: {
+    //         propFilter: prop => !prop.parent.fileName.includes('node_modules'),
+    //         tsconfigPath: workingDir('./support/tsconfig.base.json'),
+    //       },
+    //     };
+    //   }
+    //   return loader;
+    // });
 
-    config.plugins[0].config.loaders = loaders;
+    // config.plugins[0].config.loaders = loaders;
 
     config.module.rules.push({
       test: /\.tsx?$/,

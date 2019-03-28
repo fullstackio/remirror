@@ -36,7 +36,6 @@
     "babel-plugin-lodash": "3.3.4",
     "babel-plugin-module-resolver": "3.2.0",
     "babel-plugin-styled-components": "1.10.0",
-    "babel-preset-docz": "0.13.6",
     "chalk": "2.4.2",
     "cpy-cli": "2.0.0",
     "cross-env": "5.2.0",
@@ -95,6 +94,9 @@
     "typescript": "3.4.0-rc",
     "typescript-styled-plugin": "0.14.0",
     "typescript-tslint-plugin": "0.3.1"
+  },
+  "deprecatedDeps": {
+    "babel-preset-docz": "0.13.6"
   },
   "private": true
 }
