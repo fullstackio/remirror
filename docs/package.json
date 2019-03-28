@@ -14,13 +14,13 @@
     "@remirror/renderer-react": "0.0.1-alpha.10",
     "@remirror/ui-twitter": "0.0.1-alpha.10",
     "@types/match-sorter": "2.3.0",
-    "docz": "0.13.7",
-    "docz-core": "0.13.7",
-    "docz-theme-default": "0.13.7",
+    "docz": "1.0.0-rc.3",
+    "docz-core": "1.0.0-rc.3",
+    "docz-theme-default": "1.0.0-rc.3",
     "emoji-mart": "2.9.2",
     "match-sorter": "2.3.0",
-    "react": "16.8.0",
-    "react-dom": "16.8.0"
+    "react": "16.8.4",
+    "react-dom": "16.8.4"
   },
   "private": true,
   "scripts": {

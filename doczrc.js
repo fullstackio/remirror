@@ -40,6 +40,7 @@ module.exports = {
   },
   title: 'Remirror',
   typescript: true,
+  codeSandbox: false,
   modifyBabelRc() {
     return babelConfig;
   },
