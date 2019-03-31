@@ -102,6 +102,7 @@ export interface Extension<GOptions extends BaseExtensionOptions = BaseExtension
 
   /**
    * Determines whether this extension is currently active (only applies to Node Extensions and Mark Extensions)
+   *
    * @param params
    */
   active?(params: ExtensionManagerParams): FlexibleConfig<ExtensionBooleanFunction>;

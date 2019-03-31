@@ -62,7 +62,9 @@
     "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
     "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
     "lint": "tslint --project tsconfig.json --config ../../tslint.json",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit"
+    "typecheck": "tsc -p ./tsconfig.json --noEmit",
+    "api": "api-extractor run",
+    "document":"api-documenter markdown"
   },
   "types": "lib/index.d.ts",
   "umd": "lib/dist/core.umd.js",
