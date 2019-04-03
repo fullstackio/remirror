@@ -1,8 +1,9 @@
-import { SchemaParams } from '@remirror/core';
+import { findDOMRefAtPos, SchemaParams } from '@remirror/core';
 import { AllSelection, NodeSelection, TextSelection } from 'prosemirror-state';
+import { fireEvent } from 'react-testing-library';
 import { coerce, offsetTags } from './builder';
 import { Keyboard } from './keys';
-import { TaggedProsemirrorNode, Tags, TestEditorViewParams } from './types';
+import { FireParams, TaggedProsemirrorNode, Tags, TestEditorViewParams } from './types';
 
 interface InsertTextParams extends TestEditorViewParams {
   /** Text to insert */
@@ -60,6 +61,16 @@ export function keyboardShortcut({ view, shortcut }: KeyboardShortcutParams) {
     .start()
     .mod({ text: shortcut })
     .end();
+}
+
+interface FireEventAtPositionParams extends TestEditorViewParams, FireParams {}
+
+/**
+ * Fires an event at the provided position or the current selected position in the dom.
+ */
+export function fireEventAtPosition({ view, event, options = {}, position }: FireEventAtPositionParams) {
+  const element = view.domAtPos(position || view.state.selection.anchor).node! as HTMLElement;
+  fireEvent[event](element, options);
 }
 
 interface ProcessTextParams extends SchemaParams {

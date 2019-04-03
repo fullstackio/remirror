@@ -20,6 +20,7 @@ import { BaseExtensionNodeNames, nodeExtensions } from './test-schema';
 import {
   dispatchNodeSelection,
   dispatchTextSelection,
+  fireEventAtPosition,
   insertText,
   keyboardShortcut,
   replaceSelection,
@@ -143,6 +144,10 @@ export const renderEditor = <
           keyboardShortcut({ shortcut, view });
           return createAddContentReturn();
         },
+        fire: params => {
+          fireEventAtPosition({ view, ...params });
+          return createAddContentReturn();
+        },
       };
     };
 
@@ -178,7 +183,7 @@ export const renderEditor = <
     utils,
     view,
     schema,
-    state: view.state,
+    getState: returnedParams.manager.getEditorState,
     add,
     nodes: nodesWithoutAttrs,
     marks: marksWithoutAttrs,

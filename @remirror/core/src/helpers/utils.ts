@@ -49,16 +49,16 @@ export const removeNodeAtPos = (position: number) => (tr: Transaction) => {
  * @param position
  * @param domAtPos
  */
-export const findDOMRefAtPos = (position: number, view: EditorView) => {
+export const findDOMRefAtPos = (position: number, view: EditorView): HTMLElement => {
   const dom = view.domAtPos(position);
   const node = dom.node.childNodes[dom.offset];
 
   if (isTextDOMNode(dom.node)) {
-    return dom.node.parentNode;
+    return dom.node.parentNode as HTMLElement;
   }
 
   if (!node || isTextDOMNode(node)) {
-    return dom.node;
+    return dom.node as HTMLElement;
   }
 
   return node as HTMLElement;
