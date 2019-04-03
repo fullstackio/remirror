@@ -134,7 +134,7 @@
     "build:production": "cross-env NODE_ENV=production yarn build",
     "build:rollup": "rollup --config ./support/rollup/rollup.config.js",
     "changelog": "lerna-changelog",
-    "checks": "run-s integrity lint typecheck test",
+    "checks": "run-p integrity lint typecheck test",
     "checks:parallel": "run-p lint typecheck test",
     "ci": "yarn clean && yarn frozen",
     "ci:checks": "run-s integrity lint typecheck",

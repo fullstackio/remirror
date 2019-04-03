@@ -2,7 +2,6 @@ import { fromHTML, toHTML } from '@remirror/core';
 import { createBaseTestManager } from '@test-fixtures/schema-helpers';
 import { pmBuild } from 'jest-prosemirror';
 import { renderEditor } from 'jest-remirror';
-import { fireEvent } from 'react-testing-library';
 import { Link, LinkOptions } from '../link';
 
 const href = 'https://test.com';
@@ -225,7 +224,7 @@ describe('plugin', () => {
   });
 
   describe('clickHandler', () => {
-    it.skip('selects the full text of the link when clicked', () => {
+    it('selects the full text of the link when clicked', () => {
       const testLink = link({ href });
       add(doc(p(testLink('Li<cursor>nk')))).fire({ event: 'click' });
       const { from, to } = getState().selection;
