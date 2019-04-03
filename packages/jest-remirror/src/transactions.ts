@@ -2,6 +2,7 @@ import { findDOMRefAtPos, SchemaParams } from '@remirror/core';
 import { AllSelection, NodeSelection, TextSelection } from 'prosemirror-state';
 import { fireEvent } from 'react-testing-library';
 import { coerce, offsetTags } from './builder';
+import { createEvents } from './events';
 import { Keyboard } from './keys';
 import { FireParams, TaggedProsemirrorNode, Tags, TestEditorViewParams } from './types';
 
@@ -68,9 +69,32 @@ interface FireEventAtPositionParams extends TestEditorViewParams, FireParams {}
 /**
  * Fires an event at the provided position or the current selected position in the dom.
  */
-export function fireEventAtPosition({ view, event, options = {}, position }: FireEventAtPositionParams) {
-  const element = view.domAtPos(position || view.state.selection.anchor).node! as HTMLElement;
-  fireEvent[event](element, options);
+export function fireEventAtPosition({
+  view,
+  event,
+  options = {},
+  position = view.state.selection.anchor,
+}: FireEventAtPositionParams) {
+  const element = findDOMRefAtPos(position, view)!;
+  const syntheticEvents = createEvents(event, options);
+
+  syntheticEvents.forEach(syntheticEvent => fireEvent(element, syntheticEvent));
+
+  if (
+    event === ('tripleClick' as any) &&
+    !view.someProp('handleTripleClick', f => f(view, position, syntheticEvents[2]))
+  ) {
+    syntheticEvents.forEach(syntheticEvent => view.dispatchEvent(syntheticEvent));
+  }
+  if (
+    event === 'dblClick' &&
+    !view.someProp('handleDoubleClick', f => f(view, position, syntheticEvents[0]))
+  ) {
+    syntheticEvents.forEach(syntheticEvent => view.dispatchEvent(syntheticEvent));
+  }
+  if (event === 'click' && !view.someProp('handleClick', f => f(view, position, syntheticEvents[0]))) {
+    syntheticEvents.forEach(syntheticEvent => view.dispatchEvent(syntheticEvent));
+  }
 }
 
 interface ProcessTextParams extends SchemaParams {
@@ -136,6 +160,7 @@ interface DispatchTextSelectionParams extends TestEditorViewParams {
 export const dispatchTextSelection = ({ view, start, end }: DispatchTextSelectionParams) => {
   const { state } = view;
   const tr = state.tr.setSelection(TextSelection.create(state.doc, start, end));
+
   view.dispatch(tr);
 };
 
