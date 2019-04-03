@@ -3,7 +3,8 @@ import { MarkType, NodeType } from 'prosemirror-model';
 import { liftListItem, wrapInList } from 'prosemirror-schema-list';
 import { Attrs, AttrsParams, CommandFunction, FromToParams, NodeTypeParams } from '../types';
 import { isNumber } from './base';
-import { nodeActive } from './utils';
+import { getMarkRange } from './document';
+import { nodeActive, selectionEmpty } from './utils';
 /**
  * Update the selection with the provided MarkType
  *
@@ -131,9 +132,15 @@ export const replaceText = ({
  * Removes a mark from the current selection
  *
  * @param type
+ * @param expand - whether to expand empty selections to the current mark range
  */
-export const removeMark = (type: MarkType): CommandFunction => (state, dispatch) => {
-  const { from, to } = state.selection;
+export const removeMark = (type: MarkType, expand: boolean = false): CommandFunction => (state, dispatch) => {
+  let { from, to } = state.selection;
+
+  if (expand && selectionEmpty(state)) {
+    ({ from, to } = getMarkRange(state.selection.$anchor, type) || { from, to });
+  }
+
   if (dispatch) {
     dispatch(state.tr.removeMark(from, to, type));
   }

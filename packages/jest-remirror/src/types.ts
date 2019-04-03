@@ -9,13 +9,31 @@ import {
   MarkExtension,
   NodeExtension,
   Omit,
+  PlainObject,
   ProsemirrorNode,
   RemirrorActions,
   SchemaParams,
 } from '@remirror/core';
 import { InjectedRemirrorProps } from '@remirror/react';
 import { Node as PMNode } from 'prosemirror-model';
-import { RenderResult } from 'react-testing-library';
+import { EventType, RenderResult } from 'react-testing-library';
+
+export interface FireParams {
+  /**
+   * The event to fire on the view
+   */
+  event: EventType;
+
+  /**
+   * Options passed into the event
+   */
+  options?: PlainObject;
+
+  /**
+   * Override the default position to use
+   */
+  position?: number;
+}
 
 export interface BaseFactoryParams extends SchemaParams, Partial<AttrsParams> {
   /**
@@ -138,6 +156,14 @@ export interface AddContentReturn extends EditorStateParams {
   shortcut(shortcut: string): AddContentReturn;
 
   /**
+   * Fires a custom event at the specified dom node.
+   * e.g. `click`
+   *
+   * @param shortcut
+   */
+  fire(params: FireParams): AddContentReturn;
+
+  /**
    * Simply calls add again which overwrites the whole doc
    */
   overwrite: AddContent;
@@ -175,7 +201,7 @@ export type CreateTestEditorReturn<
   marks: MarkWithoutAttrs<GPlainMarkNames>;
   attrNodes: NodeWithAttrs<GAttrNodeNames>;
   attrMarks: MarkWithAttrs<GAttrMarkNames>;
-  state: EditorState;
+  getState(): EditorState;
   schema: EditorSchema;
 };
 

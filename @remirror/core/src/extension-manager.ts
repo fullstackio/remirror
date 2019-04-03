@@ -372,15 +372,15 @@ export class ExtensionManager {
           methodFactory(params, callback);
         });
       },
-      getItemParams: (ext, params) =>
-        ext.commands({
+      getItemParams: (extension, params) =>
+        extension.commands({
           schema: params.schema,
           getEditorState: this.getEditorState,
           getPortalContainer: this.getPortalContainer,
-          ...(isMarkExtension(ext)
-            ? { type: params.schema.marks[ext.name] }
-            : isNodeExtension(ext)
-            ? { type: params.schema.nodes[ext.name] }
+          ...(isMarkExtension(extension)
+            ? { type: params.schema.marks[extension.name] }
+            : isNodeExtension(extension)
+            ? { type: params.schema.nodes[extension.name] }
             : {}),
         }),
     },
@@ -420,6 +420,11 @@ const booleanFlexibleFunctionMap = <GKey extends 'enabled' | 'active'>(key: GKey
         schema: params.schema,
         getEditorState: ctx.getEditorState,
         getPortalContainer: ctx.getPortalContainer,
+        ...(isMarkExtension(extension)
+          ? { type: params.schema.marks[extension.name] }
+          : isNodeExtension(extension)
+          ? { type: params.schema.nodes[extension.name] }
+          : {}),
       }),
   });
 };
