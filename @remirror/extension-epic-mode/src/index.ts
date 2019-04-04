@@ -51,6 +51,7 @@ const createEpicModePlugin = (ctx: Extension<EpicModeOptions>) => {
         return pluginState;
       },
     },
+
     props: {
       handleKeyPress(view) {
         const pluginState = getPluginState<EpicModePluginState>(ctx.pluginKey, view.state);
@@ -59,6 +60,7 @@ const createEpicModePlugin = (ctx: Extension<EpicModeOptions>) => {
         return false;
       },
     },
+
     view(view) {
       const pluginState = getPluginState<EpicModePluginState>(ctx.pluginKey, view.state).init(view);
 

@@ -44,6 +44,7 @@
       "emoji-mart",
       "react-feather",
       "prismjs",
+      "refractor",
       "jest-dom"
     ]
   }
