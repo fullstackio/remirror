@@ -9,12 +9,12 @@ import {
   RemirrorExtension,
   RemirrorManager,
   RemirrorProps,
-  useRemirrorContext,
+  useRemirror,
 } from '@remirror/react';
 import { RenderTree } from '@remirror/renderer-react';
 
 const SillyMenu: FC = () => {
-  const { getPositionerProps, actions } = useRemirrorContext();
+  const { getPositionerProps, actions } = useRemirror();
 
   const runAction = memoize(
     (method: () => void): MouseEventHandler<HTMLElement> => e => {

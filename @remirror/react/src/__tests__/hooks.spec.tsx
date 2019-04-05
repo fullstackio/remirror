@@ -4,13 +4,13 @@ import { injectedPropsShape, positionerShape } from '@test-fixtures/object-shape
 import { createTestManager } from '@test-fixtures/schema-helpers';
 import { render } from 'react-testing-library';
 import { RemirrorEditor } from '../components/providers';
-import { usePositioner, useRemirrorContext } from '../hooks';
+import { usePositioner, useRemirror } from '../hooks';
 import { bubblePositioner } from '../positioners';
 
 test('useRemirrorContext', () => {
   expect.assertions(1);
   const HookComponent: FC = () => {
-    const injectedProps = useRemirrorContext();
+    const injectedProps = useRemirror();
     expect(injectedProps).toMatchObject(injectedPropsShape);
     return <div />;
   };

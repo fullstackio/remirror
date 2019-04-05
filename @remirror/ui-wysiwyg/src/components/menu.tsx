@@ -30,7 +30,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import keyCode from 'keycode';
 
 import { Attrs, memoize } from '@remirror/core';
-import { bubblePositioner, useRemirrorContext } from '@remirror/react';
+import { bubblePositioner, useRemirror } from '@remirror/react';
 import { ButtonState, styled } from '../theme';
 import {
   BubbleContent,
@@ -74,7 +74,7 @@ interface MenuBarProps extends Pick<BubbleMenuProps, 'activateLink'> {
 }
 
 export const MenuBar: FC<MenuBarProps> = ({ inverse, activateLink }) => {
-  const { actions } = useRemirrorContext();
+  const { actions } = useRemirror();
 
   return (
     <Toolbar>
@@ -143,7 +143,7 @@ const bubbleMenuItems: Array<[string, [IconDefinition, string?], Attrs?]> = [
 ];
 
 export const BubbleMenu: FC<BubbleMenuProps> = ({ linkActivated = false, deactivateLink, activateLink }) => {
-  const { actions, getPositionerProps } = useRemirrorContext();
+  const { actions, getPositionerProps } = useRemirror();
   const { bottom, left, ref } = getPositionerProps({
     ...bubblePositioner,
     isActive: params => bubblePositioner.isActive(params) || linkActivated,

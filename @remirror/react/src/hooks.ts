@@ -30,14 +30,14 @@ import { UsePositionerParams } from './types';
  * }
  * ```
  */
-export const useRemirrorContext = () => {
+export const useRemirror = () => {
   return useContext(RemirrorEditorContext);
 };
 
 /**
  * A low level context picker to obtain the manager from within a RemirrorManager context
  */
-export const useRemirrorManagerContext = () => {
+export const useRemirrorManager = () => {
   return useContext(RemirrorManagerContext);
 };
 
@@ -72,7 +72,7 @@ export const usePositioner = <GRefKey extends string = 'ref'>({
   positioner,
   ...rest
 }: UsePositionerParams<GRefKey>) => {
-  const { getPositionerProps } = useRemirrorContext();
+  const { getPositionerProps } = useRemirror();
 
   return getPositionerProps<GRefKey>({ ...positioner, ...rest });
 };

@@ -3,7 +3,7 @@ import { Placeholder } from '@remirror/core-extensions';
 import { EditorView } from 'prosemirror-view';
 import React, { FC } from 'react';
 import { render, RenderResult } from 'react-testing-library';
-import { useRemirrorManagerContext } from '../../hooks';
+import { useRemirrorManager } from '../../hooks';
 import { ManagedRemirrorEditor } from '../providers';
 import { RemirrorExtension } from '../remirror-extension';
 import { RemirrorManager } from '../remirror-manager';
@@ -11,7 +11,7 @@ import { RemirrorManager } from '../remirror-manager';
 test('a manager is created', () => {
   expect.assertions(1);
   const Component: FC = () => {
-    const manager = useRemirrorManagerContext();
+    const manager = useRemirrorManager();
     expect(manager).toBeTruthy();
     return null;
   };
@@ -39,7 +39,7 @@ describe('manager prop', () => {
   let manager!: ExtensionManager;
   let rerender: RenderResult['rerender'];
   const Component: FC = () => {
-    manager = useRemirrorManagerContext()!;
+    manager = useRemirrorManager()!;
     return null;
   };
 
@@ -92,7 +92,7 @@ describe('manager prop', () => {
 
 test('it supports <RemirrorExtension />', () => {
   const Component: FC = () => {
-    const manager = useRemirrorManagerContext();
+    const manager = useRemirrorManager();
     expect(manager.extensions).toContainAnyValues([expect.any(NewExtension), expect.any(Placeholder)]);
     return null;
   };

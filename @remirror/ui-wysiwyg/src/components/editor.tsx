@@ -22,7 +22,7 @@ import {
   RemirrorExtension,
   RemirrorManager,
   RemirrorProps,
-  useRemirrorContext,
+  useRemirror,
 } from '@remirror/react';
 import deepMerge from 'deepmerge';
 import { ThemeProvider } from 'emotion-theming';
@@ -104,7 +104,7 @@ export class WysiwygUI extends PureComponent<WysiwygUIProps> {
 }
 
 const InnerEditor: FC<BubbleMenuProps> = ({ linkActivated, deactivateLink, activateLink }) => {
-  const { getRootProps } = useRemirrorContext();
+  const { getRootProps } = useRemirror();
 
   return (
     <EditorWrapper>

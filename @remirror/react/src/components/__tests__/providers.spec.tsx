@@ -1,14 +1,14 @@
 import React, { FC } from 'react';
 import { render } from 'react-testing-library';
 import { withRemirror } from '../../hocs';
-import { useRemirrorContext } from '../../hooks';
+import { useRemirror } from '../../hooks';
 import { InjectedRemirrorProps } from '../../types';
 import { ManagedRemirrorEditor } from '../providers';
 import { RemirrorManager } from '../remirror-manager';
 
 describe('ManagedRemirrorEditor', () => {
   const TestComponent: FC = () => {
-    const { getRootProps } = useRemirrorContext();
+    const { getRootProps } = useRemirror();
     return <div data-testid='target' {...getRootProps()} />;
   };
 

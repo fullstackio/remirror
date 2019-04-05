@@ -3,7 +3,7 @@ import React from 'react';
 import { MakeOptional, Omit } from '@remirror/core';
 import { RemirrorEditorContext } from '../contexts';
 import { defaultProps } from '../helpers';
-import { useRemirrorManagerContext } from '../hooks';
+import { useRemirrorManager } from '../hooks';
 import { RemirrorElementType, RemirrorFC, RemirrorProps } from '../types';
 import { Remirror } from './remirror';
 
@@ -42,7 +42,7 @@ export const ManagedRemirrorEditor: RemirrorFC<Omit<RemirrorProviderProps, 'mana
   children,
   ...props
 }) => {
-  const manager = useRemirrorManagerContext();
+  const manager = useRemirrorManager();
 
   return manager ? (
     <RemirrorEditor {...props} manager={manager}>
