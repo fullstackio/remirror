@@ -20,7 +20,7 @@ export const LEAF_NODE_REPLACING_CHARACTER = '\ufffc';
 /**
  * The null character.
  *
- * @see https://stackoverflow.com/a/6380172
+ * See {@link https://stackoverflow.com/a/6380172}
  */
 export const NULL_CHARACTER = '\0';
 

@@ -2,7 +2,7 @@ import { MarkSpec, MarkType, Node as PMNode, NodeSpec, NodeType } from 'prosemir
 import { Plugin as PMPlugin } from 'prosemirror-state';
 import { NodeViewPortalContainer } from '../portal-container';
 import { EditorView, InputRule, Mark, Transaction } from './aliases';
-import { Attrs, EditorSchema, EditorState, Omit, ProsemirrorNode } from './base';
+import { AnyFunction, Attrs, EditorSchema, EditorState, Omit, ProsemirrorNode } from './base';
 import { SchemaParams } from './builders';
 
 /**
@@ -73,7 +73,10 @@ export interface ExtensionManagerParams extends SchemaParams {
   getEditorState: () => EditorState;
 }
 
-export type FlexibleConfig<GFunc> = GFunc | GFunc[] | Record<string, GFunc | GFunc[]>;
+export type FlexibleConfig<GFunc extends AnyFunction, GNames extends string = string> =
+  | GFunc
+  | GFunc[]
+  | Record<GNames, GFunc | GFunc[]>;
 
 export type ExtensionCommandFunction = (attrs?: Attrs) => CommandFunction;
 export type ExtensionBooleanFunction = (attrs?: Attrs) => boolean;
@@ -109,7 +112,7 @@ export interface ActionMethods {
 export type RemirrorActions<GKeys extends string = string> = Record<GKeys, ActionMethods>;
 
 /**
- * Marks are categorised into different groups. One motivation for this was to allow the `code` mark
+ * Marks are categorized into different groups. One motivation for this was to allow the `code` mark
  * to exclude other marks, without needing to explicitly name them. Explicit naming requires the
  * named mark to exist in the schema. This is undesirable because we want to construct different
  * schemas that have different sets of nodes/marks.
@@ -123,6 +126,9 @@ export enum MarkGroup {
   INDENTATION = 'indentation',
 }
 
+/**
+ * Defines the type of the extension.
+ */
 export enum ExtensionType {
   NODE = 'node',
   MARK = 'mark',

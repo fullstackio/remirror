@@ -101,7 +101,7 @@ export class Link extends MarkExtension<LinkOptions> {
     return {
       update: (attrs?: Attrs) => updateMark(type, attrs),
       remove: () => {
-        return removeMark(type, true);
+        return removeMark({ type, expand: true });
       },
     };
   }

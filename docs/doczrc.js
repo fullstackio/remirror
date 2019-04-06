@@ -1,10 +1,10 @@
-const externalLinks = require('remark-external-links');
-const path = require('path');
+import externalLinks from 'remark-external-links';
+import { resolve } from 'path';
 
-const PUBLIC = path.resolve(__dirname, 'public');
-const THEME = path.resolve(__dirname, 'theme');
+const PUBLIC = resolve(__dirname, 'public');
+const THEME = resolve(__dirname, 'theme');
 
-module.exports = {
+export default {
   title: 'Remirror',
   description: 'A world class text editor for every JavaScript environment',
   propsParser: false,

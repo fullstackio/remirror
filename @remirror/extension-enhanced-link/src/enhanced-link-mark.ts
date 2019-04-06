@@ -65,7 +65,7 @@ export class EnhancedLink extends MarkExtension<EnhancedLinkOptions> {
         return updateMark(type, attrs);
       }
 
-      return removeMark(type);
+      return removeMark({ type });
     };
   }
 

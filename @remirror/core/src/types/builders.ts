@@ -1,13 +1,11 @@
-import { EditorView } from './aliases';
-import { Attrs, EditorSchema, EditorState, MarkType, NodeType, Position } from './base';
-
 /**
- * @module
- *
  * Trying out a new thing with interface builders which provide
  * the basic interface elements that can be combined into a well documented
- * paramter interface.
+ * parameter interface.
  */
+
+import { EditorView } from './aliases';
+import { Attrs, EditorSchema, EditorState, MarkType, NodeType, Position } from './base';
 
 export interface EditorViewParams {
   /**
@@ -57,7 +55,10 @@ export interface FromToParams {
 
 export interface FixedCoordsParams {
   /**
-   * Position or coordinates relative to the window. Typically this is the result of calling:
+   * Position or coordinates relative to the window.
+   *
+   * @remarks
+   * Typically this is the result of calling the following:
    *
    * ```ts
    * view.coordsAtPos(pos);

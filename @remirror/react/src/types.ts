@@ -56,7 +56,7 @@ export interface RefParams<GRefKey extends string = 'ref'> {
   /**
    * A custom ref key which allows a reference to be obtained from non standard components.
    *
-   * @default 'ref'
+   * @defaultValue 'ref'
    */
   refKey?: GRefKey;
 }
@@ -146,28 +146,28 @@ export interface RemirrorProps {
    * Remirror exports an uncontrolled component. Value changes are passed back out of the editor and there is now way to
    * set the value via props. As a result this is the only opportunity to directly control the rendered text.
    *
-   * @default "{ type: 'doc', content: [{ type: 'paragraph' }] }"
+   * @defaultValue `{ type: 'doc', content: [{ type: 'paragraph' }] }`
    */
   initialContent: ObjectNode | string;
 
   /**
    * Adds attributes directly to the prosemirror html element.
    *
-   * @default {}
+   * @defaultValue `{}`
    */
   attributes: Record<string, string> | AttributePropFunction;
 
   /**
    * Determines whether this editor is editable or not.
    *
-   * @default true
+   * @defaultValue true
    */
   editable: boolean;
 
   /**
    * Set to true to force the focus on the editor when the editor first loads.
    *
-   * @default false
+   * @defaultValue false
    */
   autoFocus?: boolean;
 
@@ -177,7 +177,7 @@ export interface RemirrorProps {
    * <Remirror placeholder={['Please enter your message', { color: 'red' }]} {...props} />
    * ```
    *
-   * @default undefined
+   * @defaultValue undefined
    */
   placeholder?: string | [string, ObjectInterpolation<undefined>];
   /**
@@ -213,25 +213,28 @@ export interface RemirrorProps {
   /**
    * Sets the accessibility label for the editor instance.
    *
-   * @default ''
+   * @defaultValue ''
    */
   label: string;
 
   /**
    * Determines whether or not to use the built in extensions.
+   *
+   * @remarks
+   * Use this only if you would like to take full control of all your extensions and if you know what you're doing.
+   *
    * ```ts
    * const builtInExtensions = [new Placeholder(), new Doc(), new Text(), new Paragraph()]
    * ```
-   * Use this only if you would like to take full control of all your extensions and if you know what you're doing.
    *
-   * @default true
+   * @defaultValue true
    */
   usesBuiltInExtensions: boolean;
 
   /**
    * Determine whether the editor should use default styles.
    *
-   * @default true
+   * @defaultValue true
    */
   usesDefaultStyles: boolean;
 
@@ -239,17 +242,19 @@ export interface RemirrorProps {
    * Additional editor styles passed into prosemirror. Used to provide styles for the text, nodes and marks
    * rendered in the editor.
    *
-   * @default {}
+   * @defaultValue `{}`
    */
   editorStyles: Interpolation;
 
   /**
    * Determine whether the Prosemirror view is inserted as first in the holding html element or last.
    *
+   * @remarks
+   *
    * Last means that any elements added to the holding react component will actually be inserted before and as a result would lose
    * click access.
    *
-   * @default end
+   * @defaultValue 'end'
    */
   insertPosition: 'start' | 'end';
 
@@ -260,11 +265,14 @@ export interface RemirrorProps {
   forceEnvironment?: RenderEnvironment;
 
   /**
+   * Whether to use custom root props within a context provider
+   *
+   * @remarks
    * Let's the editor know that custom root props will be manually applied. This allows for the
    * Providers which depend on this element to specify that the nested components will be responsible
    * for calling `getRootProps()` on the root element.
    *
-   * @default false
+   * @defaultValue false
    */
   customRootProp: boolean;
 }
@@ -349,7 +357,7 @@ export interface BaseExtensionProps {
    *
    * Base extensions are loaded with a priority of 1.
    *
-   * @default 2
+   * @defaultValue 2
    */
   priority?: number;
   children?: never;
@@ -362,7 +370,7 @@ export interface RegisterExtensionParams<GOptions extends {}> {
   extension: Extension<GOptions, any>;
   /**
    * The priority index for the extension
-   * @default 2
+   * @defaultValue 2
    */
   priority: number;
 }

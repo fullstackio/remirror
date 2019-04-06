@@ -21,8 +21,6 @@ export class Mention extends NodeExtension<MentionOptions> {
   /**
    * The name is dynamically generated based on the passed in name.
    * It must start with 'mention'
-   *
-   * @readonly
    */
   get name() {
     return 'mention' as const;
@@ -30,8 +28,6 @@ export class Mention extends NodeExtension<MentionOptions> {
 
   /**
    * Provide the default options for this extension
-   *
-   * @readonly
    */
   get defaultOptions() {
     return {

@@ -16,8 +16,6 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
   /**
    * The name is dynamically generated based on the passed in name.
    * It must start with 'mention'
-   *
-   * @readonly
    */
   get name() {
     return 'codeBlock' as const;
@@ -25,8 +23,6 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
 
   /**
    * Provide the default options for this extension
-   *
-   * @readonly
    */
   get defaultOptions() {
     return {};
@@ -49,6 +45,6 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
   }
 
   public commands({ type, schema }: SchemaNodeTypeParams): ExtensionCommandFunction {
-    return () => toggleBlockItem(type, schema.nodes.paragraph);
+    return () => toggleBlockItem({ type, toggleType: schema.nodes.paragraph });
   }
 }

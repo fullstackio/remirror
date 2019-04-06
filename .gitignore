@@ -96,6 +96,7 @@ secrets/crypt.key
 
 tmp**
 **tmp**
+temp**
 
 @example/
 *.tar.gz

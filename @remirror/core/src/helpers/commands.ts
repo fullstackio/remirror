@@ -1,15 +1,17 @@
 import { lift, setBlockType, wrapIn } from 'prosemirror-commands';
 import { MarkType, NodeType } from 'prosemirror-model';
 import { liftListItem, wrapInList } from 'prosemirror-schema-list';
-import { Attrs, AttrsParams, CommandFunction, FromToParams, NodeTypeParams } from '../types';
+import { Attrs, AttrsParams, CommandFunction, FromToParams, MarkTypeParams, NodeTypeParams } from '../types';
 import { isNumber } from './base';
 import { getMarkRange } from './document';
 import { nodeActive, selectionEmpty } from './utils';
 /**
  * Update the selection with the provided MarkType
  *
- * @param type
- * @param attrs
+ * @param type - the type to update the mark to
+ * @param attrs - attrs to use for the mark
+ *
+ * @public
  */
 export const updateMark = (type: MarkType, attrs: Attrs = {}): CommandFunction => (state, dispatch) => {
   const { from, to } = state.selection;
@@ -22,11 +24,13 @@ export const updateMark = (type: MarkType, attrs: Attrs = {}): CommandFunction =
 /**
  * Toggle between wrapping an inactive node with the provided node type, and lifting it up into it's parent.
  *
- * @param type
- * @param attrs
+ * @param type - the node type to toggle
+ * @param attrs - the attrs to use for the node
+ *
+ * @public
  */
 export const toggleWrap = (type: NodeType, attrs?: Attrs): CommandFunction => (state, dispatch) => {
-  const isActive = nodeActive(state, type);
+  const isActive = nodeActive({ state, type });
 
   if (isActive) {
     return lift(state, dispatch);
@@ -36,16 +40,19 @@ export const toggleWrap = (type: NodeType, attrs?: Attrs): CommandFunction => (s
 };
 
 /**
- * Toggles a list item. When the provided list wrapper is inactive (e.g. ul) then wrap the list with this type.
+ * Toggles a list item.
+ *
+ * @remarks
+ * When the provided list wrapper is inactive (e.g. ul) then wrap the list with this type.
  * When it is active then remove the selected line from the list.
  *
- * @param type
- * @param itemType
+ * @param type - the list node type
+ * @param itemType - the list item type (must be in the schema)
  *
- * @returns a command function
+ * @public
  */
 export const toggleList = (type: NodeType, itemType: NodeType): CommandFunction => (state, dispatch) => {
-  const isActive = nodeActive(state, type);
+  const isActive = nodeActive({ state, type });
 
   if (isActive) {
     return liftListItem(itemType)(state, dispatch);
@@ -54,18 +61,25 @@ export const toggleList = (type: NodeType, itemType: NodeType): CommandFunction 
   return wrapInList(type)(state, dispatch);
 };
 
+interface ToggleBlockItemParams extends NodeTypeParams, Partial<AttrsParams> {
+  /**
+   * The type to toggle back to. Usually this is the paragraph node type.
+   */
+  toggleType: NodeType;
+}
+
 /**
  * Toggle a block between the provided type and toggleType.
  *
- * @param type
- * @param toggleType
- * @param attrs
+ * @param params - the destructured params
+ *
+ * @public
  */
-export const toggleBlockItem = (type: NodeType, toggleType: NodeType, attrs = {}): CommandFunction => (
+export const toggleBlockItem = ({ type, toggleType, attrs = {} }: ToggleBlockItemParams): CommandFunction => (
   state,
   dispatch,
 ) => {
-  const isActive = nodeActive(state, type, attrs);
+  const isActive = nodeActive({ state, type, attrs });
 
   if (isActive) {
     return setBlockType(toggleType)(state, dispatch);
@@ -88,10 +102,9 @@ interface ReplaceTextParams extends Partial<FromToParams>, NodeTypeParams, Parti
 /**
  * Replaces text with an optional appended string at the end
  *
- * @param range
- * @param type
- * @param attrs
- * @param appendText
+ * @param params - the destructured params
+ *
+ * @public
  */
 export const replaceText = ({
   from,
@@ -128,13 +141,26 @@ export const replaceText = ({
   return true;
 };
 
+interface RemoveMarkParams extends MarkTypeParams {
+  /**
+   * Whether to expand empty selections to the current mark range
+   *
+   * @defaultValue false
+   */
+  expand?: boolean;
+}
+
 /**
  * Removes a mark from the current selection
  *
- * @param type
- * @param expand - whether to expand empty selections to the current mark range
+ * @param params - the destructured params
+ *
+ * @public
  */
-export const removeMark = (type: MarkType, expand: boolean = false): CommandFunction => (state, dispatch) => {
+export const removeMark = ({ type, expand = false }: RemoveMarkParams): CommandFunction => (
+  state,
+  dispatch,
+) => {
   let { from, to } = state.selection;
 
   if (expand && selectionEmpty(state)) {

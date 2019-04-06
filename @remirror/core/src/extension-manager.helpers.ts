@@ -23,14 +23,14 @@ interface IsNameUniqueParams {
   /**
    * Whether to throw when not unique
    *
-   * @default false
+   * @defaultValue false
    */
   shouldThrow?: boolean;
 
   /**
    * The type of the unique check
    *
-   * @default 'extension'
+   * @defaultValue 'extension'
    */
   type?: string;
 }
@@ -39,11 +39,7 @@ interface IsNameUniqueParams {
  * Checks whether a given string is unique to the set.
  * Add the name if it doesn't already exist, or throw an error when `shouldThrow` is true.
  *
- * @param params
- * @param params.name
- * @param params.set
- * @param params.shouldThrow
- * @param params.type
+ * @param params - destructured params
  */
 export const isNameUnique = ({ name, set, shouldThrow = false, type = 'extension' }: IsNameUniqueParams) => {
   if (set.has(name)) {
@@ -64,6 +60,55 @@ export interface HasExtensions {
 }
 
 /**
+ * Params used when creating the actions for an extension manager.
+ */
+interface CreateFlexibleFunctionMapParams<
+  GKey extends keyof AnyExtension,
+  GMappedFunc extends AnyFunction,
+  GFunc extends AnyFunction
+> {
+  /**
+   * The key of the method on the extension. For example 'commands', 'active'.
+   */
+  key: GKey;
+
+  /**
+   * Whether or not to check for uniqueness.
+   *
+   * @defaultValue true
+   */
+  checkUniqueness?: boolean;
+
+  /**
+   * Provide the parameters which should be used for the extension method.
+   */
+  getItemParams: (
+    ext: AnyExtension & Pick<Required<AnyExtension>, GKey>,
+    params: CommandParams,
+  ) => FlexibleConfig<GFunc>;
+
+  /**
+   * Transforms the entry into a callable method with attrs as the first optional parameter.
+   * Something like `actions[name].command()`
+   */
+  methodFactory: MethodFactory<GMappedFunc, GFunc>;
+
+  /**
+   * Transform an array of items in a method that can be called.
+   */
+  arrayTransformer: (
+    fns: GFunc[],
+    params: CommandParams,
+    methodFactory: MethodFactory<GMappedFunc, GFunc>,
+  ) => GMappedFunc;
+
+  /**
+   * Passes the context (usually the extension manager) which has an instance property `.extensions`
+   */
+  ctx: HasExtensions;
+}
+
+/**
  * This creates a flexible function mapper.
  *
  * The reason is that extensions can have commands / enabled / active methods that return a very complex type signature
@@ -74,13 +119,7 @@ export interface HasExtensions {
  *
  * This creates a function that is able to step through each possibility and perform the action required.
  *
- * @param param
- * @param param.key
- * @param param.checkUniqueness
- * @param param.getItemParams
- * @param param.methodFactory
- * @param param.arrayTransformer
- * @param param.ctx
+ * @param param - destructured parameters
  */
 export const createFlexibleFunctionMap = <
   GKey extends keyof AnyExtension,
@@ -88,26 +127,14 @@ export const createFlexibleFunctionMap = <
   GFunc extends AnyFunction
 >({
   key,
-  checkUniqueness,
+  checkUniqueness = true,
   getItemParams,
   methodFactory,
   arrayTransformer,
   ctx,
-}: {
-  checkUniqueness: boolean;
-  key: GKey;
-  getItemParams: (
-    ext: AnyExtension & Pick<Required<AnyExtension>, GKey>,
-    params: CommandParams,
-  ) => FlexibleConfig<GFunc>;
-  methodFactory: MethodFactory<GMappedFunc, GFunc>;
-  arrayTransformer: (
-    fns: GFunc[],
-    params: CommandParams,
-    methodFactory: MethodFactory<GMappedFunc, GFunc>,
-  ) => GMappedFunc;
-  ctx: HasExtensions;
-}) => (params: CommandParams): Record<string, GMappedFunc> => {
+}: CreateFlexibleFunctionMapParams<GKey, GMappedFunc, GFunc>) => (
+  params: CommandParams,
+): Record<string, GMappedFunc> => {
   const items: Record<string, GMappedFunc> = {};
   const names = new Set<string>();
   ctx.extensions.filter(hasExtensionProperty(key)).forEach(currentExtension => {
@@ -141,7 +168,7 @@ export const createFlexibleFunctionMap = <
 /**
  * Determines if the passed in extension is a node extension. Useful as a type guard where a particular type of extension is needed.
  *
- * @param extension
+ * @param extension - the extension to check
  */
 export const isNodeExtension = (extension: unknown): extension is NodeExtension<any> =>
   isObject(extension) && extension instanceof NodeExtension;
@@ -149,7 +176,7 @@ export const isNodeExtension = (extension: unknown): extension is NodeExtension<
 /**
  * Determines if the passed in extension is a mark extension. Useful as a type guard where a particular type of extension is needed.
  *
- * @param extension
+ * @param extension - the extension to check
  */
 export const isMarkExtension = (extension: unknown): extension is MarkExtension<any> =>
   isObject(extension) && extension instanceof MarkExtension;
@@ -157,14 +184,23 @@ export const isMarkExtension = (extension: unknown): extension is MarkExtension<
 /**
  * Checks whether the this is an extension and if it is a plain one
  *
- * @param extension
+ * @param extension - the extension to check
  */
 export const isPlainExtension = (extension: unknown): extension is Extension<any, never> =>
   isObject(extension) && extension instanceof Extension && extension.type === ExtensionType.EXTENSION;
 
 /**
  * Checks to see if an optional property exists on an extension.
- * Used by the extension manager to build the plugins, keymaps etc...
+ *
+ * @remarks
+ * This is used by the extension manager to build the:
+ * - plugins
+ * - keys
+ * - styles
+ * - inputRules
+ * - pasteRules
+ *
+ * @param property - the extension property / method name
  */
 export const hasExtensionProperty = <GExt extends AnyExtension, GKey extends keyof GExt>(property: GKey) => (
   extension: GExt,
@@ -178,8 +214,8 @@ type ExtensionMethodProperties = 'inputRules' | 'pasteRules' | 'keys' | 'plugin'
 /**
  * Looks at the passed property and calls the extension with the required parameters.
  *
- * @param property
- * @param params
+ * @param property - the extension method to map
+ * @param params - the params the method will be called with
  */
 export const extensionPropertyMapper = <
   GExt extends AnyExtension,
@@ -190,7 +226,7 @@ export const extensionPropertyMapper = <
 ) => (extension: GExt): GExt[GExtMethodProp] extends AnyFunction ? ReturnType<GExt[GExtMethodProp]> : {} => {
   const extensionMethod = extension[property];
   if (!extensionMethod) {
-    return Cast({});
+    return {} as any;
   }
   return Cast(
     isNodeExtension(extension)
@@ -201,6 +237,10 @@ export const extensionPropertyMapper = <
   );
 };
 
+/**
+ * Provides a priority value to the extension which determines the order in which it is invokes
+ * and hence determines the priority
+ */
 export interface ExtensionMapValue {
   /**
    * The instantiated extension
@@ -211,7 +251,7 @@ export interface ExtensionMapValue {
    * A priority given to the extension.
    * A lower number implies an earlier place in the extension list and hence more priority over the extensions that follow.
    *
-   * @default 2
+   * @defaultValue 2
    */
   priority: number;
 }
@@ -221,16 +261,20 @@ export interface ExtensionMapValue {
  *
  * TODO: Add a check for requiredExtensions and inject them automatically
  *
- * @param extensionMapValues
+ * @param extensionMapValues - the extensions to transform as well as their priorities
+ * @returns the list of extension instances sorted by priority
  */
 export const transformExtensionMap = (extensionMapValues: ExtensionMapValue[]) =>
   extensionMapValues.sort((a, b) => a.priority - b.priority).map(({ extension }) => extension);
 
 /**
- * Takes in an object and removes all function values. Useful for deep equality checks where
- * functions need to be ignored.
+ * Takes in an object and removes all function values.
  *
- * @param obj
+ * @remarks
+ * This is useful for deep equality checks when functions need to be ignored.
+ *
+ * @param obj - an object which might contain methods
+ * @returns a new object without any of the function defined
  */
 export const ignoreFunctions = (obj: Record<string, unknown>) => {
   const newMap: Record<string, unknown> = {};

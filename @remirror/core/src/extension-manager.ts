@@ -120,9 +120,6 @@ export class ExtensionManager {
 
   /**
    * Utility getter for accessing the schema params
-   *
-   * @readonly
-   * @private
    */
   private get schemaParams(): ExtensionManagerParams {
     return {
@@ -432,7 +429,7 @@ const booleanFlexibleFunctionMap = <GKey extends 'enabled' | 'active'>(key: GKey
 /**
  * Checks to see whether this is an extension manager
  *
- * @param value
+ * @param value - the value to check
  */
 export const isExtensionManager = (value: unknown): value is ExtensionManager => {
   return isObject(value) && value instanceof ExtensionManager;

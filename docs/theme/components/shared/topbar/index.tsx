@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import Github from 'react-feather/dist/icons/github';
 import { useWindowSize } from 'react-use';
 
-import { css, styled } from '@styled';
 import { Link } from 'docz';
 
-import { breakpoints } from '../../../styles/responsive';
-import { Container, Logo } from '../../ui';
+import { Container, Logo } from '@components/ui';
+import { css, styled } from '@styled';
+import { breakpoints } from '@styles/responsive';
 import { mainContext } from '../main';
 import { Hamburger } from '../sidebar/hamburger';
 

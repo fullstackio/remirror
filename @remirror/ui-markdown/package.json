@@ -41,8 +41,11 @@
     "directory": "@remirror/ui-markdown"
   },
   "scripts": {
-    "build": "run-s build:declaration build:babel",
+    "build": "run-p build:*",
     "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
+    "dev": "run-p dev:*",
+    "dev:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s --watch",
+    "dev:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap --watch",
     "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
     "dev": "run-p watch:*",
     "lint": "tslint --project tsconfig.json --config ../../tslint.json",
