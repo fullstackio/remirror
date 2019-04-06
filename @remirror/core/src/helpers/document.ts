@@ -386,7 +386,7 @@ export const closestElement = (domNode: Node | null | undefined, selector: strin
 };
 
 /**
- * Checks for an element node like <p> or <div>.
+ * Checks for an element node like `<p>` or `<div>`.
  *
  * @param domNode - the dom node
  *

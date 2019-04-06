@@ -25,13 +25,16 @@ export const LEAF_NODE_REPLACING_CHARACTER = '\ufffc';
 export const NULL_CHARACTER = '\0';
 
 /**
- * A character useful for separating inline nodes. Typically used in decorations as follows.
+ * A character useful for separating inline nodes.
+ *
+ * @remarks
+ * Typically used in decorations as follows.
  *
  * ```ts
  * document.createTextNode(ZERO_WIDTH_SPACE_CHAR)
  * ```
  *
- * This produces the html entity `&#8203;`
+ * This produces the html entity '8203'
  */
 export const ZERO_WIDTH_SPACE_CHAR = '\u200b';
 

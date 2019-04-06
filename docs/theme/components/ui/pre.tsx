@@ -9,6 +9,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { styled } from '@styled';
 import cx from 'classnames';
+// tslint:disable-next-line:no-duplicate-imports
 import prism from 'prismjs';
 
 const PreStyled = styled.pre`
@@ -25,6 +26,8 @@ export const Pre: React.FC<PreProps> = ({ children, className }) => {
   const hasChildren = children && children.props;
   const childrenProps = hasChildren && children.props.props;
   const childrenClassName = childrenProps && childrenProps.className;
+
+  console.log(children, childrenClassName, className);
 
   useEffect(() => {
     if (preRef && preRef.current) {

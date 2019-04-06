@@ -46,11 +46,10 @@
   },
   "private": true,
   "scripts": {
-    "prebuild": "run-s lint typecheck",
     "lint": "tslint --project tsconfig.json --config ./tslint.json",
     "test": "jest",
     "dev": "docz dev",
-    "_build": "docz build",
+    "build": "docz build",
     "typecheck": "tsc -p ./tsconfig.json --noEmit"
   }
 }

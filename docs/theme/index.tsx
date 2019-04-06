@@ -32,7 +32,7 @@ const map = {
   blockquote: components.Blockquote,
 };
 
-const Theme: React.FC = ({ children }) => {
+const Theme: FC = ({ children }) => {
   const config = useConfig();
   return (
     <ThemeProvider theme={config.themeConfig}>

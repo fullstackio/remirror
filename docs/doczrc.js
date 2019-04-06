@@ -6,6 +6,7 @@ const THEME = resolve(__dirname, 'theme');
 
 export default {
   title: 'Remirror',
+  files: '**/*.{md,markdown,mdx}',
   description: 'A world class text editor for every JavaScript environment',
   propsParser: false,
   indexHtml: 'index.html',

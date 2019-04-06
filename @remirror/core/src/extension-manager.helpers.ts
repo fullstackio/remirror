@@ -111,6 +111,8 @@ interface CreateFlexibleFunctionMapParams<
 /**
  * This creates a flexible function mapper.
  *
+ * @remarks
+ *
  * The reason is that extensions can have commands / enabled / active methods that return a very complex type signature
  *
  * ```ts
@@ -120,6 +122,8 @@ interface CreateFlexibleFunctionMapParams<
  * This creates a function that is able to step through each possibility and perform the action required.
  *
  * @param param - destructured parameters
+ *
+ * @internal
  */
 export const createFlexibleFunctionMap = <
   GKey extends keyof AnyExtension,
@@ -238,8 +242,11 @@ export const extensionPropertyMapper = <
 };
 
 /**
- * Provides a priority value to the extension which determines the order in which it is invokes
- * and hence determines the priority
+ * Provides a priority value to the extension which determines the priority.
+ *
+ * @remarks
+ * A lower value for priority means a higher priority. Think of it as an index and position in array
+ * except that it can also support negative values.
  */
 export interface ExtensionMapValue {
   /**
@@ -249,6 +256,8 @@ export interface ExtensionMapValue {
 
   /**
    * A priority given to the extension.
+   *
+   * @remarks
    * A lower number implies an earlier place in the extension list and hence more priority over the extensions that follow.
    *
    * @defaultValue 2
@@ -263,6 +272,8 @@ export interface ExtensionMapValue {
  *
  * @param extensionMapValues - the extensions to transform as well as their priorities
  * @returns the list of extension instances sorted by priority
+ *
+ * @internal
  */
 export const transformExtensionMap = (extensionMapValues: ExtensionMapValue[]) =>
   extensionMapValues.sort((a, b) => a.priority - b.priority).map(({ extension }) => extension);
@@ -275,6 +286,8 @@ export const transformExtensionMap = (extensionMapValues: ExtensionMapValue[]) =
  *
  * @param obj - an object which might contain methods
  * @returns a new object without any of the function defined
+ *
+ * @internal
  */
 export const ignoreFunctions = (obj: Record<string, unknown>) => {
   const newMap: Record<string, unknown> = {};

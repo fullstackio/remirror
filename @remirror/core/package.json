@@ -66,8 +66,10 @@
     "dev:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap --watch",
     "lint": "tslint --project tsconfig.json --config ../../tslint.json",
     "typecheck": "tsc -p ./tsconfig.json --noEmit",
+
     "api": "api-extractor run",
-    "document":"api-documenter markdown --input-folder lib/etc"
+    "api:local": "api-extractor run --local",
+    "document":"node ../api-documenter/lib/start.js markdown --input-folder temp --output-folder ../../docs/api/@remirror"
   },
   "types": "lib/index.d.ts",
   "umd": "lib/dist/core.umd.js",

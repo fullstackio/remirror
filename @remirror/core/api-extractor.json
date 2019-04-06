@@ -3,7 +3,7 @@
   "mainEntryPointFile": "lib/index.d.ts",
   "apiReport": {
     "enabled": true,
-    "reportFolder": "lib/etc"
+    "reportFolder": "etc"
   },
   "docModel": {
     "enabled": true

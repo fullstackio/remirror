@@ -1,6 +1,5 @@
 import React, { FC, FunctionComponent } from 'react';
 
-import { Interpolation } from '@emotion/core';
 import { EDITOR_CLASS_SELECTOR } from '@remirror/core';
 import { Bold, Italic, Underline } from '@remirror/core-extensions';
 import {
@@ -12,7 +11,7 @@ import {
 } from '@remirror/extension-epic-mode';
 import { ManagedRemirrorEditor, RemirrorExtension, RemirrorManager } from '@remirror/react';
 
-const editorStyles: Interpolation = {
+const editorStyles = {
   [EDITOR_CLASS_SELECTOR]: {
     border: '1px solid grey',
     minHeight: '50px',

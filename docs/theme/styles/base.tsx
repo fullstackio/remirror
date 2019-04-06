@@ -1,5 +1,4 @@
-import { css } from '@styled';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from '@styled';
 
 import faktSoftBlond from '@fonts/FaktSoftPro-Blond.woff2';
 import faktSoftMedium from '@fonts/FaktSoftPro-Medium.woff2';
@@ -14,6 +13,8 @@ const selection = (color: string) => css`
 export const BaseStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Inconsolata');
   @import url('https://fonts.googleapis.com/css?family=Zilla+Slab:300,400,600');
+  @import url('https://unpkg.com/codemirror@5.42.0/lib/codemirror.css');
+
   @font-face {
     font-family: 'FaktSoft';
     font-weight: 700;

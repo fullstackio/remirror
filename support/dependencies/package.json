@@ -94,7 +94,7 @@
     "rollup-plugin-terser": "4.0.4",
     "start-server-and-test": "1.7.13",
     "tslint": "5.15.0",
-    "typescript": "3.4.1",
+    "typescript": "3.4.2",
     "typescript-styled-plugin": "0.14.0",
     "typescript-tslint-plugin": "0.3.1"
   },

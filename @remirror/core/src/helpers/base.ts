@@ -18,21 +18,6 @@ import { AnyConstructor, AnyFunction, Literal, PlainObject } from '../types/base
 export const Cast = <GType = any>(arg: any): GType => arg;
 
 /**
- * Use this to create a Tuple with args that can be used as a type
- *
- * ```
- * const ALL_SUITS = tuple('hearts', 'diamonds', 'spades', 'clubs');
- * type SuitTuple = typeof ALL_SUITS;
- * type Suit = SuitTuple[number]; // union type
- * ```
- *
- * @param args - the args which become the tuple
- *
- * @public
- */
-export const tuple = <GType extends Literal[]>(...args: GType) => args;
-
-/**
  * Finds all the regex matches for a string
  *
  * @param text - the text to check against
