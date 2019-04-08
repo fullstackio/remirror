@@ -8,7 +8,7 @@ export default function createCodeBlockPlugin(ctx: NodeExtension<CodeBlockOption
     key: ctx.pluginKey,
     state: {
       init(_, state) {
-        const pluginState = new CodeBlockState(ctx, type);
+        const pluginState = new CodeBlockState(type);
         return pluginState.init(state);
       },
       apply(tr, pluginState, prevState, newState) {

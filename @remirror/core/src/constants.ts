@@ -49,7 +49,7 @@ export enum Side {
 /**
  * A default empty object node. Useful for resetting the content of a prosemirror document.
  */
-export const EMPTY_OBJECT_NODE = {
+export const EMPTY_PARAGRAPH_NODE = {
   type: 'doc',
   content: [
     {

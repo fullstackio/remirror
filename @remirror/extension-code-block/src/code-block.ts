@@ -1,20 +1,17 @@
 import {
-  ExtensionCommandFunction,
   isElementDOMNode,
   NodeExtension,
   NodeExtensionSpec,
+  Plugin,
   SchemaNodeTypeParams,
   toggleBlockItem,
 } from '@remirror/core';
 import refractor from 'refractor/core';
-import { SyntaxTheme, syntaxTheme } from './styles';
+import createCodeBlockPlugin from './plugin';
+import { CodeBlockState } from './state';
+import { syntaxTheme, SyntaxTheme } from './themes';
 import { CodeBlockOptions } from './types';
 
-/**
- * The mention extension manages suggestions through onChange, onKeyDown, onExit and onEnter callbacks.
- * It also allows for configuration options to be passed into transforming suggestion queries into a mention
- * node.
- */
 export class CodeBlock extends NodeExtension<CodeBlockOptions> {
   get name() {
     return 'codeBlock' as const;
@@ -27,6 +24,7 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
     return {
       supportedLanguages: [],
       syntaxTheme: 'atomDark' as SyntaxTheme,
+      defaultLanguage: 'markup',
     };
   }
 
@@ -48,7 +46,7 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
     return {
       attrs: {
         ...this.extraAttrs(),
-        language: { default: 'markup' },
+        language: { default: this.options.defaultLanguage },
       },
       content: 'text*',
       marks: '',
@@ -65,7 +63,13 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
               return false;
             }
 
-            const language = dom.getAttribute(dataAttribute);
+            const codeElement = dom.querySelector('code');
+
+            if (!isElementDOMNode(codeElement)) {
+              return false;
+            }
+
+            const language = codeElement.getAttribute(dataAttribute);
             return { language };
           },
         },
@@ -79,14 +83,22 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
     };
   }
 
+  /**
+   * Add styles for the editor into the dom.
+   */
   public styles() {
     const { syntaxTheme: theme } = this.options;
     if (theme) {
       return syntaxTheme[theme];
     }
+    return;
   }
 
-  public commands({ type, schema }: SchemaNodeTypeParams): ExtensionCommandFunction {
-    return () => toggleBlockItem({ type, toggleType: schema.nodes.paragraph });
+  public commands({ type, schema }: SchemaNodeTypeParams) {
+    return { toggle: () => toggleBlockItem({ type, toggleType: schema.nodes.paragraph }) };
+  }
+
+  public plugin({ type }: SchemaNodeTypeParams): Plugin<CodeBlockState> {
+    return createCodeBlockPlugin(this, type);
   }
 }
