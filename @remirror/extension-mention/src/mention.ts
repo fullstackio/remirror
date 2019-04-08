@@ -18,10 +18,6 @@ import { DEFAULT_MATCHER } from './utils';
  * node.
  */
 export class Mention extends NodeExtension<MentionOptions> {
-  /**
-   * The name is dynamically generated based on the passed in name.
-   * It must start with 'mention'
-   */
   get name() {
     return 'mention' as const;
   }

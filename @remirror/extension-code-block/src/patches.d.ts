@@ -7,21 +7,59 @@ declare module 'refractor/core' {
     (prism: Prism): void;
   }
 
+  namespace refractor {
+    namespace AST {
+      namespace Unist {
+        export interface Node {
+          type: string;
+        }
+
+        export interface Parent extends Node {
+          children: RefractorNode[];
+        }
+
+        export interface Text extends Node {
+          value: string;
+        }
+      }
+
+      interface Properties {
+        className?: string[];
+        [key: string]: any;
+      }
+
+      export interface Element extends Unist.Parent {
+        type: 'element';
+        tagName: string;
+        properties: Properties;
+      }
+
+      export interface Text extends Unist.Text {
+        type: 'text';
+      }
+    }
+
+    export type RefractorNode = AST.Element | AST.Text;
+  }
+
   export interface Refractor {
     register(syntax: RefractorSyntax): void;
-    highlight(value: string, name: string): string;
+    highlight(value: string, name: string): refractor.RefractorNode[];
     registered(name: string): boolean;
     listLanguages(): string[];
   }
 
   const refractor: Refractor;
   export as namespace refractor;
+  export = refractor;
 }
 
 declare module 'refractor' {
   import refractor = require('refractor/core');
   export = refractor;
 }
+
+// tslint:disable-next-line: no-namespace
 
 declare module 'refractor/lang/abap' {
   import { RefractorSyntax } from 'refractor/core';

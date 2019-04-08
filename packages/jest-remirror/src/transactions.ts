@@ -1,4 +1,4 @@
-import { findDOMRefAtPos, SchemaParams } from '@remirror/core';
+import { findDOMRefAtPos, PosParams, SchemaParams } from '@remirror/core';
 import { AllSelection, NodeSelection, TextSelection } from 'prosemirror-state';
 import { fireEvent } from 'react-testing-library';
 import { coerce, offsetTags } from './builder';
@@ -179,12 +179,7 @@ export const dispatchAllSelection = ({ view, taggedDoc }: DispatchAllSelectionPa
   view.dispatch(view.state.tr.setSelection(new AllSelection(taggedDoc)));
 };
 
-interface DispatchNodeSelectionParams extends TestEditorViewParams {
-  /**
-   * The position of the cursor within the node which will be selected
-   */
-  pos: number;
-}
+interface DispatchNodeSelectionParams extends TestEditorViewParams, PosParams {}
 
 /**
  * Dispatch a text selection from start to end

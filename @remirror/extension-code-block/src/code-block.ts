@@ -1,10 +1,13 @@
 import {
   ExtensionCommandFunction,
+  isElementDOMNode,
   NodeExtension,
   NodeExtensionSpec,
   SchemaNodeTypeParams,
   toggleBlockItem,
 } from '@remirror/core';
+import refractor from 'refractor/core';
+import { SyntaxTheme, syntaxTheme } from './styles';
 import { CodeBlockOptions } from './types';
 
 /**
@@ -13,10 +16,6 @@ import { CodeBlockOptions } from './types';
  * node.
  */
 export class CodeBlock extends NodeExtension<CodeBlockOptions> {
-  /**
-   * The name is dynamically generated based on the passed in name.
-   * It must start with 'mention'
-   */
   get name() {
     return 'codeBlock' as const;
   }
@@ -25,13 +24,31 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
    * Provide the default options for this extension
    */
   get defaultOptions() {
-    return {};
+    return {
+      supportedLanguages: [],
+      syntaxTheme: 'atomDark' as SyntaxTheme,
+    };
   }
 
+  /**
+   * Register the configured languages.
+   */
+  protected init() {
+    super.init();
+    for (const language of this.options.supportedLanguages) {
+      refractor.register(language);
+    }
+  }
+
+  /**
+   * Provides the codeBlock schema.
+   */
   get schema(): NodeExtensionSpec {
+    const dataAttribute = 'data-code-block-language';
     return {
       attrs: {
-        language: {},
+        ...this.extraAttrs(),
+        language: { default: 'markup' },
       },
       content: 'text*',
       marks: '',
@@ -39,9 +56,34 @@ export class CodeBlock extends NodeExtension<CodeBlockOptions> {
       code: true,
       defining: true,
       draggable: false,
-      parseDOM: [{ tag: 'pre', preserveWhitespace: 'full' }],
-      toDOM: () => ['pre', ['code', 0]],
+      parseDOM: [
+        {
+          tag: 'pre',
+          preserveWhitespace: 'full',
+          getAttrs: dom => {
+            if (!isElementDOMNode(dom)) {
+              return false;
+            }
+
+            const language = dom.getAttribute(dataAttribute);
+            return { language };
+          },
+        },
+      ],
+      toDOM: node => {
+        const { language, ...rest } = node.attrs;
+        const attrs = { ...rest, class: `language-${language}`, [dataAttribute]: language };
+
+        return ['pre', ['code', attrs, 0]];
+      },
     };
+  }
+
+  public styles() {
+    const { syntaxTheme: theme } = this.options;
+    if (theme) {
+      return syntaxTheme[theme];
+    }
   }
 
   public commands({ type, schema }: SchemaNodeTypeParams): ExtensionCommandFunction {

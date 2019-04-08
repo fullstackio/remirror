@@ -36,10 +36,11 @@ Also I want don't want to be able to use domNodes in the toDOM spec since this w
 */
 
 type DOMOutputSpecPos1 = DOMOutputSpecPosX | { [attr: string]: string };
-type DOMOutputSpecPosX = string | 0 | [string, 0];
+type DOMOutputSpecPosX = string | 0 | [string, 0] | [string, { [attr: string]: string }, 0];
 export type DOMOutputSpec =
   | string
   | [string, 0]
+  | [string, { [attr: string]: string }, 0]
   | [
       string,
       DOMOutputSpecPos1?,

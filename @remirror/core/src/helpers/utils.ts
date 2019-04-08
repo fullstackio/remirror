@@ -6,6 +6,8 @@ import {
   EditorView,
   NodeType,
   NodeTypeParams,
+  PMNodeParams,
+  PosParams,
   ProsemirrorNode,
   Selection,
   Transaction,
@@ -24,7 +26,7 @@ import { isSelection, isTextDOMNode } from './document';
  * @public
  */
 export const equalNodeType = (type: NodeType | NodeType[], node: ProsemirrorNode) => {
-  return (Array.isArray(type) && type.indexOf(node.type) > -1) || node.type === type;
+  return (Array.isArray(type) && type.includes(node.type)) || node.type === type;
 };
 
 /**
@@ -106,10 +108,8 @@ export const removeNodeBefore = (tr: Transaction): Transaction => {
   return tr;
 };
 
-interface FindParentNode {
-  pos: number;
+interface FindParentNode extends PosParams, PMNodeParams {
   start: number;
-  node: ProsemirrorNode;
 }
 
 /**
@@ -130,12 +130,12 @@ export const findParentNode = (predicate: (node: ProsemirrorNode) => boolean) =>
   selection: Selection,
 ): FindParentNode | undefined => {
   const { $from } = selection;
-  for (let i = $from.depth; i > 0; i--) {
-    const node = $from.node(i);
+  for (let currentDepth = $from.depth; currentDepth > 0; currentDepth--) {
+    const node = $from.node(currentDepth);
     if (predicate(node)) {
       return {
-        pos: i > 0 ? $from.before(i) : 0,
-        start: $from.start(i),
+        pos: currentDepth > 0 ? $from.before(currentDepth) : 0,
+        start: $from.start(currentDepth),
         node,
       };
     }

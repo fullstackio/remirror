@@ -45,6 +45,7 @@
       "react-feather",
       "prismjs",
       "refractor",
+      "react-syntax-highlighter",
       "jest-dom"
     ]
   }
