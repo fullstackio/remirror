@@ -136,7 +136,7 @@ export const createDocumentNode: ({ content, schema, doc }: CreateDocumentNodePa
 // Warning: (ae-internal-missing-underscore) The name createFlexibleFunctionMap should be prefixed with an underscore because the declaration is marked as "@internal"
 // 
 // @internal
-export const createFlexibleFunctionMap: <GKey extends "name" | "type" | "options" | "pluginKey" | "defaultOptions" | "requiredExtensions" | "active" | "enabled" | "styles" | "commands" | "pasteRules" | "inputRules" | "keys" | "plugin", GMappedFunc extends AnyFunction<any>, GFunc extends AnyFunction<any>>({ key, checkUniqueness, getItemParams, methodFactory, arrayTransformer, ctx, }: CreateFlexibleFunctionMapParams<GKey, GMappedFunc, GFunc>) => (params: CommandParams) => Record<string, GMappedFunc>;
+export const createFlexibleFunctionMap: <GKey extends "active" | "enabled" | "type" | "name" | "options" | "pluginKey" | "defaultOptions" | "requiredExtensions" | "styles" | "commands" | "pasteRules" | "inputRules" | "keys" | "plugin", GMappedFunc extends AnyFunction<any>, GFunc extends AnyFunction<any>>({ key, checkUniqueness, getItemParams, methodFactory, arrayTransformer, ctx, }: CreateFlexibleFunctionMapParams<GKey, GMappedFunc, GFunc>) => (params: CommandParams) => Record<string, GMappedFunc>;
 
 // @public (undocumented)
 export type DecorationSet = DecorationSet_2<EditorSchema>;
@@ -149,9 +149,7 @@ export class Doc extends NodeExtension {
     // (undocumented)
     readonly name: "doc";
     // (undocumented)
-    readonly schema: {
-        content: string;
-    };
+    readonly schema: NodeExtensionSpec;
 }
 
 // Warning: (ae-forgotten-export) The symbol "DOMOutputSpecPos1" needs to be exported by the entry point index.d.ts
@@ -877,7 +875,7 @@ export type SchemaTypeParams<GType> = ExtensionManagerParams & InferredType<GTyp
 export type Selection = Selection_2<EditorSchema>;
 
 // @public
-export const selectionEmpty: (value: import("prosemirror-state").EditorState<import("prosemirror-model").Schema<string, string>> | Selection_2<import("prosemirror-model").Schema<string, string>>) => boolean;
+export const selectionEmpty: (value: Selection_2<import("prosemirror-model").Schema<string, string>> | import("prosemirror-state").EditorState<import("prosemirror-model").Schema<string, string>>) => boolean;
 
 // @public
 export const setPluginMeta: <GMeta>(key: string | Plugin_2<any, any> | import("prosemirror-state").PluginKey<any, import("prosemirror-model").Schema<string, string>>, tr: import("prosemirror-state").Transaction<import("prosemirror-model").Schema<string, string>>, data: GMeta) => import("prosemirror-state").Transaction<import("prosemirror-model").Schema<string, string>>;

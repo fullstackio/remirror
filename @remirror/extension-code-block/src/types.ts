@@ -1,9 +1,12 @@
-import { NodeExtensionOptions } from '@remirror/core';
+import { Attrs, NodeExtensionOptions } from '@remirror/core';
 import { RefractorSyntax } from 'refractor/core';
+import { SyntaxTheme } from './styles';
 
 export interface CodeBlockOptions extends NodeExtensionOptions {
   /**
    * Import languages from refractor
+   *
+   * @remarks
    * ```ts
    * import jsx from 'refractor/lang/jsx'
    * import typescript from 'refractor/lang/typescript'
@@ -14,12 +17,34 @@ export interface CodeBlockOptions extends NodeExtensionOptions {
    * import { CodeBlock } from '@remirror/extension-code-block';
    *
    * new CodeBlock({ supportedLanguages: [typescript, jsx] })
+   * ```
    *
-   * // Or in JSX
+   * Or as a component
+   * ```tsx
    * <RemirrorManager>
    *   <RemirrorExtension Constructor={CodeBlock} supportedLanguages={[typescript, jsx]} />
    * </RemirrorManager>
    * ```
    */
   supportedLanguages?: RefractorSyntax[];
+
+  /**
+   * The theme to use for the codeBlocks.
+   *
+   * @remarks
+   * Currently only one theme can be set per document.
+   *
+   * Set this to false if you don't want to manage the syntax styles by yourself.
+   * For some tips on how this could be accomplished see {@link https://prismjs.com}
+   *
+   * @default 'atomDark'
+   */
+  syntaxTheme?: SyntaxTheme | false;
+}
+
+export interface CodeBlockAttrs extends Attrs {
+  /**
+   * The language attribute
+   */
+  language: string;
 }

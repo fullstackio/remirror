@@ -5,7 +5,7 @@ import memoizeOne from 'memoize-one';
 import nano from 'nanoid';
 import objectOmit from 'object.omit';
 import objectPick from 'object.pick';
-import { AnyConstructor, AnyFunction, Literal, PlainObject } from '../types/base';
+import { AnyConstructor, AnyFunction, PlainObject } from '../types/base';
 
 /**
  * Type cast an argument. If no type is provided it will default to any.
@@ -586,3 +586,18 @@ export const uniqueArray = <GType>(array: GType[]) => {
   const set = new Set(array);
   return Array.from(set);
 };
+
+/**
+ * Flattens an array
+ *
+ * @param array
+ *
+ * @public
+ */
+export function flattenArray<GType>(array: any[]): GType[] {
+  const flattenedArray: GType[] = [];
+  for (const item of array) {
+    Array.isArray(item) ? flattenArray(item) : flattenedArray.push(item);
+  }
+  return flattenedArray;
+}

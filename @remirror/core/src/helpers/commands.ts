@@ -5,6 +5,7 @@ import { Attrs, AttrsParams, CommandFunction, FromToParams, MarkTypeParams, Node
 import { isNumber } from './base';
 import { getMarkRange } from './document';
 import { nodeActive, selectionEmpty } from './utils';
+
 /**
  * Update the selection with the provided MarkType
  *
