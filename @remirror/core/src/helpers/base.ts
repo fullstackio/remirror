@@ -595,9 +595,7 @@ export const uniqueArray = <GType>(array: GType[]) => {
  * @public
  */
 export function flattenArray<GType>(array: any[]): GType[] {
-  const flattenedArray: GType[] = [];
-  for (const item of array) {
-    Array.isArray(item) ? flattenArray(item) : flattenedArray.push(item);
-  }
-  return flattenedArray;
+  return Array.prototype.flat
+    ? array.flat()
+    : array.reduce((a, b) => a.concat(Array.isArray(b) ? flattenArray(b) : b), []);
 }

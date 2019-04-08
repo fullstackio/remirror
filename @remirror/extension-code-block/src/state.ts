@@ -1,37 +1,60 @@
 import {
   CompareStateParams,
   EditorState,
+  EditorStateParams,
   findChildrenByNode,
   FromToParams,
-  NodeExtension,
   NodeType,
   NodeTypeParams,
   NodeWithPosition,
   PMNodeParams,
-  PositionParams,
   PosParams,
-  Transaction,
   TransactionParams,
 } from '@remirror/core';
 import { DecorationSet } from 'prosemirror-view';
-import { CodeBlockOptions } from './types';
 import { createDecorations } from './utils';
 
 export class CodeBlockState {
+  /**
+   * Keep track of all document codeBlocks
+   */
+  private blocks: NodeWithPosition[] = [];
+
+  /**
+   * The set of cached decorations to minimise dom updates
+   */
   public decorationSet!: DecorationSet;
 
-  constructor(private extension: NodeExtension<CodeBlockOptions>, private type: NodeType) {}
+  constructor(private type: NodeType) {}
 
   /**
    * Creates the initial set of decorations
    */
   public init(state: EditorState) {
     const blocks = findChildrenByNode({ node: state.doc, type: this.type });
-    const decorations = createDecorations(blocks);
-
-    this.decorationSet = DecorationSet.create(state.doc, decorations);
+    this.refreshDecorationSet({ blocks, node: state.doc });
 
     return this;
+  }
+
+  private refreshDecorationSet({ blocks, node }: RefreshDecorationSetParams) {
+    const decorations = createDecorations(blocks);
+    this.decorationSet = DecorationSet.create(node, decorations);
+    this.blocks = blocks;
+  }
+
+  /**
+   * Currently this is very primitive and simply re-renders all the blocks if more than one block has changed.
+   * Or if the length of the blocks has changed.
+   */
+  private updateBlocks({ tr }: EditorStateParams & TransactionParams) {
+    const blocks = findChildrenByNode({ node: tr.doc, type: this.type });
+    if (blocks.length !== this.blocks.length) {
+      this.refreshDecorationSet({ blocks, node: tr.doc });
+      return false;
+    }
+
+    return true;
   }
 
   /**
@@ -39,6 +62,10 @@ export class CodeBlockState {
    */
   public apply({ tr, prevState, newState }: ApplyParams) {
     if (!tr.docChanged) {
+      return this;
+    }
+
+    if (!this.updateBlocks({ state: newState, tr })) {
       return this;
     }
 
@@ -63,18 +90,22 @@ export class CodeBlockState {
   }
 
   private manageDecorationSet({ previous, current, tr }: ManageDecorationSetParams) {
-    if (tr.docChanged) {
-      if (current.type === this.type) {
-        this.updateDecorationSet({ nodeInfo: current, tr });
-      }
-      if (previous.type === this.type && !previous.node.eq(current.node)) {
-        this.updateDecorationSet({ nodeInfo: previous, tr });
-      }
+    if (current.type === this.type) {
+      this.updateDecorationSet({ nodeInfo: current, tr });
+    }
+    if (previous.type === this.type && !previous.node.eq(current.node)) {
+      this.updateDecorationSet({ nodeInfo: previous, tr });
     }
   }
 }
 
 interface ApplyParams extends TransactionParams, CompareStateParams {}
+interface RefreshDecorationSetParams extends PMNodeParams {
+  /**
+   * The positioned nodes
+   */
+  blocks: NodeWithPosition[];
+}
 interface ManageDecorationSetParams extends TransactionParams {
   previous: NodeInformation;
   current: NodeInformation;
@@ -83,6 +114,7 @@ interface ManageDecorationSetParams extends TransactionParams {
 interface UpdateDecorationSetParams extends TransactionParams {
   nodeInfo: NodeInformation;
 }
+
 interface NodeInformation extends NodeTypeParams, FromToParams, PMNodeParams, PosParams {}
 
 const getNodeInformationFromState = (state: EditorState): NodeInformation => {

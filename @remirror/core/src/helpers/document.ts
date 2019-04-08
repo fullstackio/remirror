@@ -14,7 +14,7 @@ import {
   Selection as PMSelection,
   TextSelection,
 } from 'prosemirror-state';
-import { EMPTY_OBJECT_NODE } from '../constants';
+import { EMPTY_PARAGRAPH_NODE } from '../constants';
 import {
   EditorSchema,
   EditorState,
@@ -618,7 +618,7 @@ export const createDocumentNode = ({ content, schema, doc = document }: CreateDo
       return schema.nodeFromJSON(content);
     } catch (e) {
       console.error(e);
-      return schema.nodeFromJSON(EMPTY_OBJECT_NODE);
+      return schema.nodeFromJSON(EMPTY_PARAGRAPH_NODE);
     }
   }
 

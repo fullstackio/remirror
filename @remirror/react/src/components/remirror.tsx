@@ -7,7 +7,7 @@ import {
   EDITOR_CLASS_NAME,
   EDITOR_CLASS_SELECTOR,
   EditorView as EditorViewType,
-  EMPTY_OBJECT_NODE,
+  EMPTY_PARAGRAPH_NODE,
   ExtensionManager,
   isArray,
   isString,
@@ -420,7 +420,7 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
    * @param triggerOnChange whether to notify the onChange handler that the content has been reset
    */
   private clearContent = (triggerOnChange = false) => {
-    this.setContent(EMPTY_OBJECT_NODE, triggerOnChange);
+    this.setContent(EMPTY_PARAGRAPH_NODE, triggerOnChange);
   };
 
   get eventListenerParams(): RemirrorEventListenerParams {

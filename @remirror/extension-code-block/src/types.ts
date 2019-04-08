@@ -1,6 +1,6 @@
 import { Attrs, NodeExtensionOptions } from '@remirror/core';
 import { RefractorSyntax } from 'refractor/core';
-import { SyntaxTheme } from './styles';
+import { SyntaxTheme } from './themes';
 
 export interface CodeBlockOptions extends NodeExtensionOptions {
   /**
@@ -27,6 +27,13 @@ export interface CodeBlockOptions extends NodeExtensionOptions {
    * ```
    */
   supportedLanguages?: RefractorSyntax[];
+
+  /**
+   * The default language to use when none is provided.
+   *
+   * @default 'markup'
+   */
+  defaultLanguage?: string;
 
   /**
    * The theme to use for the codeBlocks.

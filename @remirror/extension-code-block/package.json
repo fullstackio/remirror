@@ -6,9 +6,11 @@
   "license": "MIT",
   "dependencies": {
     "@remirror/core": "0.0.1-alpha.11",
-    "@types/react-syntax-highlighter": "^10.1.0",
-    "react-syntax-highlighter": "^10.2.1",
+    "@types/prettier": "^1.16.1",
     "@types/prismjs": "^1.9.0",
+    "@types/react-syntax-highlighter": "^10.1.0",
+    "prettier": "^1.16.4",
+    "react-syntax-highlighter": "^10.2.1",
     "refractor": "^2.8.0"
   },
   "files": [
@@ -19,10 +21,10 @@
   "main": "lib/index.js",
   "module": "lib/dist/extension-code-block.esm.js",
   "peerDependencies": {
-    "emotion": "^10.0.9",
     "@babel/runtime-corejs2": ">=7",
     "@types/prosemirror-state": "^1.2.3",
     "@types/prosemirror-view": "^1.3.1",
+    "emotion": "^10.0.9",
     "prosemirror-state": "^1.2.2",
     "prosemirror-view": "^1.8.3"
   },

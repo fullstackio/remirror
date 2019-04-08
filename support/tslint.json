@@ -18,6 +18,7 @@
         "prosemirror-test-builder",
         "jest-matcher-utils",
         "jest-image-snapshot",
+        "prettier",
         "chalk",
         "yargs",
         "enzyme",

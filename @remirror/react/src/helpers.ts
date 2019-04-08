@@ -2,7 +2,7 @@ import { jsx } from '@emotion/core';
 import {
   bool,
   Cast,
-  EMPTY_OBJECT_NODE,
+  EMPTY_PARAGRAPH_NODE,
   isArray,
   isFunction,
   isObject,
@@ -132,7 +132,7 @@ export const updateChildWithKey = (
 };
 
 export const defaultProps = asDefaultProps<RemirrorProps>()({
-  initialContent: EMPTY_OBJECT_NODE,
+  initialContent: EMPTY_PARAGRAPH_NODE,
   editable: true,
   usesBuiltInExtensions: true,
   attributes: {},

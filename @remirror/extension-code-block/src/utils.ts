@@ -41,14 +41,14 @@ function parseRefractorNodes(
 }
 
 /**
- * Creates a decoration set for the provides blocks
+ * Creates a decoration set for the provided blocks
  */
 export function createDecorations(blocks: NodeWithPosition[]) {
   const decorations: Decoration[] = [];
 
   blocks.forEach(block => {
     const positionedRefractorNodes = getPositionedRefractorNodes(block);
-
+    // console.log(positionedRefractorNodes);
     positionedRefractorNodes.forEach(positionedRefractorNode => {
       const decoration = Decoration.inline(positionedRefractorNode.from, positionedRefractorNode.to, {
         class: positionedRefractorNode.classes.join(' '),
@@ -57,33 +57,32 @@ export function createDecorations(blocks: NodeWithPosition[]) {
     });
   });
 
+  // console.log(decorations);
   return decorations;
 }
 
-const mapToPositionedRefractorNodeFactory = (startPos: number) => (
-  refractorNode: ParsedRefractorNode,
-): PositionedRefractorNode => {
-  const from = startPos;
-  const to = from + refractorNode.text.length;
-  startPos = to;
-  return {
-    ...refractorNode,
-    from,
-    to,
-  };
+/**
+ * Retrieves positioned refractor nodes from the positionedNode
+ *
+ * @param nodeWithPosition - a node and position
+ * @returns the positioned refractor nodes which are text, classes and a FromTo interface
+ */
+const getPositionedRefractorNodes = ({ node, pos }: NodeWithPosition) => {
+  let startPos = pos + 1;
+  const refractorNodes = refractor.highlight(node.textContent, node.attrs.language);
+  // console.log(JSON.stringify(refractorNodes, null, 2));
+  function mapper(refractorNode: ParsedRefractorNode): PositionedRefractorNode {
+    const from = startPos;
+    const to = from + refractorNode.text.length;
+    startPos = to;
+    return {
+      ...refractorNode,
+      from,
+      to,
+    };
+  }
+
+  const parsedRefractorNodes = parseRefractorNodes(refractorNodes);
+
+  return flattenArray<ParsedRefractorNode>(parsedRefractorNodes).map(mapper);
 };
-
-const getPositionedRefractorNodes = (positionedNodes: NodeWithPosition) => {
-  const startPos = positionedNodes.pos + 1;
-  const refractorNodes = refractor.highlight(
-    positionedNodes.node.textContent,
-    positionedNodes.node.attrs.language,
-  );
-
-  return flattenArray<ParsedRefractorNode>(parseRefractorNodes(refractorNodes)).map(
-    mapToPositionedRefractorNodeFactory(startPos),
-  );
-};
-
-export const sortBlocks = (positionedNodes: NodeWithPosition[]) =>
-  positionedNodes.sort((a, b) => a.pos - b.pos);
