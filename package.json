@@ -1,11 +1,7 @@
 {
   "name": "root",
-  "browserslist": [
-    "> 1%",
-    "not dead"
-  ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "eslintConfig": {
     "extends": [
@@ -122,6 +118,11 @@
   "private": true,
   "resolutions": {
     "react": "16.8.6",
+    "braces": "3.0.1",
+    "semver": "6.0.0",
+    "bl": "0.9.5",
+    "js-yaml": "3.13.1",
+    "tar": "4.4.8",
     "acorn": "6.1.1",
     "react-dom": "16.8.6",
     "@babel/parser": "7.4.3",
@@ -172,7 +173,8 @@
     "test:integration": "cross-env TEST_ENV=integration start-server-and-test launch:docs http-get://localhost:3000 test:integration:no-coverage",
     "test:integration:watch": "cross-env TEST_ENV=integration yarn test:watch",
     "test:watch": "jest  --watch --verbose=false --coverage=false",
-    "typecheck": "lerna run typecheck"
+    "typecheck": "lerna run typecheck",
+    "ci:audit": "audit-ci --high"
   },
   "workspaces": {
     "packages": [
