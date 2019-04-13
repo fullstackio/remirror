@@ -69,10 +69,6 @@ interface ApplyStateParams extends SharedParams {
  * Apply state for managing the created placeholder plugin
  *
  * @param params
- * @param params.pluginState
- * @param params.extension
- * @param params.tr
- * @param params.state
  */
 const applyState = ({ pluginState, extension, tr, state }: ApplyStateParams) => {
   const meta = getPluginMeta<PlaceholderPluginMeta>(extension.pluginKey, tr);

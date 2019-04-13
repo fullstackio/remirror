@@ -63,6 +63,7 @@ const defaultOptions: BaseExtensionOptions = {
 export abstract class Extension<
   GOptions extends BaseExtensionOptions = BaseExtensionOptions,
   GType = never,
+  // tslint:disable-next-line: no-unused
   GCommands extends string = string
 > {
   /**
@@ -196,11 +197,7 @@ export abstract class Extension<
   }
 }
 
-export interface Extension<
-  GOptions extends BaseExtensionOptions = BaseExtensionOptions,
-  GType = never,
-  GCommands extends string = string
-> {
+export interface Extension<GOptions extends BaseExtensionOptions = BaseExtensionOptions, GType = never> {
   /**
    * An extension can declare the extensions it requires with options needed for instantiating them.
    *
@@ -220,7 +217,7 @@ export interface Extension<
    *
    * @param params - extension manager params
    */
-  active?(params: ExtensionManagerParams): FlexibleConfig<ExtensionBooleanFunction, GCommands>;
+  active?(params: ExtensionManagerParams): FlexibleConfig<ExtensionBooleanFunction>;
 
   /**
    * Determines whether this extension is enabled. If an object is returned then it can define different node types and
@@ -228,7 +225,7 @@ export interface Extension<
    *
    * @param params - extension manager parameters
    */
-  enabled?(params: ExtensionManagerParams): FlexibleConfig<ExtensionBooleanFunction, GCommands>;
+  enabled?(params: ExtensionManagerParams): FlexibleConfig<ExtensionBooleanFunction>;
 
   /**
    * Allows extensions to register styles on the editor instance using emotion for dynamic styling.
@@ -265,7 +262,7 @@ export interface Extension<
    *
    * @param params - schema params with type included
    */
-  commands?(params: SchemaTypeParams<GType>): FlexibleConfig<ExtensionCommandFunction, GCommands>;
+  commands?(params: SchemaTypeParams<GType>): FlexibleConfig<ExtensionCommandFunction>;
 
   /**
    * Register paste rules for this extension.

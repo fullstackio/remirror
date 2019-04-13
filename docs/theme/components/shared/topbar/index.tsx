@@ -15,7 +15,7 @@ const Wrapper = styled.div`
   width: 100%;
   position: fixed;
   height: 60px;
-  background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%);
+  /* background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%); */
 
   ${Container} {
     display: flex;
@@ -89,13 +89,8 @@ export const TOPBAR_LINKS: MenuListItem[] = [
   },
   {
     id: 3,
-    children: 'Plugins',
-    to: '/plugins',
-  },
-  {
-    id: 4,
-    children: 'Themes',
-    to: '/themes',
+    children: 'Packages',
+    to: '/packages',
   },
 ];
 
@@ -103,6 +98,7 @@ export const Topbar = () => {
   const { width } = useWindowSize();
   const showFullMenu = width > breakpoints.tablet;
   const { showing, setShowing } = useContext(mainContext);
+  const onClickHamburger = () => setShowing((val: boolean) => !val);
 
   return (
     <Wrapper>
@@ -120,13 +116,10 @@ export const Topbar = () => {
                 </Component>
               );
             })}
-          <IconLink href='https://medium.com/doczoficial' target='_blank'>
-            Blog
-          </IconLink>
-          <IconLink href='https://github.com/pedronauck/docz' target='_blank'>
+          <IconLink href='https://github.com/ifiokjr/remirror' target='_blank'>
             <Github width={30} />
           </IconLink>
-          {!showFullMenu && <Hamburger opened={showing} onClick={() => setShowing((s: any) => !s)} />}
+          {!showFullMenu && <Hamburger opened={showing} onClick={onClickHamburger} />}
         </Menu>
       </Container>
     </Wrapper>
