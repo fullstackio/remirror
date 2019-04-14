@@ -1,1080 +1,1117 @@
-declare module 'refractor/core' {
-  import Prism from 'prismjs';
-
-  export interface RefractorSyntax {
-    displayName: string;
-    aliases: string[];
-    (prism: Prism): void;
-  }
-
-  export interface Refractor {
-    register(syntax: RefractorSyntax): void;
-    highlight(value: string, name: string): string;
-    registered(name: string): boolean;
-    listLanguages(): string[];
-  }
-
-  const refractor: Refractor;
-  export = refractor;
-}
+// Type definitions for refractor 2.8
+// Project: https://github.com/wooorm/refractor#readme
+// Definitions by: Ifiok Jr. <https://github.com/ifiokjr>
+// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 declare module 'refractor' {
   import refractor = require('refractor/core');
   export = refractor;
 }
 
+declare module 'refractor/core' {
+  import * as Prism from 'prismjs';
+
+  namespace refractor {
+    export interface RefractorSyntax {
+      displayName: string;
+      aliases: string[];
+      (prism: typeof Prism): void;
+    }
+
+    namespace AST {
+      namespace Unist {
+        interface Node {
+          type: string;
+        }
+
+        interface Parent extends Node {
+          children: RefractorNode[];
+        }
+
+        interface Text extends Node {
+          value: string;
+        }
+      }
+
+      interface Properties {
+        className?: string[];
+        [key: string]: any;
+      }
+
+      interface Element extends Unist.Parent {
+        type: 'element';
+        tagName: string;
+        properties: Properties;
+      }
+
+      interface Text extends Unist.Text {
+        type: 'text';
+      }
+    }
+
+    export type RefractorNode = AST.Element | AST.Text;
+
+    export function register(syntax: RefractorSyntax): void;
+    export function highlight(value: string, name: string): RefractorNode[];
+    export function registered(name: string): boolean;
+    export function listLanguages(): string[];
+  }
+}
+
+// tslint:disable-next-line: no-namespace
+
 declare module 'refractor/lang/abap' {
   import { RefractorSyntax } from 'refractor/core';
-  const abap: RefractorSyntax;
-  export = abap;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/abnf' {
   import { RefractorSyntax } from 'refractor/core';
-  const abnf: RefractorSyntax;
-  export = abnf;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/actionscript' {
   import { RefractorSyntax } from 'refractor/core';
-  const actionscript: RefractorSyntax;
-  export = actionscript;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/ada' {
   import { RefractorSyntax } from 'refractor/core';
-  const ada: RefractorSyntax;
-  export = ada;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/apacheconf' {
   import { RefractorSyntax } from 'refractor/core';
-  const apacheconf: RefractorSyntax;
-  export = apacheconf;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/apl' {
   import { RefractorSyntax } from 'refractor/core';
-  const apl: RefractorSyntax;
-  export = apl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/applescript' {
   import { RefractorSyntax } from 'refractor/core';
-  const applescript: RefractorSyntax;
-  export = applescript;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/arduino' {
   import { RefractorSyntax } from 'refractor/core';
-  const arduino: RefractorSyntax;
-  export = arduino;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/arff' {
   import { RefractorSyntax } from 'refractor/core';
-  const arff: RefractorSyntax;
-  export = arff;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/asciidoc' {
   import { RefractorSyntax } from 'refractor/core';
-  const asciidoc: RefractorSyntax;
-  export = asciidoc;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/asm6502' {
   import { RefractorSyntax } from 'refractor/core';
-  const asm6502: RefractorSyntax;
-  export = asm6502;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/aspnet' {
   import { RefractorSyntax } from 'refractor/core';
-  const aspnet: RefractorSyntax;
-  export = aspnet;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/autohotkey' {
   import { RefractorSyntax } from 'refractor/core';
-  const autohotkey: RefractorSyntax;
-  export = autohotkey;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/autoit' {
   import { RefractorSyntax } from 'refractor/core';
-  const autoit: RefractorSyntax;
-  export = autoit;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/bash' {
   import { RefractorSyntax } from 'refractor/core';
-  const bash: RefractorSyntax;
-  export = bash;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/basic' {
   import { RefractorSyntax } from 'refractor/core';
-  const basic: RefractorSyntax;
-  export = basic;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/batch' {
   import { RefractorSyntax } from 'refractor/core';
-  const batch: RefractorSyntax;
-  export = batch;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/bison' {
   import { RefractorSyntax } from 'refractor/core';
-  const bison: RefractorSyntax;
-  export = bison;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/bnf' {
   import { RefractorSyntax } from 'refractor/core';
-  const bnf: RefractorSyntax;
-  export = bnf;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/brainfuck' {
   import { RefractorSyntax } from 'refractor/core';
-  const brainfuck: RefractorSyntax;
-  export = brainfuck;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/bro' {
   import { RefractorSyntax } from 'refractor/core';
-  const bro: RefractorSyntax;
-  export = bro;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/c' {
   import { RefractorSyntax } from 'refractor/core';
-  const c: RefractorSyntax;
-  export = c;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/cil' {
   import { RefractorSyntax } from 'refractor/core';
-  const cil: RefractorSyntax;
-  export = cil;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/clike' {
   import { RefractorSyntax } from 'refractor/core';
-  const clike: RefractorSyntax;
-  export = clike;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/clojure' {
   import { RefractorSyntax } from 'refractor/core';
-  const clojure: RefractorSyntax;
-  export = clojure;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/cmake' {
   import { RefractorSyntax } from 'refractor/core';
-  const cmake: RefractorSyntax;
-  export = cmake;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/coffeescript' {
   import { RefractorSyntax } from 'refractor/core';
-  const coffeescript: RefractorSyntax;
-  export = coffeescript;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/cpp' {
   import { RefractorSyntax } from 'refractor/core';
-  const cpp: RefractorSyntax;
-  export = cpp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/crystal' {
   import { RefractorSyntax } from 'refractor/core';
-  const crystal: RefractorSyntax;
-  export = crystal;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/csharp' {
   import { RefractorSyntax } from 'refractor/core';
-  const csharp: RefractorSyntax;
-  export = csharp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/csp' {
   import { RefractorSyntax } from 'refractor/core';
-  const csp: RefractorSyntax;
-  export = csp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/css-extras' {
   import { RefractorSyntax } from 'refractor/core';
-  const cssExtras: RefractorSyntax;
-  export = cssExtras;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/css' {
   import { RefractorSyntax } from 'refractor/core';
-  const css: RefractorSyntax;
-  export = css;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/d' {
   import { RefractorSyntax } from 'refractor/core';
-  const d: RefractorSyntax;
-  export = d;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/dart' {
   import { RefractorSyntax } from 'refractor/core';
-  const dart: RefractorSyntax;
-  export = dart;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/diff' {
   import { RefractorSyntax } from 'refractor/core';
-  const diff: RefractorSyntax;
-  export = diff;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/django' {
   import { RefractorSyntax } from 'refractor/core';
-  const django: RefractorSyntax;
-  export = django;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/docker' {
   import { RefractorSyntax } from 'refractor/core';
-  const docker: RefractorSyntax;
-  export = docker;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/ebnf' {
   import { RefractorSyntax } from 'refractor/core';
-  const ebnf: RefractorSyntax;
-  export = ebnf;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/eiffel' {
   import { RefractorSyntax } from 'refractor/core';
-  const eiffel: RefractorSyntax;
-  export = eiffel;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/ejs' {
   import { RefractorSyntax } from 'refractor/core';
-  const ejs: RefractorSyntax;
-  export = ejs;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/elixir' {
   import { RefractorSyntax } from 'refractor/core';
-  const elixir: RefractorSyntax;
-  export = elixir;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/elm' {
   import { RefractorSyntax } from 'refractor/core';
-  const elm: RefractorSyntax;
-  export = elm;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/erb' {
   import { RefractorSyntax } from 'refractor/core';
-  const erb: RefractorSyntax;
-  export = erb;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/erlang' {
   import { RefractorSyntax } from 'refractor/core';
-  const erlang: RefractorSyntax;
-  export = erlang;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/flow' {
   import { RefractorSyntax } from 'refractor/core';
-  const flow: RefractorSyntax;
-  export = flow;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/fortran' {
   import { RefractorSyntax } from 'refractor/core';
-  const fortran: RefractorSyntax;
-  export = fortran;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/fsharp' {
   import { RefractorSyntax } from 'refractor/core';
-  const fsharp: RefractorSyntax;
-  export = fsharp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/gcode' {
   import { RefractorSyntax } from 'refractor/core';
-  const gcode: RefractorSyntax;
-  export = gcode;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/gedcom' {
   import { RefractorSyntax } from 'refractor/core';
-  const gedcom: RefractorSyntax;
-  export = gedcom;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/gherkin' {
   import { RefractorSyntax } from 'refractor/core';
-  const gherkin: RefractorSyntax;
-  export = gherkin;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/git' {
   import { RefractorSyntax } from 'refractor/core';
-  const git: RefractorSyntax;
-  export = git;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/glsl' {
   import { RefractorSyntax } from 'refractor/core';
-  const glsl: RefractorSyntax;
-  export = glsl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/gml' {
   import { RefractorSyntax } from 'refractor/core';
-  const gml: RefractorSyntax;
-  export = gml;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/go' {
   import { RefractorSyntax } from 'refractor/core';
-  const go: RefractorSyntax;
-  export = go;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/graphql' {
   import { RefractorSyntax } from 'refractor/core';
-  const graphql: RefractorSyntax;
-  export = graphql;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/groovy' {
   import { RefractorSyntax } from 'refractor/core';
-  const groovy: RefractorSyntax;
-  export = groovy;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/haml' {
   import { RefractorSyntax } from 'refractor/core';
-  const haml: RefractorSyntax;
-  export = haml;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/handlebars' {
   import { RefractorSyntax } from 'refractor/core';
-  const handlebars: RefractorSyntax;
-  export = handlebars;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/haskell' {
   import { RefractorSyntax } from 'refractor/core';
-  const haskell: RefractorSyntax;
-  export = haskell;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/haxe' {
   import { RefractorSyntax } from 'refractor/core';
-  const haxe: RefractorSyntax;
-  export = haxe;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/hcl' {
   import { RefractorSyntax } from 'refractor/core';
-  const hcl: RefractorSyntax;
-  export = hcl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/hpkp' {
   import { RefractorSyntax } from 'refractor/core';
-  const hpkp: RefractorSyntax;
-  export = hpkp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/hsts' {
   import { RefractorSyntax } from 'refractor/core';
-  const hsts: RefractorSyntax;
-  export = hsts;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/http' {
   import { RefractorSyntax } from 'refractor/core';
-  const http: RefractorSyntax;
-  export = http;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/ichigojam' {
   import { RefractorSyntax } from 'refractor/core';
-  const ichigojam: RefractorSyntax;
-  export = ichigojam;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/icon' {
   import { RefractorSyntax } from 'refractor/core';
-  const icon: RefractorSyntax;
-  export = icon;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/inform7' {
   import { RefractorSyntax } from 'refractor/core';
-  const inform7: RefractorSyntax;
-  export = inform7;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/ini' {
   import { RefractorSyntax } from 'refractor/core';
-  const ini: RefractorSyntax;
-  export = ini;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/io' {
   import { RefractorSyntax } from 'refractor/core';
-  const io: RefractorSyntax;
-  export = io;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/j' {
   import { RefractorSyntax } from 'refractor/core';
-  const j: RefractorSyntax;
-  export = j;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/java' {
   import { RefractorSyntax } from 'refractor/core';
-  const java: RefractorSyntax;
-  export = java;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/javadoc' {
   import { RefractorSyntax } from 'refractor/core';
-  const javadoc: RefractorSyntax;
-  export = javadoc;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/javadoclike' {
   import { RefractorSyntax } from 'refractor/core';
-  const javadoclike: RefractorSyntax;
-  export = javadoclike;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/javascript' {
   import { RefractorSyntax } from 'refractor/core';
-  const javascript: RefractorSyntax;
-  export = javascript;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/javastacktrace' {
   import { RefractorSyntax } from 'refractor/core';
-  const javastacktrace: RefractorSyntax;
-  export = javastacktrace;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/jolie' {
   import { RefractorSyntax } from 'refractor/core';
-  const jolie: RefractorSyntax;
-  export = jolie;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/js-extras' {
   import { RefractorSyntax } from 'refractor/core';
-  const jsExtras: RefractorSyntax;
-  export = jsExtras;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/jsdoc' {
   import { RefractorSyntax } from 'refractor/core';
-  const jsdoc: RefractorSyntax;
-  export = jsdoc;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/json' {
   import { RefractorSyntax } from 'refractor/core';
-  const json: RefractorSyntax;
-  export = json;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/json5' {
   import { RefractorSyntax } from 'refractor/core';
-  const json5: RefractorSyntax;
-  export = json5;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/jsonp' {
   import { RefractorSyntax } from 'refractor/core';
-  const jsonp: RefractorSyntax;
-  export = jsonp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/jsx' {
   import { RefractorSyntax } from 'refractor/core';
-  const jsx: RefractorSyntax;
-  export = jsx;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/julia' {
   import { RefractorSyntax } from 'refractor/core';
-  const julia: RefractorSyntax;
-  export = julia;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/keyman' {
   import { RefractorSyntax } from 'refractor/core';
-  const keyman: RefractorSyntax;
-  export = keyman;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/kotlin' {
   import { RefractorSyntax } from 'refractor/core';
-  const kotlin: RefractorSyntax;
-  export = kotlin;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/latex' {
   import { RefractorSyntax } from 'refractor/core';
-  const latex: RefractorSyntax;
-  export = latex;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/less' {
   import { RefractorSyntax } from 'refractor/core';
-  const less: RefractorSyntax;
-  export = less;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/liquid' {
   import { RefractorSyntax } from 'refractor/core';
-  const liquid: RefractorSyntax;
-  export = liquid;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/lisp' {
   import { RefractorSyntax } from 'refractor/core';
-  const lisp: RefractorSyntax;
-  export = lisp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/livescript' {
   import { RefractorSyntax } from 'refractor/core';
-  const livescript: RefractorSyntax;
-  export = livescript;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/lolcode' {
   import { RefractorSyntax } from 'refractor/core';
-  const lolcode: RefractorSyntax;
-  export = lolcode;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/lua' {
   import { RefractorSyntax } from 'refractor/core';
-  const lua: RefractorSyntax;
-  export = lua;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/makefile' {
   import { RefractorSyntax } from 'refractor/core';
-  const makefile: RefractorSyntax;
-  export = makefile;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/markdown' {
   import { RefractorSyntax } from 'refractor/core';
-  const markdown: RefractorSyntax;
-  export = markdown;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/markup-templating' {
   import { RefractorSyntax } from 'refractor/core';
-  const markuptemplating: RefractorSyntax;
-  export = markuptemplating;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/markup' {
   import { RefractorSyntax } from 'refractor/core';
-  const markup: RefractorSyntax;
-  export = markup;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/matlab' {
   import { RefractorSyntax } from 'refractor/core';
-  const matlab: RefractorSyntax;
-  export = matlab;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/mel' {
   import { RefractorSyntax } from 'refractor/core';
-  const mel: RefractorSyntax;
-  export = mel;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/mizar' {
   import { RefractorSyntax } from 'refractor/core';
-  const mizar: RefractorSyntax;
-  export = mizar;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/monkey' {
   import { RefractorSyntax } from 'refractor/core';
-  const monkey: RefractorSyntax;
-  export = monkey;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/n1ql' {
   import { RefractorSyntax } from 'refractor/core';
-  const n1ql: RefractorSyntax;
-  export = n1ql;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/n4js' {
   import { RefractorSyntax } from 'refractor/core';
-  const n4js: RefractorSyntax;
-  export = n4js;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/nand2tetris-hdl' {
   import { RefractorSyntax } from 'refractor/core';
-  const nand2tetrishdl: RefractorSyntax;
-  export = nand2tetrishdl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/nasm' {
   import { RefractorSyntax } from 'refractor/core';
-  const nasm: RefractorSyntax;
-  export = nasm;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/nginx' {
   import { RefractorSyntax } from 'refractor/core';
-  const nginx: RefractorSyntax;
-  export = nginx;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/nim' {
   import { RefractorSyntax } from 'refractor/core';
-  const nim: RefractorSyntax;
-  export = nim;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/nix' {
   import { RefractorSyntax } from 'refractor/core';
-  const nix: RefractorSyntax;
-  export = nix;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/nsis' {
   import { RefractorSyntax } from 'refractor/core';
-  const nsis: RefractorSyntax;
-  export = nsis;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/objectivec' {
   import { RefractorSyntax } from 'refractor/core';
-  const objectivec: RefractorSyntax;
-  export = objectivec;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/ocaml' {
   import { RefractorSyntax } from 'refractor/core';
-  const ocaml: RefractorSyntax;
-  export = ocaml;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/opencl' {
   import { RefractorSyntax } from 'refractor/core';
-  const opencl: RefractorSyntax;
-  export = opencl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/oz' {
   import { RefractorSyntax } from 'refractor/core';
-  const oz: RefractorSyntax;
-  export = oz;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/parigp' {
   import { RefractorSyntax } from 'refractor/core';
-  const parigp: RefractorSyntax;
-  export = parigp;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/parser' {
   import { RefractorSyntax } from 'refractor/core';
-  const parser: RefractorSyntax;
-  export = parser;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/pascal' {
   import { RefractorSyntax } from 'refractor/core';
-  const pascal: RefractorSyntax;
-  export = pascal;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/perl' {
   import { RefractorSyntax } from 'refractor/core';
-  const perl: RefractorSyntax;
-  export = perl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/php-extras' {
   import { RefractorSyntax } from 'refractor/core';
-  const phpextras: RefractorSyntax;
-  export = phpextras;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/php' {
   import { RefractorSyntax } from 'refractor/core';
-  const php: RefractorSyntax;
-  export = php;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/phpdoc' {
   import { RefractorSyntax } from 'refractor/core';
-  const phpdoc: RefractorSyntax;
-  export = phpdoc;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/plsql' {
   import { RefractorSyntax } from 'refractor/core';
-  const plsql: RefractorSyntax;
-  export = plsql;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/powershell' {
   import { RefractorSyntax } from 'refractor/core';
-  const powershell: RefractorSyntax;
-  export = powershell;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/processing' {
   import { RefractorSyntax } from 'refractor/core';
-  const processing: RefractorSyntax;
-  export = processing;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/prolog' {
   import { RefractorSyntax } from 'refractor/core';
-  const prolog: RefractorSyntax;
-  export = prolog;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/properties' {
   import { RefractorSyntax } from 'refractor/core';
-  const properties: RefractorSyntax;
-  export = properties;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/protobuf' {
   import { RefractorSyntax } from 'refractor/core';
-  const protobuf: RefractorSyntax;
-  export = protobuf;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/pug' {
   import { RefractorSyntax } from 'refractor/core';
-  const pug: RefractorSyntax;
-  export = pug;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/puppet' {
   import { RefractorSyntax } from 'refractor/core';
-  const puppet: RefractorSyntax;
-  export = puppet;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/pure' {
   import { RefractorSyntax } from 'refractor/core';
-  const pure: RefractorSyntax;
-  export = pure;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/python' {
   import { RefractorSyntax } from 'refractor/core';
-  const python: RefractorSyntax;
-  export = python;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/q' {
   import { RefractorSyntax } from 'refractor/core';
-  const q: RefractorSyntax;
-  export = q;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/qore' {
   import { RefractorSyntax } from 'refractor/core';
-  const qore: RefractorSyntax;
-  export = qore;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/r' {
   import { RefractorSyntax } from 'refractor/core';
-  const r: RefractorSyntax;
-  export = r;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/reason' {
   import { RefractorSyntax } from 'refractor/core';
-  const reason: RefractorSyntax;
-  export = reason;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/regex' {
   import { RefractorSyntax } from 'refractor/core';
-  const regex: RefractorSyntax;
-  export = regex;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/renpy' {
   import { RefractorSyntax } from 'refractor/core';
-  const renpy: RefractorSyntax;
-  export = renpy;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/rest' {
   import { RefractorSyntax } from 'refractor/core';
-  const rest: RefractorSyntax;
-  export = rest;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/rip' {
   import { RefractorSyntax } from 'refractor/core';
-  const rip: RefractorSyntax;
-  export = rip;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/roboconf' {
   import { RefractorSyntax } from 'refractor/core';
-  const roboconf: RefractorSyntax;
-  export = roboconf;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/ruby' {
   import { RefractorSyntax } from 'refractor/core';
-  const ruby: RefractorSyntax;
-  export = ruby;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/rust' {
   import { RefractorSyntax } from 'refractor/core';
-  const rust: RefractorSyntax;
-  export = rust;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/sas' {
   import { RefractorSyntax } from 'refractor/core';
-  const sas: RefractorSyntax;
-  export = sas;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/sass' {
   import { RefractorSyntax } from 'refractor/core';
-  const sass: RefractorSyntax;
-  export = sass;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/scala' {
   import { RefractorSyntax } from 'refractor/core';
-  const scala: RefractorSyntax;
-  export = scala;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/scheme' {
   import { RefractorSyntax } from 'refractor/core';
-  const scheme: RefractorSyntax;
-  export = scheme;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/scss' {
   import { RefractorSyntax } from 'refractor/core';
-  const scss: RefractorSyntax;
-  export = scss;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/smalltalk' {
   import { RefractorSyntax } from 'refractor/core';
-  const smalltalk: RefractorSyntax;
-  export = smalltalk;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/smarty' {
   import { RefractorSyntax } from 'refractor/core';
-  const smarty: RefractorSyntax;
-  export = smarty;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/soy' {
   import { RefractorSyntax } from 'refractor/core';
-  const soy: RefractorSyntax;
-  export = soy;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/sql' {
   import { RefractorSyntax } from 'refractor/core';
-  const sql: RefractorSyntax;
-  export = sql;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/stylus' {
   import { RefractorSyntax } from 'refractor/core';
-  const stylus: RefractorSyntax;
-  export = stylus;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/swift' {
   import { RefractorSyntax } from 'refractor/core';
-  const swift: RefractorSyntax;
-  export = swift;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/t4-cs' {
   import { RefractorSyntax } from 'refractor/core';
-  const t4cs: RefractorSyntax;
-  export = t4cs;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/t4-templating' {
   import { RefractorSyntax } from 'refractor/core';
-  const t4templating: RefractorSyntax;
-  export = t4templating;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/t4-vb' {
   import { RefractorSyntax } from 'refractor/core';
-  const t4vb: RefractorSyntax;
-  export = t4vb;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/tap' {
   import { RefractorSyntax } from 'refractor/core';
-  const tap: RefractorSyntax;
-  export = tap;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/tcl' {
   import { RefractorSyntax } from 'refractor/core';
-  const tcl: RefractorSyntax;
-  export = tcl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/textile' {
   import { RefractorSyntax } from 'refractor/core';
-  const textile: RefractorSyntax;
-  export = textile;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/toml' {
   import { RefractorSyntax } from 'refractor/core';
-  const toml: RefractorSyntax;
-  export = toml;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/tsx' {
   import { RefractorSyntax } from 'refractor/core';
-  const tsx: RefractorSyntax;
-  export = tsx;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/tt2' {
   import { RefractorSyntax } from 'refractor/core';
-  const tt2: RefractorSyntax;
-  export = tt2;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/twig' {
   import { RefractorSyntax } from 'refractor/core';
-  const twig: RefractorSyntax;
-  export = twig;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/typescript' {
   import { RefractorSyntax } from 'refractor/core';
-  const typescript: RefractorSyntax;
-  export = typescript;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/vala' {
   import { RefractorSyntax } from 'refractor/core';
-  const vala: RefractorSyntax;
-  export = vala;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/vbnet' {
   import { RefractorSyntax } from 'refractor/core';
-  const vbnet: RefractorSyntax;
-  export = vbnet;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/velocity' {
   import { RefractorSyntax } from 'refractor/core';
-  const velocity: RefractorSyntax;
-  export = velocity;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/verilog' {
   import { RefractorSyntax } from 'refractor/core';
-  const verilog: RefractorSyntax;
-  export = verilog;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/vhdl' {
   import { RefractorSyntax } from 'refractor/core';
-  const vhdl: RefractorSyntax;
-  export = vhdl;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/vim' {
   import { RefractorSyntax } from 'refractor/core';
-  const vim: RefractorSyntax;
-  export = vim;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/visual-basic' {
   import { RefractorSyntax } from 'refractor/core';
-  const visualbasic: RefractorSyntax;
-  export = visualbasic;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/wasm' {
   import { RefractorSyntax } from 'refractor/core';
-  const wasm: RefractorSyntax;
-  export = wasm;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/wiki' {
   import { RefractorSyntax } from 'refractor/core';
-  const wiki: RefractorSyntax;
-  export = wiki;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/xeora' {
   import { RefractorSyntax } from 'refractor/core';
-  const xeora: RefractorSyntax;
-  export = xeora;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/xojo' {
   import { RefractorSyntax } from 'refractor/core';
-  const xojo: RefractorSyntax;
-  export = xojo;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/xquery' {
   import { RefractorSyntax } from 'refractor/core';
-  const xquery: RefractorSyntax;
-  export = xquery;
+  const lang: RefractorSyntax;
+  export = lang;
 }
 
 declare module 'refractor/lang/yaml' {
   import { RefractorSyntax } from 'refractor/core';
-  const yaml: RefractorSyntax;
-  export = yaml;
+  const lang: RefractorSyntax;
+  export = lang;
 }

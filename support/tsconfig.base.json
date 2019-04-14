@@ -13,7 +13,7 @@
     "noUnusedParameters": true,
     "pretty": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
+    // "skipLibCheck": true,
     "experimentalDecorators": true,
     "strict": true,
     "alwaysStrict": true,
@@ -23,7 +23,7 @@
     "paths": {
       "@remirror/core": ["@remirror/core/src/index.ts"],
       "@remirror/core-extensions": ["@remirror/core-extensions/src/index.ts"],
-      "@remirror/extension-codeblock": ["@remirror/extension-codeblock/src/index.ts"],
+      "@remirror/extension-code-block": ["@remirror/extension-code-block/src/index.ts"],
       "@remirror/extension-emoji": ["@remirror/extension-emoji/src/index.ts"],
       "@remirror/extension-enhanced-link": ["@remirror/extension-enhanced-link/src/index.ts"],
       "@remirror/extension-epic-mode": ["@remirror/extension-epic-mode/src/index.ts"],
@@ -35,8 +35,7 @@
       "@remirror/ui-wysiwyg": ["@remirror/ui-wysiwyg/src"],
       "jest-remirror": ["packages/jest-remirror/src"],
       "jest-prosemirror": ["packages/jest-prosemirror/src"],
-      "@test-fixtures/*": ["support/fixtures/*"],
-      "*": ["support/types/*"]
+      "@test-fixtures/*": ["support/fixtures/*"]
     }
   }
 }

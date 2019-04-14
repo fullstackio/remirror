@@ -12,6 +12,9 @@
     "@types/nanoid": "1.2.1",
     "@types/node": "^11.13.4",
     "@types/prosemirror-commands": "^1.0.1",
+    "@types/object.omit": "file:./internal/object.omit",
+    "@types/object.pick": "file:./internal/object.pick",
+    "@types/min-document": "file:./internal/min-document",
     "@types/prosemirror-inputrules": "^1.0.2",
     "@types/prosemirror-keymap": "^1.0.1",
     "@types/prosemirror-model": "^1.7.0",
@@ -40,7 +43,8 @@
   },
   "files": [
     "lib",
-    "src"
+    "src",
+    "internal"
   ],
   "homepage": "https://github.com/ifiokjr/remirror/tree/master/@remirror/core",
   "main": "lib/index.js",

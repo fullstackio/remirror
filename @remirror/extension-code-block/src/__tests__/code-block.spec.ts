@@ -10,7 +10,7 @@ describe('schema', () => {
   const attrs = { language: 'typescript' };
   const content = 'unchanged without decorations';
 
-  const { codeBlock, p, doc } = pmBuild(schema, {
+  const { codeBlock, doc } = pmBuild(schema, {
     codeBlock: { nodeType: 'codeBlock', ...attrs },
   });
 
