@@ -25,7 +25,6 @@ export interface EnhancedLinkOptions extends MarkExtensionOptions {
   onUrlsChange?(params: { set: Set<string>; urls: string[] }): void;
 }
 
-// TODO Fix bug with URL regex and how the matches are sourced
 export class EnhancedLink extends MarkExtension<EnhancedLinkOptions> {
   get name() {
     return 'enhancedLink' as const;
