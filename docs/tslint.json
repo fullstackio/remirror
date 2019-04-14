@@ -53,6 +53,8 @@
       "react-feather",
       "prismjs",
       "refractor",
+      "polished",
+      "codemirror",
       "jest-dom"
     ]
   }

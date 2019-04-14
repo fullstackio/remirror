@@ -4,7 +4,7 @@ import { useWindowSize } from 'react-use';
 import { css, styled } from '@styled';
 import { Entry, Link as BaseLink, useDocs, useMenus } from 'docz';
 
-import { breakpoints } from '../../../styles/responsive';
+import { breakpoints } from '@styles/responsive';
 import { mainContext } from '../main';
 import { IconLink, TOPBAR_LINKS } from '../topbar';
 

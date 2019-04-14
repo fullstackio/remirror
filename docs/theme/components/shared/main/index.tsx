@@ -2,7 +2,7 @@ import React, { createContext, FC, useEffect, useState } from 'react';
 import { useWindowSize } from 'react-use';
 
 import { styled } from '@styled';
-import { breakpoints } from '../../../styles/responsive';
+import { breakpoints } from '@styles/responsive';
 
 const Wrapper = styled.div`
   display: flex;
