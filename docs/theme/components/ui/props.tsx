@@ -1,7 +1,7 @@
-import { PropsComponentProps, useComponents } from 'docz';
-import React, { useMemo } from 'react';
+import React, { FC, useMemo } from 'react';
 
 import { styled } from '@styled';
+import { PropsComponentProps, useComponents } from 'docz';
 
 const Wrapper = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ const PropRequired = styled(PropType)`
   opacity: 0.5;
 `;
 
-export const Props: React.SFC<PropsComponentProps> = ({ props, getPropType }) => {
+export const Props: FC<PropsComponentProps> = ({ props, getPropType }) => {
   const entries = Object.entries(props);
   const components = useComponents();
   const Paragraph = useMemo(

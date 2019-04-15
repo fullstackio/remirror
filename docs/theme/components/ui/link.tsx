@@ -18,7 +18,7 @@ export const LinkStyled = styled.a<any>`
 
 type LinkProps = AnchorHTMLAttributes<any>;
 export const Link: FC<LinkProps> = ({ href, ...props }) => {
-  const { separator, linkComponent: Link } = useConfig();
+  const { separator, linkComponent: LinkComponent } = useConfig();
   const docs = useDocs();
   const toCheck = useMemo(
     () =>
@@ -37,5 +37,9 @@ export const Link: FC<LinkProps> = ({ href, ...props }) => {
   const nHref = matched ? matched.route : href;
   const isInternal = nHref && nHref.startsWith('/');
 
-  return isInternal ? <LinkStyled as={Link} {...props} to={nHref} /> : <LinkStyled {...props} href={nHref} />;
+  return isInternal ? (
+    <LinkStyled as={LinkComponent} {...props} to={nHref} />
+  ) : (
+    <LinkStyled {...props} href={nHref} />
+  );
 };

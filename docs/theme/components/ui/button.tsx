@@ -73,7 +73,7 @@ export interface ButtonProps {
 }
 
 const getScale = ({ scale = 'normal' }: ButtonProps) => scales[scale];
-const getKind = ({ kind = 'primary', outline = false }: ButtonProps) => kinds(outline)[kind];
+const getKind = ({ kind: type = 'primary', outline = false }: ButtonProps) => kinds(outline)[type];
 
 export const btnStyle = css<ButtonProps>`
   ${getKind};

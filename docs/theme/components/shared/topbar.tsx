@@ -4,7 +4,8 @@ import { useWindowSize } from 'react-use';
 
 import { Link } from 'docz';
 
-import { Container, Logo } from '@components/ui';
+import { Container } from '@components/ui/container';
+import { Logo } from '@components/ui/logo';
 import { css, styled } from '@styled';
 import { breakpoints } from '@styles/responsive';
 import { MainContext } from './main';

@@ -33,7 +33,7 @@ import { TextSelection } from 'prosemirror-state';
 import { Transaction as Transaction_2 } from 'prosemirror-state';
 
 // Warning: (ae-forgotten-export) The symbol "AbsoluteCoordinatesParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const absoluteCoordinates: ({ view, element, coords, cursorHeight, }: AbsoluteCoordinatesParams) => {
     left: number;
@@ -128,13 +128,13 @@ export interface CompareStateParams {
 }
 
 // Warning: (ae-forgotten-export) The symbol "CreateDocumentNodeParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const createDocumentNode: ({ content, schema, doc }: CreateDocumentNodeParams) => Node<import("prosemirror-model").Schema<string, string>> | null;
 
 // Warning: (ae-forgotten-export) The symbol "CreateFlexibleFunctionMapParams" needs to be exported by the entry point index.d.ts
 // Warning: (ae-internal-missing-underscore) The name createFlexibleFunctionMap should be prefixed with an underscore because the declaration is marked as "@internal"
-// 
+//
 // @internal
 export const createFlexibleFunctionMap: <GKey extends "active" | "enabled" | "type" | "name" | "options" | "pluginKey" | "defaultOptions" | "requiredExtensions" | "styles" | "commands" | "pasteRules" | "inputRules" | "keys" | "plugin", GMappedFunc extends AnyFunction<any>, GFunc extends AnyFunction<any>>({ key, checkUniqueness, getItemParams, methodFactory, arrayTransformer, ctx, }: CreateFlexibleFunctionMapParams<GKey, GMappedFunc, GFunc>) => (params: CommandParams) => Record<string, GMappedFunc>;
 
@@ -154,7 +154,7 @@ export class Doc extends NodeExtension {
 
 // Warning: (ae-forgotten-export) The symbol "DOMOutputSpecPos1" needs to be exported by the entry point index.d.ts
 // Warning: (ae-forgotten-export) The symbol "DOMOutputSpecPosX" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public (undocumented)
 export type DOMOutputSpec = string | [string, 0] | [string, DOMOutputSpecPos1?, DOMOutputSpecPosX?, DOMOutputSpecPosX?, DOMOutputSpecPosX?, DOMOutputSpecPosX?, DOMOutputSpecPosX?, DOMOutputSpecPosX?, DOMOutputSpecPosX?, DOMOutputSpecPosX?, DOMOutputSpecPosX?];
 
@@ -263,7 +263,7 @@ export class ExtensionManager {
     static create(extensions: ExtensionMapValue[]): ExtensionManager;
     createSchema(): EditorSchema;
     // Warning: (ae-forgotten-export) The symbol "ExtensionManagerData" needs to be exported by the entry point index.d.ts
-    // 
+    //
     // (undocumented)
     readonly data: ExtensionManagerData;
     // (undocumented)
@@ -305,7 +305,7 @@ export interface ExtensionMapValue {
 export type ExtensionOptions<GExtension extends Extension> = GExtension extends Extension<infer P, any> ? P : never;
 
 // Warning: (ae-forgotten-export) The symbol "ExtensionMethodProperties" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const extensionPropertyMapper: <GExt extends Extension<any, any, string>, GExtMethodProp extends ExtensionMethodProperties>(property: GExtMethodProp, params: ExtensionManagerParams) => (extension: GExt) => GExt[GExtMethodProp] extends AnyFunction<any> ? ReturnType<GExt[GExtMethodProp]> : {};
 
@@ -329,7 +329,7 @@ export const findDOMRefAtPos: (position: number, view: import("../../../../suppo
 export const findMatches: (text: string, regexp: RegExp) => RegExpExecArray[];
 
 // Warning: (ae-forgotten-export) The symbol "FindParentNode" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const findParentNode: (predicate: (node: import("prosemirror-model").Node<import("prosemirror-model").Schema<string, string>>) => boolean) => (selection: Selection_2<import("prosemirror-model").Schema<string, string>>) => FindParentNode | undefined;
 
@@ -354,7 +354,7 @@ export const format: (str: string) => string;
 export type Fragment = Fragment_2<EditorSchema>;
 
 // Warning: (ae-forgotten-export) The symbol "FromHTMLParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const fromHTML: ({ content, schema, doc }: FromHTMLParams) => Node<import("prosemirror-model").Schema<string, string>>;
 
@@ -388,7 +388,7 @@ export const getMatchString: (match: string | string[], index?: number) => strin
 export const getNearestNonTextNode: (domNode: Node) => HTMLElement;
 
 // Warning: (ae-forgotten-export) The symbol "GetOffsetParentParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public (undocumented)
 export const getOffsetParent: ({ view, element }: GetOffsetParentParams) => HTMLElement;
 
@@ -416,7 +416,7 @@ export interface HasExtensions {
 }
 
 // Warning: (ae-internal-missing-underscore) The name ignoreFunctions should be prefixed with an underscore because the declaration is marked as "@internal"
-// 
+//
 // @internal
 export const ignoreFunctions: (obj: Record<string, unknown>) => Record<string, unknown>;
 
@@ -489,7 +489,7 @@ export const isMap: (value: unknown) => value is Map<unknown, unknown>;
 export const isMarkExtension: (extension: unknown) => extension is MarkExtension<any>;
 
 // Warning: (ae-forgotten-export) The symbol "IsNameUniqueParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const isNameUnique: ({ name, set, shouldThrow, type }: IsNameUniqueParams) => void;
 
@@ -656,7 +656,7 @@ export interface MountedPortal {
 }
 
 // Warning: (ae-forgotten-export) The symbol "NodeActiveParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const nodeActive: ({ state, type, attrs }: NodeActiveParams) => boolean;
 
@@ -705,7 +705,7 @@ export class NodeViewPortalContainer {
     // (undocumented)
     context: Component<NodeViewPortalComponentProps>;
     // Warning: (ae-forgotten-export) The symbol "Events" needs to be exported by the entry point index.d.ts
-    // 
+    //
     // (undocumented)
     events: default<Events>;
     // (undocumented)
@@ -829,7 +829,7 @@ export type RemirrorActions<GKeys extends string = string> = Record<GKeys, Actio
 export type RemirrorContentType = string | ObjectNode | ProsemirrorNode;
 
 // Warning: (ae-forgotten-export) The symbol "RemoveMarkParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const removeMark: ({ type, expand }: RemoveMarkParams) => CommandFunction;
 
@@ -840,7 +840,7 @@ export const removeNodeAtPos: (position: number) => (tr: import("prosemirror-sta
 export const removeNodeBefore: (tr: import("prosemirror-state").Transaction<import("prosemirror-model").Schema<string, string>>) => import("prosemirror-state").Transaction<import("prosemirror-model").Schema<string, string>>;
 
 // Warning: (ae-forgotten-export) The symbol "ReplaceTextParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const replaceText: ({ from, to, type, attrs, appendText, content, }: ReplaceTextParams) => CommandFunction;
 
@@ -867,7 +867,7 @@ export interface SchemaParams {
 }
 
 // Warning: (ae-forgotten-export) The symbol "InferredType" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public (undocumented)
 export type SchemaTypeParams<GType> = ExtensionManagerParams & InferredType<GType>;
 
@@ -908,12 +908,12 @@ export class Text extends NodeExtension {
 }
 
 // Warning: (ae-forgotten-export) The symbol "FromNodeParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const toDOM: ({ node, schema, doc }: FromNodeParams) => DocumentFragment;
 
 // Warning: (ae-forgotten-export) The symbol "ToggleBlockItemParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const toggleBlockItem: ({ type, toggleType, attrs }: ToggleBlockItemParams) => CommandFunction;
 
@@ -930,7 +930,7 @@ export const toHTML: ({ node, schema, doc }: FromNodeParams) => string;
 export type Transaction = Transaction_2<EditorSchema>;
 
 // Warning: (ae-internal-missing-underscore) The name transformExtensionMap should be prefixed with an underscore because the declaration is marked as "@internal"
-// 
+//
 // @internal
 export const transformExtensionMap: (extensionMapValues: ExtensionMapValue[]) => Extension<any, any, string>[];
 
@@ -941,7 +941,7 @@ export const trim: (str: string) => string;
 export const uniqueArray: <GType>(array: GType[]) => GType[];
 
 // Warning: (ae-forgotten-export) The symbol "UniqueIdParams" needs to be exported by the entry point index.d.ts
-// 
+//
 // @public
 export const uniqueId: ({ prefix, size }?: UniqueIdParams) => string;
 

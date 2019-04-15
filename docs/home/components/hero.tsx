@@ -5,7 +5,6 @@ import Helmet from 'react-helmet';
 import { Container, Logo } from '@components/ui';
 import { btnStyle } from '@components/ui/button';
 import image from '@images/builtin-components.png';
-import heroBg from '@images/hero-bg.svg';
 import { styled } from '@styled';
 import { Link as BaseLink } from 'docz';
 
