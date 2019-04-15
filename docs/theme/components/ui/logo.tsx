@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, ImgHTMLAttributes } from 'react';
 
+import symbol from '@images/logo-icon.svg';
 import logo from '@images/logo.svg';
-import symbol from '@images/symbol.svg';
 
-export interface LogoProps extends React.ImgHTMLAttributes<any> {
+export interface LogoProps extends ImgHTMLAttributes<any> {
   width?: number;
   height?: number;
   small?: boolean;

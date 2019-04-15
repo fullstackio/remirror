@@ -11,23 +11,18 @@ import { styled } from '@styled';
 import cx from 'classnames';
 // tslint:disable-next-line:no-duplicate-imports
 import prism from 'prismjs';
+import { EditorProps } from './editor';
 
 const PreStyled = styled.pre`
   ${p => p.theme.styles.pre};
 `;
 
-interface PreProps {
-  children: any;
-  className?: string;
-}
-
-export const Pre: React.FC<PreProps> = ({ children, className }) => {
+export const Pre: React.FC<EditorProps> = props => {
+  const { children, className } = props;
   const preRef = useRef<any>(null);
   const hasChildren = children && children.props;
   const childrenProps = hasChildren && children.props.props;
   const childrenClassName = childrenProps && childrenProps.className;
-
-  console.log(children, childrenClassName, className);
 
   useEffect(() => {
     if (preRef && preRef.current) {

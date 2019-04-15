@@ -16,6 +16,6 @@ const Logo = styled(BaseLogo)`
 
 export const Footer = () => (
   <Wrapper>
-    <span>Built with</span> <Logo height={30} />
+    <span>Footer goes here</span>
   </Wrapper>
 );

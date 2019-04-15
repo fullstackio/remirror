@@ -1,6 +1,5 @@
 import { styled } from '@styled';
-import React from 'react';
-import { FC, useState } from 'react';
+import React, { FC, useState } from 'react';
 import Lightbox from 'react-images';
 
 const Wrapper = styled.div`

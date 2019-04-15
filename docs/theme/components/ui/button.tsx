@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 
 import { css, styled } from '@styled';
-import * as colors from '../../styles/colors';
-import { breakpoints } from '../../styles/responsive';
+import * as colors from '@styles/colors';
+import { breakpoints } from '@styles/responsive';
 
 const scales = {
   small: `
@@ -69,7 +69,7 @@ export interface ButtonProps {
   scale?: 'small' | 'normal' | 'big';
   kind?: 'primary' | 'secondary' | 'cancel' | 'dark' | 'gray';
   outline?: boolean;
-  onClick?: React.EventHandler<any>;
+  onClick?: MouseEventHandler<HTMLElement>;
 }
 
 const getScale = ({ scale = 'normal' }: ButtonProps) => scales[scale];

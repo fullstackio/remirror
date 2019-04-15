@@ -1,6 +1,8 @@
+import { useContext } from 'react';
 import Styled, {
   createGlobalStyle as CreateGlobalStyle,
   css as StyledCss,
+  ThemeContext,
   ThemedCssFunction,
   ThemedStyledComponentsModule,
   ThemedStyledInterface,
@@ -11,7 +13,7 @@ import { fonts } from './styles/fonts';
 import { breakpoints, mq } from './styles/responsive';
 
 export const styled = Styled as ThemedStyledInterface<DocsTheme>;
-export const css = StyledCss as ThemedCssFunction<DocsTheme>;
+export const css: ThemedCssFunction<DocsTheme> = StyledCss as ThemedCssFunction<DocsTheme>;
 export const createGlobalStyle = CreateGlobalStyle as ThemedStyledComponentsModule<
   DocsTheme
 >['createGlobalStyle'];
@@ -26,3 +28,5 @@ export const docsTheme = {
   mq,
   breakpoints,
 };
+
+export const useTheme = () => useContext<DocsTheme>(ThemeContext);

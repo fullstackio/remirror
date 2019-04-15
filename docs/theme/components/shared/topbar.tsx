@@ -7,15 +7,15 @@ import { Link } from 'docz';
 import { Container, Logo } from '@components/ui';
 import { css, styled } from '@styled';
 import { breakpoints } from '@styles/responsive';
-import { mainContext } from '../main';
-import { Hamburger } from '../sidebar/hamburger';
+import { MainContext } from './main';
+import { Hamburger } from './sidebar/hamburger';
 
 const Wrapper = styled.div`
   z-index: 999;
   width: 100%;
   position: fixed;
   height: 60px;
-  /* background-image: linear-gradient(to right, #92fe9d 0%, #00c9ff 100%); */
+  background-color: ${({ theme }) => theme.colors.white};
 
   ${Container} {
     display: flex;
@@ -97,14 +97,14 @@ export const TOPBAR_LINKS: MenuListItem[] = [
 export const Topbar = () => {
   const { width } = useWindowSize();
   const showFullMenu = width > breakpoints.tablet;
-  const { showing, setShowing } = useContext(mainContext);
+  const { showing, setShowing } = useContext(MainContext);
   const onClickHamburger = () => setShowing((val: boolean) => !val);
 
   return (
     <Wrapper>
       <Container>
         <LogoLink to='/'>
-          <Logo height={30} small={!showFullMenu} />
+          <Logo height={30} small={true} />
         </LogoLink>
         <Menu>
           {showFullMenu &&

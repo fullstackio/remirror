@@ -1,11 +1,11 @@
 import React, { FC, Fragment, MouseEventHandler, useCallback, useContext } from 'react';
 import { useWindowSize } from 'react-use';
 
-import { css, styled } from '@styled';
+import { styled } from '@styled';
 import { Entry, Link as BaseLink, useDocs, useMenus } from 'docz';
 
-import { breakpoints } from '../../../styles/responsive';
-import { mainContext } from '../main';
+import { breakpoints } from '@styles/responsive';
+import { MainContext } from '../main';
 import { IconLink, TOPBAR_LINKS } from '../topbar';
 
 interface WrapperProps {
@@ -29,16 +29,17 @@ const SidebarWrapper = styled.div<WrapperProps>`
   transition: transform 0.2s, background 0.3s;
   transform: translateX(${toggle});
 
-  ${p =>
-    p.mobile &&
-    css`
+  ${({ mobile }) =>
+    mobile
+      ? `
       position: absolute;
       top: 0;
       left: 0;
       overflow: auto;
       z-index: 9999;
       padding: 30px;
-    `};
+    `
+      : ''};
 `;
 
 const Wrapper = styled.div`
@@ -175,7 +176,7 @@ interface SidebarProps {
 export const Sidebar: FC<SidebarProps> = ({ menu: pathname, mobile }) => {
   const docs = useDocs();
   const { width } = useWindowSize();
-  const { showing, setShowing } = useContext(mainContext);
+  const { showing, setShowing } = useContext(MainContext);
 
   const menus = useMenus();
   const isDesktop = width > breakpoints.tablet;
@@ -221,7 +222,6 @@ export const Sidebar: FC<SidebarProps> = ({ menu: pathname, mobile }) => {
                 </Fragment>
               );
             })}
-          <div id='ads' />
         </Wrapper>
       </SidebarWrapper>
       {!isDesktop && <ToggleBackground opened={showing} onClick={handleSidebarToggle} />}

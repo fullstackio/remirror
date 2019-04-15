@@ -5,14 +5,14 @@ import Helmet from 'react-helmet';
 import { Container, Logo } from '@components/ui';
 import { btnStyle } from '@components/ui/button';
 import image from '@images/builtin-components.png';
-import pattern from '@images/pattern.png';
+import heroBg from '@images/hero-bg.svg';
 import { styled } from '@styled';
 import { Link as BaseLink } from 'docz';
 
 const Wrapper = styled.div`
   width: 100%;
-  background: url(${pattern});
-  background-position: center;
+  background-color: ${({ theme }) => theme.colors.grayExtraDark};
+  background-repeat: none;
   border-bottom: 1px solid ${p => p.theme.colors.grayLight};
 
   ${Container} {
@@ -57,7 +57,7 @@ export const Hero = () => {
       </Helmet>
       <Container>
         <Logo height={80} style={{ maxWidth: '100%' }} />
-        <Subtitle>It's never been easier to document your things!</Subtitle>
+        <Subtitle>Effortlessly build your world-class text editor!</Subtitle>
         <GitHubButton type='stargazers' size='large' namespace='pedronauck' repo='docz' />
         <Image src={image} alt='Built-in components' />
         <Buttons>

@@ -18,6 +18,18 @@ import { AnyConstructor, AnyFunction, PlainObject } from '../types/base';
 export const Cast = <GType = any>(arg: any): GType => arg;
 
 /**
+ * Calls a function if defined and provides compile time type checking for the passed in parameters.
+ *
+ * @param fn - the function to call if it exists
+ * @param args - the rest of the parameters with types
+ */
+export const callIfDefined = <GFunc extends AnyFunction>(fn: GFunc | unknown, ...args: Parameters<GFunc>) => {
+  if (isFunction(fn)) {
+    fn(...args);
+  }
+};
+
+/**
  * Finds all the regex matches for a string
  *
  * @param text - the text to check against

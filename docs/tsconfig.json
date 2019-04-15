@@ -27,7 +27,14 @@
       "@test-fixtures/*": ["../support/fixtures/*"],
       "*": ["support/types/*"]
     },
-    "types": ["jest", "jest-environment-puppeteer", "expect-puppeteer", "puppeteer", "jest-extended"]
+    "types": [
+      "jest",
+      "jest-environment-puppeteer",
+      "expect-puppeteer",
+      "puppeteer",
+      "jest-extended",
+      "styled-components"
+    ]
   },
   "include": ["./", "patches.d.ts"]
 }

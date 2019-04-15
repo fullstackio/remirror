@@ -1,43 +1,86 @@
-// import { css }
+import { css } from 'styled-components';
+
 export const styles = {
-  h1: {
-    margin: '0 0 30px',
-    fontFamily: 'Zilla Slab',
-    fontSize: 52,
-    fontWeight: 600,
-    letterSpacing: '-0.03em',
-  },
-  h2: {
-    margin: '30px 0 20px',
-    fontFamily: 'Zilla Slab',
-    fontSize: 36,
-    fontWeight: 400,
-    letterSpacing: '-0.03em',
-  },
-  h3: {
-    margin: '30px 0 15px',
-    fontSize: 24,
-    fontWeight: 400,
-  },
-  h4: {
-    margin: '20px 0 15px 0',
-    fontSize: 20,
-    fontWeight: 600,
-  },
-  h5: {
-    fontSize: 18,
-    fontWeight: 400,
-  },
-  h6: {
-    fontSize: 16,
-    fontWeight: 400,
-  },
-  list: {
-    padding: 0,
-    margin: '10px 0 10px 20px',
-  },
-  pre: {
-    margin: '25px 0 40px 0',
-    fontSize: 18,
-  },
+  body: css`
+    font-family: ${({ theme }) => theme.fonts.ui};
+    font-size: 16px;
+    line-height: 1.6;
+  `,
+  h1: css`
+    margin: 40px 0 20px;
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  `,
+  h2: css`
+    margin: 30px 0 15px;
+    line-height: 1.4em;
+    font-family: ${({ theme }) => theme.fonts.display};
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+  `,
+  h3: css`
+    margin: 25px 0 10px;
+    font-size: 20px;
+    font-weight: 400;
+  `,
+  h4: css`
+    margin: 25px 0 10px;
+    font-size: 16px;
+    font-weight: 400;
+  `,
+  h5: css`
+    margin: 20px 0 10px;
+    font-size: 16px;
+    font-weight: 400;
+  `,
+  h6: css`
+    margin: 20px 0 10px;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+  `,
+  ol: css`
+    padding: 0;
+    margin: 10px 0 10px;
+  `,
+  ul: css`
+    padding: 0;
+    margin: 10px 0 10px;
+  `,
+  playground: css`
+    padding: 40px;
+  `,
+  code: css`
+    margin: 0 3px;
+    border-radius: 3px;
+    font-family: ${({ theme }) => theme.fonts.mono};
+    padding: 2px 5px;
+    font-size: 0.8em;
+    border: '1px solid rgba(0, 0, 0, 0.02)';
+  `,
+  pre: css`
+    font-family: ${({ theme }) => theme.fonts.mono};
+    font-size: 1em;
+    line-height: 1.8;
+  `,
+  paragraph: css`
+    margin: 10px 0 20px 0;
+  `,
+  table: css`
+    overflow-y: hidden;
+    width: 100%;
+    font-family: ${({ theme }) => theme.fonts.mono};
+    font-size: 16px;
+    overflow-x: initial;
+    display: block;
+  `,
+  blockquote: css`
+    margin: 25px 0;
+    padding: 20px;
+    font-style: italic;
+    font-size: 16px;
+  `,
 };

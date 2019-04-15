@@ -32,6 +32,33 @@ const Document = styled.div`
     })}
 `;
 
+// const EditPage = styled.a`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   position: absolute;
+//   padding: 2px 8px;
+//   margin: 8px;
+//   border-radius: ${({ theme }) => theme.radii};
+//   border: 1px solid ${({ theme }) => theme.colors.border};
+//   opacity: 0.7;
+//   transition: opacity 0.4s;
+//   font-size: 14px;
+//   color: ${({ theme }) => theme.colors.text};
+//   text-decoration: none;
+//   text-transform: uppercase;
+//   &:hover {
+//     opacity: 1;
+//     background: ${({ theme }) => theme.colors.border};
+//   }
+//   ${({ theme }) =>
+//     theme.mq({
+//       visibility: ['hidden', 'hidden', 'visible'],
+//       top: [0, -60, 32],
+//       right: [0, 0, 40],
+//     })};
+// `;
+
 export const Page: FC<PageProps> = ({ children, doc, location }) => {
   const { parent, fullpage } = doc;
   const { width } = useWindowSize();
