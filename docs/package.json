@@ -53,9 +53,9 @@
     "@types/reach__router": "1.2.4",
     "@types/styled-components": "4.1.14",
     "acorn": "6.1.1",
-    "docz": "1.0.0",
-    "docz-core": "1.0.0",
-    "docz-theme-default": "1.0.0",
+    "docz": "1.0.3",
+    "docz-core": "1.0.2",
+    "docz-theme-default": "1.0.3",
     "remark-external-links": "4.0.0"
   },
   "private": true,
