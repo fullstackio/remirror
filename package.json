@@ -183,7 +183,8 @@
       "@remirror/*",
       "packages/*",
       "support/dependencies",
-      "docs"
+      "docs",
+      "apps/*"
     ]
   }
 }

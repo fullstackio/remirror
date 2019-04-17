@@ -46,7 +46,8 @@
       "prismjs",
       "refractor",
       "react-syntax-highlighter",
-      "jest-dom"
+      "jest-dom",
+      "firebase"
     ]
   }
 }
