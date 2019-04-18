@@ -1,9 +1,28 @@
 {
   "name": "jest-prosemirror",
   "description": "A text editor for react built with prosemirror",
-  "version": "0.0.1-alpha.11",
-  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
   "license": "MIT",
+  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
+  "homepage": "https://github.com/ifiokjr/remirror/tree/master/packages/jest-prosemirror",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifiokjr/remirror.git",
+    "directory": "packages/jest-prosemirror"
+  },
+  "version": "0.0.1-alpha.11",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "run-p build:*",
+    "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
+    "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
+    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit"
+  },
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@remirror/core": "0.0.1-alpha.11",
     "@types/prosemirror-inputrules": "^1.0.2",
@@ -26,33 +45,14 @@
     "prosemirror-test-builder": "^1.0.1",
     "prosemirror-view": "^1.8.8"
   },
-  "files": [
-    "lib",
-    "src"
-  ],
-  "homepage": "https://github.com/ifiokjr/remirror/tree/master/packages/jest-prosemirror",
+  "peerDependencies": {
+    "@babel/runtime-corejs2": ">=7",
+    "jest": "^24.5.0"
+  },
   "keywords": [
     "prosemirror",
     "react",
     "ssr",
     "text editor"
-  ],
-  "main": "lib/index.js",
-  "peerDependencies": {
-    "@babel/runtime-corejs2": ">=7",
-    "jest": "^24.5.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ifiokjr/remirror.git",
-    "directory": "packages/jest-prosemirror"
-  },
-  "scripts": {
-    "build": "run-p build:*",
-    "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
-    "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
-    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit"
-  },
-  "types": "lib/index.d.ts"
+  ]
 }

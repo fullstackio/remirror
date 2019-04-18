@@ -1,5 +1,63 @@
 {
+  "private": true,
   "name": "root",
+  "workspaces": {
+    "packages": [
+      "@remirror/*",
+      "packages/*",
+      "support/dependencies",
+      "docs",
+      "apps/*"
+    ]
+  },
+  "scripts": {
+    "build": "run-s build:modules build:rollup",
+    "build:docs": "cd docs && yarn build",
+    "build:modules": "lerna run build --stream",
+    "build:production": "cross-env NODE_ENV=production yarn build",
+    "build:rollup": "rollup --config ./support/rollup/rollup.config.js",
+    "changelog": "lerna-changelog",
+    "checks": "run-p integrity lint typecheck test",
+    "checks:parallel": "run-p lint typecheck test",
+    "ci": "yarn clean && yarn frozen",
+    "ci:audit": "audit-ci --high",
+    "ci:checks": "run-s integrity lint typecheck",
+    "ci:checks:all": "run-s integrity lint typecheck test test:integration build:production",
+    "clean": "yarn if-clean git clean -fdx --exclude=.config.json",
+    "clean:force": "git clean -fdx",
+    "clean:modules": "yarn if-clean git clean -fdx @remirror support docs",
+    "dev": "run-s build:modules dev:modules",
+    "dev:docs": "cd docs && yarn dev",
+    "dev:docs:debug": "cd docs && yarn dev --debug",
+    "dev:modules": "lerna run --no-private dev --parallel",
+    "fix": "run-s fix:lint:* fix:*",
+    "fix:lint:babel": "yarn lint:babel --fix",
+    "fix:lint:js": "yarn lint:js --fix",
+    "fix:lint:ts": "lerna run lint --parallel -- --fix",
+    "fix:pkgjson": "node support/scripts/package-json-prettier.js",
+    "fix:prettier": "prettier --write \"**/*.{json,yml,yaml,md,mdx}\"",
+    "fix:support": "yarn lint:support --fix",
+    "frozen": "yarn --frozen-lockfile install",
+    "if-clean": "node support/scripts/run-if-clean.js",
+    "if-config": "node support/scripts/run-if-config.js",
+    "integrity": "yarn check --integrity",
+    "launch:docs": "cross-env COVERAGE=true echo \"Launching...\" && yarn dev:docs:debug",
+    "lerna:publish:alpha": "lerna publish prerelease --preid=alpha --exact",
+    "lint": "run-s lint:*",
+    "lint:babel": "eslint **/.babelrc.js",
+    "lint:js": "eslint support *.js @remirror docs",
+    "lint:support": "tslint --project support/tsconfig.json --config support/tslint.json",
+    "lint:ts": "lerna run lint --parallel",
+    "publish:alpha": "yarn if-clean run-s ci:checks:all lerna:publish:alpha",
+    "start:hooks": "rimraf ./.config.json",
+    "stop:hooks": "cpy support/.config.sample.json ./ --rename=\".config.json\"",
+    "test": "jest --verbose",
+    "test:integration": "cross-env TEST_ENV=integration start-server-and-test launch:docs http-get://localhost:3000 test:integration:no-coverage",
+    "test:integration:no-coverage": "cross-env TEST_ENV=integration jest --coverage=false",
+    "test:integration:watch": "cross-env TEST_ENV=integration yarn test:watch",
+    "test:watch": "jest  --watch --verbose=false --coverage=false",
+    "typecheck": "lerna run typecheck"
+  },
   "engines": {
     "node": ">=10"
   },
@@ -79,6 +137,14 @@
       "eslint --fix",
       "git add"
     ],
+    "package.json": [
+      "prettier-package-json --write",
+      "git add"
+    ],
+    "**/package.json": [
+      "prettier-package-json --write",
+      "git add"
+    ],
     "*.{json,yml,yaml,md,mdx}": [
       "prettier --write",
       "git add"
@@ -106,16 +172,9 @@
         "options": {
           "printWidth": 90
         }
-      },
-      {
-        "files": "**/package.json",
-        "options": {
-          "parser": "package-json"
-        }
       }
     ]
   },
-  "private": true,
   "resolutions": {
     "react": "16.8.6",
     "braces": "3.0.1",
@@ -130,61 +189,5 @@
     "jsdom": "14.0.0",
     "hoist-non-react-statics": "3.3.0",
     "@microsoft/tsdoc": "0.12.9"
-  },
-  "scripts": {
-    "build": "run-s build:modules build:rollup",
-    "build:docs": "cd docs && yarn build",
-    "build:modules": "lerna run build --stream",
-    "build:production": "cross-env NODE_ENV=production yarn build",
-    "build:rollup": "rollup --config ./support/rollup/rollup.config.js",
-    "changelog": "lerna-changelog",
-    "checks": "run-p integrity lint typecheck test",
-    "checks:parallel": "run-p lint typecheck test",
-    "ci": "yarn clean && yarn frozen",
-    "ci:checks": "run-s integrity lint typecheck",
-    "ci:checks:all": "run-s integrity lint typecheck test test:integration build:production",
-    "clean": "yarn if-clean git clean -fdx --exclude=.config.json",
-    "clean:force": "git clean -fdx",
-    "clean:modules": "yarn if-clean git clean -fdx @remirror support docs",
-    "dev:modules": "lerna run --no-private dev --parallel",
-    "dev": "run-s build:modules dev:modules",
-    "dev:docs": "cd docs && yarn dev",
-    "dev:docs:debug": "cd docs && yarn dev --debug",
-    "fix": "run-s fix:lint:* fix:*",
-    "fix:lint:babel": "yarn lint:babel --fix",
-    "fix:lint:js": "yarn lint:js --fix",
-    "fix:lint:ts": "lerna run lint --parallel -- --fix",
-    "fix:prettier": "prettier --write \"**/*.{json,yml,yaml,md,mdx}\"",
-    "fix:support": "yarn lint:support --fix",
-    "frozen": "yarn --frozen-lockfile install",
-    "if-clean": "node support/scripts/run-if-clean.js",
-    "if-config": "node support/scripts/run-if-config.js",
-    "integrity": "yarn check --integrity",
-    "launch:docs": "cross-env COVERAGE=true echo \"Launching...\" && yarn dev:docs:debug",
-    "lint": "run-s lint:*",
-    "lint:babel": "eslint **/.babelrc.js",
-    "lint:js": "eslint support *.js @remirror docs",
-    "lint:support": "tslint --project support/tsconfig.json --config support/tslint.json",
-    "lint:ts": "lerna run lint --parallel",
-    "publish:alpha": "yarn if-clean run-s ci:checks:all lerna:publish:alpha",
-    "lerna:publish:alpha": "lerna publish prerelease --preid=alpha --exact",
-    "test": "jest --verbose",
-    "stop:hooks": "cpy support/.config.sample.json ./ --rename=\".config.json\"",
-    "start:hooks": "rimraf ./.config.json",
-    "test:integration:no-coverage": "cross-env TEST_ENV=integration jest --coverage=false",
-    "test:integration": "cross-env TEST_ENV=integration start-server-and-test launch:docs http-get://localhost:3000 test:integration:no-coverage",
-    "test:integration:watch": "cross-env TEST_ENV=integration yarn test:watch",
-    "test:watch": "jest  --watch --verbose=false --coverage=false",
-    "typecheck": "lerna run typecheck",
-    "ci:audit": "audit-ci --high"
-  },
-  "workspaces": {
-    "packages": [
-      "@remirror/*",
-      "packages/*",
-      "support/dependencies",
-      "docs",
-      "apps/*"
-    ]
   }
 }

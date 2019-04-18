@@ -1,18 +1,34 @@
 {
   "name": "@remirror/extension-enhanced-link",
   "description": "Enhanced link extension for the remirror wysiwyg editor",
-  "version": "0.0.1-alpha.11",
-  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "@remirror/core": "0.0.1-alpha.11"
+  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifiokjr/remirror.git",
+    "directory": "@remirror/extension-enhanced-link"
   },
+  "version": "0.0.1-alpha.11",
+  "main": "lib/index.js",
+  "module": "lib/dist/extension-enhanced-link.esm.js",
   "files": [
     "lib",
     "src"
   ],
-  "main": "lib/index.js",
-  "module": "lib/dist/extension-enhanced-link.esm.js",
+  "scripts": {
+    "build": "run-p build:*",
+    "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
+    "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
+    "dev": "run-p dev:*",
+    "dev:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s --watch",
+    "dev:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap --watch",
+    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit"
+  },
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@remirror/core": "0.0.1-alpha.11"
+  },
   "peerDependencies": {
     "@babel/runtime-corejs2": ">=7",
     "@types/prosemirror-state": "^1.2.3",
@@ -23,22 +39,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ifiokjr/remirror.git",
-    "directory": "@remirror/extension-enhanced-link"
-  },
-  "scripts": {
-    "build": "run-p build:*",
-    "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
-    "dev": "run-p dev:*",
-    "dev:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s --watch",
-    "dev:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap --watch",
-    "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
-    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit"
-  },
-  "types": "lib/index.d.ts",
   "umd": "lib/dist/extension-enhanced-link.umd.js",
   "umd:min": "lib/dist/extension-enhanced-link.umd.min.js",
   "umdGlobals": {

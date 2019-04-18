@@ -1,21 +1,37 @@
 {
   "name": "@remirror/core-extensions",
   "description": "Core extensions for the remirror wysiwyg editor",
-  "version": "0.0.1-alpha.11",
-  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
   "license": "MIT",
+  "author": "Ifiok Jr. <ifiokotung@gmail.com>",
+  "homepage": "https://github.com/ifiokjr/remirror/tree/master/@remirror/core-extensions",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ifiokjr/remirror.git",
+    "directory": "@remirror/core-extensions"
+  },
+  "version": "0.0.1-alpha.11",
+  "main": "lib/index.js",
+  "module": "lib/dist/core-extensions.esm.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "run-p build:*",
+    "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
+    "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
+    "dev": "run-p dev:*",
+    "dev:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s --watch",
+    "dev:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap --watch",
+    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit"
+  },
+  "types": "lib/index.d.ts",
   "dependencies": {
     "@remirror/core": "0.0.1-alpha.11",
     "@types/prosemirror-history": "^1.0.1",
     "prosemirror-history": "^1.0.4"
   },
-  "files": [
-    "lib",
-    "src"
-  ],
-  "homepage": "https://github.com/ifiokjr/remirror/tree/master/@remirror/core-extensions",
-  "main": "lib/index.js",
-  "module": "lib/dist/core-extensions.esm.js",
   "peerDependencies": {
     "@babel/runtime-corejs2": ">=7",
     "@emotion/core": "^10",
@@ -37,22 +53,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ifiokjr/remirror.git",
-    "directory": "@remirror/core-extensions"
-  },
-  "scripts": {
-    "build": "run-p build:*",
-    "build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
-    "dev": "run-p dev:*",
-    "dev:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s --watch",
-    "dev:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap --watch",
-    "build:declaration": "tsc -p ./tsconfig.prod.json --emitDeclarationOnly --declarationMap",
-    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit"
-  },
-  "types": "lib/index.d.ts",
   "umd": "lib/dist/core-extensions.umd.js",
   "umd:min": "lib/dist/core-extensions.umd.min.js",
   "umdGlobals": {

@@ -3,3 +3,5 @@ lib
 dist
 **/dist
 .docz
+package.json
+**/package.json

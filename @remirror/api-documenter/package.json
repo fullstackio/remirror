@@ -1,10 +1,26 @@
 {
+  "private": true,
   "name": "@remirror/api-documenter",
   "description": "Read JSON files from api-extractor, generate documentation pages",
-  "version": "0.0.1-alpha.11",
   "license": "MIT",
+  "homepage": "https://api-extractor.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/web-build-tools/tree/master/apps/api-documenter"
+  },
+  "version": "0.0.1-alpha.11",
   "bin": {
     "api-documenter": "./bin/api-documenter"
+  },
+  "scripts": {
+    "_build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
+    "_dev:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s --watch",
+    "build": "run-p build:*",
+    "build:declaration": "tsc -p ./tsconfig.prod.json  --declarationMap",
+    "dev": "run-p dev:*",
+    "dev:declaration": "tsc -p ./tsconfig.prod.json --declarationMap --watch",
+    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
+    "typecheck": "tsc -p ./tsconfig.json --noEmit"
   },
   "dependencies": {
     "@microsoft/api-extractor-model": "7.1.0",
@@ -18,21 +34,5 @@
     "@microsoft/node-library-build": "6.0.56",
     "@microsoft/rush-stack-compiler-3.2": "0.3.8",
     "@types/lodash.kebabcase": "4.1.6"
-  },
-  "homepage": "https://api-extractor.com/",
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Microsoft/web-build-tools/tree/master/apps/api-documenter"
-  },
-  "scripts": {
-    "build": "run-p build:*",
-    "_build:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s",
-    "build:declaration": "tsc -p ./tsconfig.prod.json  --declarationMap",
-    "dev": "run-p dev:*",
-    "_dev:babel": "babel src --out-dir lib --extensions \".ts,.tsx\" -s --watch",
-    "dev:declaration": "tsc -p ./tsconfig.prod.json --declarationMap --watch",
-    "lint": "tslint --project tsconfig.json --config ../../tslint.json",
-    "typecheck": "tsc -p ./tsconfig.json --noEmit"
   }
 }
