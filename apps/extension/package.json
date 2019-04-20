@@ -13,11 +13,11 @@
     "clean": "rimraf dist",
     "dev": "run-p dev:*",
     "dev:build": "NODE_ENV=development webpack --watch --config=../../support/webpack/extension.config.mjs",
-    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "_lint": "tslint -p tsconfig.json -c ../../tslint.json",
     "release": "run-s build update-version save-url release:*",
     "release:amo": "cd dist && web-ext-submit",
     "release:cws": "cd dist && webstore upload --auto-publish",
-    "typecheck": "tsc -p tsconfig.json",
+    "_typecheck": "tsc -p tsconfig.json",
     "update-version": "run-s update-version:*",
     "update-version:name": "VERSION_NAME=$(dot-json package.json version) && echo Version Name: $VERSION_NAME && dot-json dist/manifest.json version_name $VERSION_NAME && dot-json src/manifest.json version_name $VERSION_NAME",
     "update-version:utc": "VERSION=$(utc-version) && echo $VERSION && dot-json dist/manifest.json version $VERSION && dot-json src/manifest.json version $VERSION"

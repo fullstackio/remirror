@@ -27,12 +27,7 @@ export class ContentScriptContainer extends PureComponent<Props, State> {
   public renderDock(): ReactNode {
     if (this.state.mounted) {
       return (
-        <Dock
-          position="right"
-          dimMode="transparent"
-          defaultSize={0.4}
-          isVisible={this.props.isVisible}
-        >
+        <Dock position='right' dimMode='transparent' defaultSize={0.4} isVisible={this.props.isVisible}>
           <div>
             <h1>I am a dock</h1>
             <button onClick={this.props.toggleVisibility}>Close me</button>

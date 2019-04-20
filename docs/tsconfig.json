@@ -24,17 +24,9 @@
       "@remirror/ui-wysiwyg": ["../@remirror/ui-wysiwyg/src"],
       "jest-remirror": ["../packages/jest-remirror/src"],
       "jest-prosemirror": ["../packages/jest-prosemirror/src"],
-      "@test-fixtures/*": ["../support/fixtures/*"],
-      "*": ["support/types/*"]
+      "@test-fixtures/*": ["../support/fixtures/*"]
     },
-    "types": [
-      "jest",
-      "jest-environment-puppeteer",
-      "expect-puppeteer",
-      "puppeteer",
-      "jest-extended",
-      "styled-components"
-    ]
+    "types": ["jest", "jest-environment-puppeteer", "expect-puppeteer", "puppeteer", "jest-extended"]
   },
   "include": ["./", "patches.d.ts"]
 }

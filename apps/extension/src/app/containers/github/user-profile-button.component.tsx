@@ -100,15 +100,11 @@ export class UserProfileButton extends PureComponent<Props, State> {
           <InjectedGitHubButton
             onClick={this.onClick}
             label={pledged ? 'Remove Pledge' : 'Pledge'}
-            labelDescription={`${
-              pledged ? 'Send' : 'Remove'
-            } pledge at the end of the month`}
+            labelDescription={`${pledged ? 'Send' : 'Remove'} pledge at the end of the month`}
             interactions={pledges}
             onClickInteractions={this.onClickPledgeInteractions}
-            interactionsDescription={`${pledges} ${
-              pledges <= 0 || pledges > 1 ? 'pledges' : 'pledge'
-            }`}
-            extraButtonClasses="btn-primary"
+            interactionsDescription={`${pledges} ${pledges <= 0 || pledges > 1 ? 'pledges' : 'pledge'}`}
+            extraButtonClasses='btn-primary'
           />
         </span>
         <span>

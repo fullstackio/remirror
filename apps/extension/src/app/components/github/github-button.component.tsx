@@ -27,22 +27,22 @@ export class InjectedGitHubButton extends PureComponent<InjectedGitHubButtonProp
       extraButtonClasses,
     } = this.props;
     return (
-      <div className="">
+      <div className=''>
         <button
           className={`btn btn-sm btn-with-count js-toggler-target ${extraButtonClasses}`}
-          role="button"
-          aria-haspopup="true"
-          aria-expanded="false"
+          role='button'
+          aria-haspopup='true'
+          aria-expanded='false'
           aria-label={labelDescription}
           title={labelDescription}
           onClick={onClick}
         >
-          <span className="js-select-button">
+          <span className='js-select-button'>
             {icon} {label}
           </span>
         </button>
         <a
-          className="social-count js-social-count"
+          className='social-count js-social-count'
           aria-label={interactionsDescription}
           title={interactionsDescription}
           onClick={onClickInteractions}

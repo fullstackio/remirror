@@ -1,0 +1,39 @@
+{
+  "extends": "../../support/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["esnext", "dom"],
+    "baseUrl": "./",
+    "paths": {
+      "@components": ["components"],
+      "@components/*": ["components/*"],
+      "@firebase": ["firebase"],
+      "@firebase/*": ["firebase/*"],
+      "@containers": ["containers"],
+      "@containers/*": ["containers/*"],
+      "@routes": ["routes"],
+      "@routes/*": ["routes/*"],
+      "@server": ["server"],
+      "@server/*": ["server/*"],
+      "@typings": ["typings"],
+      "@typings/*": ["typings/*"],
+      "@utils": ["utils"],
+      "@utils/*": ["utils/*"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "./pages",
+    "./firebase",
+    "./components",
+    "./typings",
+    "./utils",
+    "./routes",
+    "./typings/globals.d.ts",
+    "./globals.d.ts",
+    "./server",
+    "./start.ts",
+    "./containers",
+    "*.ts"
+  ]
+}

@@ -11,9 +11,7 @@ import { contentActions, selectDockVisibility } from '@app/redux/content';
 import { RootState } from '@typings/redux';
 import { GitHubPageType } from '@utils/page-detect';
 
-type Props = ReturnType<typeof mapStateToProps> &
-  typeof dispatchProps &
-  InjectedContentProps;
+type Props = ReturnType<typeof mapStateToProps> & typeof dispatchProps & InjectedContentProps;
 
 export class GitHubPortalsContainer extends PureComponent<Props> {
   public showDock = () => {
@@ -32,10 +30,7 @@ export class GitHubPortalsContainer extends PureComponent<Props> {
 
   private renderUserProfileButton() {
     console.log('should I render', this.props.pageType, this.props.elements.userProfile);
-    if (
-      this.props.pageType === GitHubPageType.UserProfile &&
-      this.props.elements.userProfile
-    ) {
+    if (this.props.pageType === GitHubPageType.UserProfile && this.props.elements.userProfile) {
       console.log('about to render userprofile button');
       return <UserProfileButton {...this.props} showDock={this.showDock} />;
     }

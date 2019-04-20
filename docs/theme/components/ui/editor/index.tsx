@@ -7,7 +7,7 @@ import { get } from 'lodash';
 
 import { ClipboardAction } from './elements';
 
-const CodeMirror = loadable(() => import('../CodeMirror'));
+const CodeMirror = loadable(() => import('../codemirror'));
 
 const getLanguage = (children: any) => {
   const defaultLanguage = 'jsx';

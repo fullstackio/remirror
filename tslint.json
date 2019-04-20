@@ -47,7 +47,12 @@
       "refractor",
       "react-syntax-highlighter",
       "jest-dom",
-      "firebase"
+      "firebase",
+      "rxfire",
+      "lodash",
+      "date-fns",
+      "next",
+      "rxjs"
     ]
   }
 }

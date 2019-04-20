@@ -1,3 +1,6 @@
+// tslint:disable-next-line: no-reference
+/// <reference path="./patches.d.ts" />
+
 import { EditorSchema } from '@remirror/core';
 import { ReactNodeView } from '@remirror/react';
 import { Data } from 'emoji-mart';
