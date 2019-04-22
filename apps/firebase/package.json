@@ -25,12 +25,12 @@
     "watch:babel": "babel src --out-dir lib --extensions \".ts\" --watch"
   },
   "dependencies": {
-    "@google-cloud/debug-agent": "3.0.1",
+    "@google-cloud/debug-agent": "3.1.0",
     "@schemafire/core": "file:/Users/ifiokjr/Coding/kickjump/schemafire/@schemafire/core",
     "@schemafire/firestore": "file:/Users/ifiokjr/Coding/kickjump/schemafire/@schemafire/firestore",
     "express": "4.16.4",
-    "firebase-admin": "7.0.0",
-    "firebase-functions": "2.2.0",
+    "firebase-admin": "7.3.0",
+    "firebase-functions": "2.3.0",
     "glob": "7.1.3",
     "got": "9.6.0",
     "io-ts": "1.8.5",
