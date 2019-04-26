@@ -2,9 +2,8 @@ import React, { Children, Component } from 'react';
 
 import { ExtensionManager, ExtensionMapValue } from '@remirror/core';
 import { baseExtensions } from '@remirror/core-extensions';
+import { asDefaultProps, isRemirrorExtension, RemirrorManagerProps } from '@remirror/react-utils';
 import { RemirrorManagerContext } from '../contexts';
-import { asDefaultProps, isRemirrorExtension } from '../helpers';
-import { RemirrorManagerProps } from '../types';
 
 export class RemirrorManager extends Component<RemirrorManagerProps> {
   public static defaultProps = asDefaultProps<RemirrorManagerProps>()({

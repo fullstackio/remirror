@@ -1,6 +1,7 @@
 import { useContext } from 'react';
+
+import { UsePositionerParams } from '@remirror/react-utils';
 import { RemirrorEditorContext, RemirrorManagerContext } from './contexts';
-import { UsePositionerParams } from './types';
 
 /**
  * This provides access to the Remirror Editor context using hooks.

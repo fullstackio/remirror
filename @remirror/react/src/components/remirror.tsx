@@ -10,6 +10,7 @@ import {
   EMPTY_PARAGRAPH_NODE,
   ExtensionManager,
   isArray,
+  isFunction,
   isString,
   NodeViewPortalContainer,
   ObjectNode,
@@ -22,24 +23,13 @@ import {
 } from '@remirror/core';
 import { PlaceholderPluginState } from '@remirror/core-extensions';
 import { createEditorView, getDoc, RemirrorSSR, shouldUseDOMEnvironment } from '@remirror/react-ssr';
-import { EditorState } from 'prosemirror-state';
-import {
-  cloneElement,
-  defaultProps,
-  getElementProps,
-  isAttributeFunction,
-  isDOMElement,
-  isRenderProp,
-  uniqueClass,
-  updateChildWithKey,
-} from '../helpers';
-import { NodeViewPortal, NodeViewPortalComponent } from '../node-views';
-import { defaultPositioner } from '../positioners';
-import { defaultStyles } from '../styles';
 import {
   CalculatePositionerParams,
+  cloneElement,
+  getElementProps,
   GetRootPropsConfig,
   InjectedRemirrorProps,
+  isReactDOMElement,
   PlaceholderConfig,
   PositionerMapValue,
   PositionerProps,
@@ -49,7 +39,14 @@ import {
   RemirrorEventListenerParams,
   RemirrorProps,
   RenderPropFunction,
-} from '../types';
+  uniqueClass,
+  updateChildWithKey,
+} from '@remirror/react-utils';
+import { EditorState } from 'prosemirror-state';
+import { defaultProps } from '../constants';
+import { NodeViewPortal, NodeViewPortalComponent } from '../node-views';
+import { defaultPositioner } from '../positioners';
+import { defaultStyles } from '../styles';
 
 export class Remirror extends Component<RemirrorProps, CompareStateParams> {
   public static defaultProps = defaultProps;
@@ -288,10 +285,11 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
    */
   private getAttributes = (state: EditorState) => {
     const { attributes } = this.props;
-    const propAttributes = isAttributeFunction(attributes)
+    const propAttributes = isFunction(attributes)
       ? attributes({ ...this.eventListenerParams, state })
       : attributes;
 
+    console.log(this.placeholder);
     const defaultAttributes = {
       role: 'textbox',
       'aria-multiline': 'true',
@@ -475,8 +473,7 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
     let pluginState: PlaceholderPluginState;
     try {
       pluginState = this.manager.getPluginState<PlaceholderPluginState>('placeholder');
-    } catch {
-      // console.error(e);
+    } catch (e) {
       return undefined;
     }
 
@@ -520,7 +517,7 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
     this.setPortalContainer(portalContainer);
     const { children } = this.props;
 
-    if (!isRenderProp(children)) {
+    if (!isFunction(children)) {
       throw new Error('The child argument to the Remirror component must be a function.');
     }
 
@@ -569,7 +566,7 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
     const { children: child, ...props } = getElementProps(element);
 
     if (!this.rootPropsConfig.called && !this.props.customRootProp) {
-      return isDOMElement(element)
+      return isReactDOMElement(element)
         ? cloneElement(element, this.internalGetRootProps(props), ...this.injectSSRIntoElementChildren(child))
         : jsx('div', this.internalGetRootProps(), ...this.injectSSRIntoElementChildren(element));
     }

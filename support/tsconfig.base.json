@@ -30,6 +30,7 @@
       "@remirror/extension-mention": ["@remirror/extension-mention/src/index.ts"],
       "@remirror/react": ["@remirror/react/src/index.ts"],
       "@remirror/react-ssr": ["@remirror/react-ssr/src/index.ts"],
+      "@remirror/react-utils": ["@remirror/react-utils/src/index.ts"],
       "@remirror/renderer-react": ["@remirror/renderer-react/src/index.ts"],
       "@remirror/ui-twitter": ["@remirror/ui-twitter/src"],
       "@remirror/ui-wysiwyg": ["@remirror/ui-wysiwyg/src"],

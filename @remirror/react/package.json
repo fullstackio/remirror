@@ -29,6 +29,7 @@
   "types": "lib/index.d.ts",
   "dependencies": {
     "@remirror/core": "0.0.1-alpha.11",
+    "@remirror/react-utils": "0.0.1-alpha.11",
     "@remirror/core-extensions": "0.0.1-alpha.11",
     "@remirror/react-ssr": "0.0.1-alpha.11",
     "@remirror/renderer-react": "0.0.1-alpha.11",
@@ -41,14 +42,14 @@
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-model": "^1.7.0",
     "@types/prosemirror-state": "^1.2.3",
-    "@types/react": "^16.8.0",
-    "@types/react-dom": "^16.8.0",
     "emotion": "^10.0.7",
     "prosemirror-commands": "^1.0.7",
     "prosemirror-model": "^1.7.0",
     "prosemirror-state": "^1.2.2"
   },
   "peerDependencies": {
+    "@types/react": "^16.8.0",
+    "@types/react-dom": "^16.8.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },

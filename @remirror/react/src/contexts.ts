@@ -1,6 +1,7 @@
-import { Cast, ExtensionManager } from '@remirror/core';
 import { createContext } from 'react';
-import { InjectedRemirrorProps } from './types';
+
+import { Cast, ExtensionManager } from '@remirror/core';
+import { InjectedRemirrorProps } from '@remirror/react-utils';
 
 /**
  * Creates a ReactContext for the RemirrorEditor component

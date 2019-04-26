@@ -1,10 +1,11 @@
+import { axe } from 'jest-axe';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
-
-import { createTestManager } from '@test-fixtures/schema-helpers';
-import { axe } from 'jest-axe';
 import { fireEvent, render } from 'react-testing-library';
-import { InjectedRemirrorProps, Remirror } from '../..';
+
+import { InjectedRemirrorProps } from '@remirror/react-utils';
+import { createTestManager } from '@test-fixtures/schema-helpers';
+import { Remirror } from '../';
 
 const textContent = `This is editor text`;
 const label = 'Remirror editor';

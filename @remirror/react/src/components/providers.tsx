@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { MakeOptional, Omit } from '@remirror/core';
+import { RemirrorElementType, RemirrorFC, RemirrorProps } from '@remirror/react-utils';
+import { defaultProps } from '../constants';
 import { RemirrorEditorContext } from '../contexts';
-import { defaultProps } from '../helpers';
 import { useRemirrorManager } from '../hooks';
-import { RemirrorElementType, RemirrorFC, RemirrorProps } from '../types';
 import { Remirror } from './remirror';
 
 export type RemirrorProviderProps = MakeOptional<Omit<RemirrorProps, 'children'>, keyof typeof defaultProps>;

@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { render } from 'react-testing-library';
+
+import { InjectedRemirrorProps } from '@remirror/react-utils';
 import { withRemirror } from '../../hocs';
 import { useRemirror } from '../../hooks';
-import { InjectedRemirrorProps } from '../../types';
 import { ManagedRemirrorEditor } from '../providers';
 import { RemirrorManager } from '../remirror-manager';
 

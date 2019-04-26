@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Doc, ExtensionManager, Paragraph, Text } from '@remirror/core';
 import { EMPTY_NODE_CLASS_SELECTOR, History } from '@remirror/core-extensions';
+import { InjectedRemirrorProps } from '@remirror/react-utils';
 import { createTestManager } from '@test-fixtures/schema-helpers';
 import { render } from 'react-testing-library';
 import { Remirror } from '../..';
-import { InjectedRemirrorProps } from '../../types';
 
 const label = 'Remirror editor';
 const handlers = {

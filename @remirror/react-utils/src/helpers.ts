@@ -1,40 +1,14 @@
 import { jsx } from '@emotion/core';
-import {
-  bool,
-  Cast,
-  isArray,
-  isFunction,
-  isObject,
-  isString,
-  PlainObject,
-  Predicate,
-  uniqueArray,
-} from '@remirror/core';
+import { bool, Cast, isArray, isObject, isString, PlainObject, uniqueArray } from '@remirror/core';
 import { Children, isValidElement, ReactNode } from 'react';
-import {
-  AttributePropFunction,
-  RemirrorComponentType,
-  RemirrorElement,
-  RemirrorElementType,
-  RenderPropFunction,
-} from './types';
-
-/**
- * Alias for checking if a the attribute function is valid and also typecasting the return as a AttributePropFunction
- */
-export const isAttributeFunction = Cast<Predicate<AttributePropFunction>>(isFunction);
-
-/**
- * Alias for checking if a render props is valid and also typecasting the return as a RenderPropFunction
- */
-export const isRenderProp = Cast<Predicate<RenderPropFunction>>(isFunction);
+import { RemirrorComponentType, RemirrorElement, RemirrorElementType } from './types';
 
 /**
  * Check whether a react node is a built in dom element (i.e. `div`, `span`)
  *
  * @param element
  */
-export const isDOMElement = (element: ReactNode) => {
+export const isReactDOMElement = (element: ReactNode) => {
   return isValidElement(element) && isString(element.type);
 };
 
@@ -67,30 +41,6 @@ export const uniqueClass = (uid: string, className: string) => `${className}-${u
 export const asDefaultProps = <GProps extends {}>() => <GDefaultProps extends Partial<GProps>>(
   props: GDefaultProps,
 ): GDefaultProps => props;
-
-/**
- * Finds a deeply nested child by the key provided.
- *
- * @param children
- * @param key
- */
-export const findChildWithKey = (children: ReactNode, key: string): ReactNode => {
-  for (const child of Children.toArray(children)) {
-    if (!isValidElement(child)) {
-      continue;
-    }
-
-    if (child.key === key) {
-      return child;
-    }
-    const subChildren = child.props && Cast(child.props).children;
-
-    if (subChildren) {
-      return findChildWithKey(subChildren, key);
-    }
-  }
-  return null;
-};
 
 /**
  * Searches the react tree for a child node with the requested key and updates
@@ -161,7 +111,7 @@ export const isRemirrorExtension = isRemirrorElementOfType(RemirrorElementType.E
  *
  * @param value - the value to check
  */
-export const isRemirrorEditor = isRemirrorElementOfType(RemirrorElementType.EditorProvider);
+export const isRemirrorEditorProvider = isRemirrorElementOfType(RemirrorElementType.EditorProvider);
 
 /**
  * Checks if this is a ManagedRemirrorEditor which pulls in the manager from the context and places it's children

@@ -1,6 +1,6 @@
 {
   "name": "@remirror/react-utils",
-  "description": "react-utils utilities for remirror",
+  "description": "React utilities for remirror",
   "license": "MIT",
   "author": "Ifiok Jr. <ifiokotung@gmail.com>",
   "homepage": "https://github.com/ifiokjr/remirror/tree/master/@remirror/react-utils",
@@ -41,14 +41,14 @@
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-model": "^1.7.0",
     "@types/prosemirror-state": "^1.2.3",
-    "@types/react": "^16.8.0",
-    "@types/react-dom": "^16.8.0",
     "emotion": "^10.0.7",
     "prosemirror-commands": "^1.0.7",
     "prosemirror-model": "^1.7.0",
     "prosemirror-state": "^1.2.2"
   },
   "peerDependencies": {
+    "@types/react": "^16.8.0",
+    "@types/react-dom": "^16.8.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
   },
