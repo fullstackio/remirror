@@ -185,9 +185,15 @@
     "acorn": "6.1.1",
     "react-dom": "16.8.6",
     "@babel/parser": "7.4.3",
-    "typescript": "3.4.4",
-    "jsdom": "14.0.0",
+    "typescript": "3.4.5",
+    "jsdom": "15.0.0",
     "hoist-non-react-statics": "3.3.0",
     "@microsoft/tsdoc": "0.12.9"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
