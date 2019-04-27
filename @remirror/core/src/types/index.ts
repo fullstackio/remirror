@@ -3,7 +3,7 @@ import { Plugin as PMPlugin } from 'prosemirror-state';
 import { NodeViewPortalContainer } from '../portal-container';
 import { EditorView, InputRule, Mark, Transaction } from './aliases';
 import { AnyFunction, Attrs, EditorSchema, EditorState, Omit, ProsemirrorNode } from './base';
-import { SchemaParams } from './builders';
+import { EditorViewParams, SchemaParams } from './builders';
 
 /**
  * Used to apply the Prosemirror transaction to the current EditorState.
@@ -73,6 +73,11 @@ export interface ExtensionManagerParams extends SchemaParams {
    */
   getEditorState: () => EditorState;
 }
+
+/**
+ * Inject a view into the params of the views.
+ */
+export interface ViewExtensionManagerParams extends EditorViewParams, ExtensionManagerParams {}
 
 export type FlexibleConfig<GFunc extends AnyFunction, GNames extends string = string> =
   | GFunc

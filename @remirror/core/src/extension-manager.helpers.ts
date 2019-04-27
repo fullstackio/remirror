@@ -1,3 +1,4 @@
+import { DEFAULT_EXTENSION_PRIORITY } from './constants';
 import { AnyExtension, Extension } from './extension';
 import { bool, capitalize, Cast, isFunction, isObject } from './helpers/base';
 import { MarkExtension } from './mark-extension';
@@ -170,12 +171,20 @@ export const createFlexibleFunctionMap = <
 };
 
 /**
+ * Determines if the passed in extension is a any type of extension.
+ *
+ * @param extension - the extension to check
+ */
+export const isExtension = (extension: unknown): extension is AnyExtension =>
+  isObject(extension) && extension instanceof Extension;
+
+/**
  * Determines if the passed in extension is a node extension. Useful as a type guard where a particular type of extension is needed.
  *
  * @param extension - the extension to check
  */
 export const isNodeExtension = (extension: unknown): extension is NodeExtension<any> =>
-  isObject(extension) && extension instanceof NodeExtension;
+  isExtension(extension) && extension instanceof NodeExtension;
 
 /**
  * Determines if the passed in extension is a mark extension. Useful as a type guard where a particular type of extension is needed.
@@ -183,7 +192,7 @@ export const isNodeExtension = (extension: unknown): extension is NodeExtension<
  * @param extension - the extension to check
  */
 export const isMarkExtension = (extension: unknown): extension is MarkExtension<any> =>
-  isObject(extension) && extension instanceof MarkExtension;
+  isExtension(extension) && extension instanceof MarkExtension;
 
 /**
  * Checks whether the this is an extension and if it is a plain one
@@ -191,7 +200,7 @@ export const isMarkExtension = (extension: unknown): extension is MarkExtension<
  * @param extension - the extension to check
  */
 export const isPlainExtension = (extension: unknown): extension is Extension<any, never> =>
-  isObject(extension) && extension instanceof Extension && extension.type === ExtensionType.EXTENSION;
+  isExtension(extension) && extension.type === ExtensionType.EXTENSION;
 
 /**
  * Checks to see if an optional property exists on an extension.
@@ -248,7 +257,7 @@ export const extensionPropertyMapper = <
  * A lower value for priority means a higher priority. Think of it as an index and position in array
  * except that it can also support negative values.
  */
-export interface ExtensionMapValue {
+export interface PrioritizedExtension {
   /**
    * The instantiated extension
    */
@@ -266,17 +275,32 @@ export interface ExtensionMapValue {
 }
 
 /**
+ * Either a PrioritizedExtension or the actual Extension
+ */
+export type FlexibleExtension = PrioritizedExtension | AnyExtension;
+
+/**
+ * Converts an extension to its mapped value
+ */
+function convertToExtensionMapValue(extension: FlexibleExtension): PrioritizedExtension {
+  return isExtension(extension) ? { priority: DEFAULT_EXTENSION_PRIORITY, extension } : extension;
+}
+
+/**
  * Sorts and transforms extension map based on the provided priorities and outputs just the extensions
  *
  * TODO: Add a check for requiredExtensions and inject them automatically
  *
- * @param extensionMapValues - the extensions to transform as well as their priorities
+ * @param values - the extensions to transform as well as their priorities
  * @returns the list of extension instances sorted by priority
  *
  * @internal
  */
-export const transformExtensionMap = (extensionMapValues: ExtensionMapValue[]) =>
-  extensionMapValues.sort((a, b) => a.priority - b.priority).map(({ extension }) => extension);
+export const transformExtensionMap = (values: FlexibleExtension[]) =>
+  values
+    .map(convertToExtensionMapValue)
+    .sort((a, b) => a.priority - b.priority)
+    .map(({ extension }) => extension);
 
 /**
  * Takes in an object and removes all function values.

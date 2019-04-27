@@ -57,3 +57,8 @@ export const EMPTY_PARAGRAPH_NODE = {
     },
   ],
 };
+
+/**
+ * The default extension priority level
+ */
+export const DEFAULT_EXTENSION_PRIORITY = 2;

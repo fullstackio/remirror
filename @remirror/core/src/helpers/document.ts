@@ -136,7 +136,7 @@ export const isDocNodeEmpty = (node: ProsemirrorNode) => {
   }
 
   return (
-    nodeChild.type.name === 'paragraph' &&
+    nodeChild.type.isBlock &&
     !nodeChild.childCount &&
     nodeChild.nodeSize === 2 &&
     (!nodeChild.marks || nodeChild.marks.length === 0)

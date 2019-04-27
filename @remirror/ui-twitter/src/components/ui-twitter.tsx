@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 
 import { Attrs, omit } from '@remirror/core';
-import { InlineCursorTarget } from '@remirror/core-extensions';
+import { InlineCursorTarget, Placeholder, PlaceholderOptions } from '@remirror/core-extensions';
 import { EmojiNode, EmojiNodeOptions, isBaseEmoji } from '@remirror/extension-emoji';
 import { EnhancedLink, EnhancedLinkOptions } from '@remirror/extension-enhanced-link';
 import {
@@ -303,17 +303,18 @@ export class TwitterUI extends PureComponent<TwitterUIProps, State> {
             set={this.props.emojiSet}
             emojiData={this.props.emojiData}
           />
+          <RemirrorExtension<PlaceholderOptions>
+            Constructor={Placeholder}
+            extraStyles={{
+              color: '#aab8c2',
+              fontStyle: 'normal',
+              position: 'absolute',
+              fontWeight: 300,
+              letterSpacing: '0.5px',
+            }}
+            placeholder="What's happening"
+          />
           <ManagedRemirrorEditor
-            placeholder={[
-              "What's happening?",
-              {
-                color: '#aab8c2',
-                fontStyle: 'normal',
-                position: 'absolute',
-                fontWeight: 300,
-                letterSpacing: '0.5px',
-              },
-            ]}
             {...this.remirrorProps}
             onChange={this.onChange}
             insertPosition='start'

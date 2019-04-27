@@ -187,6 +187,11 @@ export interface BaseExtensionOptions {
    * Whether to include the extension's plugin
    */
   includePlugin?: boolean;
+
+  /**
+   * Whether to use the attributes provided by this extension
+   */
+  includeAttributes?: boolean;
 }
 
 export type NodeExtensionOptions = BaseExtensionOptions;

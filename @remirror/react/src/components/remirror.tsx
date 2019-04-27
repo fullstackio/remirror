@@ -5,13 +5,10 @@ import {
   CompareStateParams,
   createDocumentNode,
   EDITOR_CLASS_NAME,
-  EDITOR_CLASS_SELECTOR,
   EditorView as EditorViewType,
   EMPTY_PARAGRAPH_NODE,
   ExtensionManager,
-  isArray,
   isFunction,
-  isString,
   NodeViewPortalContainer,
   ObjectNode,
   Position,
@@ -21,7 +18,6 @@ import {
   Transaction,
   uniqueId,
 } from '@remirror/core';
-import { PlaceholderPluginState } from '@remirror/core-extensions';
 import { createEditorView, getDoc, RemirrorSSR, shouldUseDOMEnvironment } from '@remirror/react-ssr';
 import {
   CalculatePositionerParams,
@@ -30,7 +26,6 @@ import {
   GetRootPropsConfig,
   InjectedRemirrorProps,
   isReactDOMElement,
-  PlaceholderConfig,
   PositionerMapValue,
   PositionerProps,
   PositionerRefFactoryParams,
@@ -149,26 +144,12 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
    */
   private get editorStyles() {
     const styles: Interpolation[] = [this.props.editorStyles];
-    const placeholder = this.placeholder;
-    const placeholderConfig = placeholder
-      ? {
-          selector: `${EDITOR_CLASS_SELECTOR} p.${placeholder.className}:first-of-type::before`,
-          content: `"${placeholder.text}"`,
-          style: placeholder.style,
-        }
-      : undefined;
-
-    if (placeholderConfig) {
-      styles.unshift({
-        [placeholderConfig.selector]: { ...placeholderConfig.style, content: placeholderConfig.content },
-      });
-    }
 
     /* Inject styles from any extensions */
     styles.unshift(this.manager.data.styles);
 
     if (this.props.usesDefaultStyles) {
-      styles.unshift(defaultStyles(placeholderConfig));
+      styles.unshift(defaultStyles());
     }
 
     return styles;
@@ -289,14 +270,18 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
       ? attributes({ ...this.eventListenerParams, state })
       : attributes;
 
-    console.log(this.placeholder);
+    const managerAttrs = this.manager.data.attributes;
+
     const defaultAttributes = {
       role: 'textbox',
       'aria-multiline': 'true',
-      ...(this.placeholder ? { 'aria-placeholder': this.placeholder.text } : {}),
+      // ...(this.placeholder ? { 'aria-placeholder': this.placeholder.text } : {}),
       ...(!this.props.editable ? { 'aria-readonly': 'true' } : {}),
       'aria-label': this.props.label || '',
-      class: `${EDITOR_CLASS_NAME} ${uniqueClass(this.uid, 'remirror')}`,
+      ...managerAttrs,
+      class: `${EDITOR_CLASS_NAME} ${uniqueClass(this.uid, 'remirror')}${
+        managerAttrs.class ? ' ' + managerAttrs.class : ''
+      }`,
     };
 
     return { ...defaultAttributes, ...propAttributes };
@@ -467,35 +452,6 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
   private getDocJSON = (): ObjectNode => {
     return this.state.newState.doc.toJSON() as ObjectNode;
   };
-
-  private get placeholder(): PlaceholderConfig | undefined {
-    const { placeholder } = this.props;
-    let pluginState: PlaceholderPluginState;
-    try {
-      pluginState = this.manager.getPluginState<PlaceholderPluginState>('placeholder');
-    } catch (e) {
-      return undefined;
-    }
-
-    if (!pluginState) {
-      if (placeholder) {
-        console.error(
-          'To use a placeholder you must provide a placeholder plugin (or set the prop `usesBuiltInExtensions={true}`).',
-        );
-      }
-      return undefined;
-    }
-
-    return isArray(placeholder)
-      ? {
-          text: placeholder[0],
-          className: pluginState.emptyNodeClass,
-          style: placeholder[1],
-        }
-      : isString(placeholder)
-      ? { text: placeholder, className: pluginState.emptyNodeClass, style: {} }
-      : undefined;
-  }
 
   /**
    * Stores the portal container which is passed through to plugins and their node views

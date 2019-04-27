@@ -3,6 +3,7 @@ import { InputRule } from 'prosemirror-inputrules';
 import { PluginKey } from 'prosemirror-state';
 import { Cast } from './helpers/base';
 import {
+  Attrs,
   BaseExtensionOptions,
   ExtensionBooleanFunction,
   ExtensionCommandFunction,
@@ -25,6 +26,7 @@ const defaultOptions: BaseExtensionOptions = {
   includePasteRules: true,
   includePlugin: true,
   includeStyles: true,
+  includeAttributes: true,
   extraAttrs: [],
 };
 
@@ -293,6 +295,15 @@ export interface Extension<GOptions extends BaseExtensionOptions = BaseExtension
    * @param params - schema params with type included
    */
   plugin?(params: SchemaTypeParams<GType>): ProsemirrorPlugin;
+
+  /**
+   * Allows the extension to modify the default attributes.
+   *
+   * This is experimental.
+   *
+   * @param params - extension manger params
+   */
+  attributes?(params: ExtensionManagerParams): Attrs;
 }
 
 /**
