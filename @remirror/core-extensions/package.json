@@ -33,7 +33,7 @@
     "prosemirror-history": "^1.0.4"
   },
   "peerDependencies": {
-    "@babel/runtime-corejs2": ">=7",
+
     "@emotion/core": "^10",
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-inputrules": "^1.0.2",
