@@ -9,7 +9,6 @@ export interface MarkdownUIProps
       | 'attributes'
       | 'editable'
       | 'autoFocus'
-      | 'placeholder'
       | 'onChange'
       | 'onFocus'
       | 'onBlur'

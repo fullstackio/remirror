@@ -9,7 +9,7 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "run-s clean lint typecheck",
-    "build": "webpack -p --config=../../support/webpack/extension.config.mjs",
+    "_build": "webpack -p --config=../../support/webpack/extension.config.mjs",
     "clean": "rimraf dist",
     "dev": "run-p dev:*",
     "dev:build": "NODE_ENV=development webpack --watch --config=../../support/webpack/extension.config.mjs",

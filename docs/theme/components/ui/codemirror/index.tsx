@@ -54,12 +54,12 @@ const EditorStyled = styled(BaseCodeMirror)`
   }
 `;
 
-// const scrollbarOpts = {
-//   wheelSpeed: 2,
-//   wheelPropagation: true,
-//   minScrollbarLength: 20,
-//   suppressScrollX: true,
-// };
+const scrollbarOpts = {
+  wheelSpeed: 2,
+  wheelPropagation: true,
+  minScrollbarLength: 20,
+  suppressScrollX: true,
+};
 
 const noCurrent = (val: any) => !val || !val.current;
 
@@ -120,12 +120,12 @@ const CodeMirror: FC<any> = props => {
   }, []);
 
   return (
-    <React.Fragment>
+    <>
       <ScrollbarStyles />
       <Scrollbar linesToScroll={linesToScroll}>
         <EditorStyled {...editorProps} />
       </Scrollbar>
-    </React.Fragment>
+    </>
   );
 };
 

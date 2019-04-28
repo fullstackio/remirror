@@ -56,8 +56,8 @@ export const Hero = () => {
       </Helmet>
       <Container>
         <Logo height={80} style={{ maxWidth: '100%' }} />
-        <Subtitle>Effortlessly build your world-class text editor!</Subtitle>
-        <GitHubButton type='stargazers' size='large' namespace='pedronauck' repo='docz' />
+        <Subtitle>Build a world class editor with minimal effort!</Subtitle>
+        <GitHubButton type='stargazers' size='large' namespace='ifiokjr' repo='remirror' />
         <Image src={image} alt='Built-in components' />
         <Buttons>
           <Link to='/docs/getting-started'>Getting started</Link>

@@ -1,4 +1,4 @@
-import { Interpolation } from 'emotion';
+import { cx, Interpolation } from 'emotion';
 import { InputRule, inputRules } from 'prosemirror-inputrules';
 import { keymap } from 'prosemirror-keymap';
 import { Schema } from 'prosemirror-model';
@@ -228,7 +228,11 @@ export class ExtensionManager {
       .map(extension => extension.attributes(this.schemaParams))
       .reverse()
       .forEach(attrs => {
-        combinedAttributes = { ...combinedAttributes, ...attrs };
+        combinedAttributes = {
+          ...combinedAttributes,
+          ...attrs,
+          class: cx(combinedAttributes.class as string, attrs.class as string),
+        };
       });
 
     return combinedAttributes;

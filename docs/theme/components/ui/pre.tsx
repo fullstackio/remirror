@@ -9,6 +9,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { styled } from '@styled';
 import cx from 'classnames';
+
 // tslint:disable-next-line:no-duplicate-imports
 import prism from 'prismjs';
 import { EditorProps } from './editor';
