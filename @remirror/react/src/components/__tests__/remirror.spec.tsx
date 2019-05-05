@@ -3,9 +3,11 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { fireEvent, render } from 'react-testing-library';
 
-import { InjectedRemirrorProps } from '@remirror/react-utils';
+import { EditorState } from '@remirror/core';
+import { InjectedRemirrorProps, RemirrorEventListenerParams, RemirrorProps } from '@remirror/react-utils';
 import { createTestManager } from '@test-fixtures/schema-helpers';
 import { Remirror } from '../';
+import { RemirrorProviderProps } from '../providers';
 
 const textContent = `This is editor text`;
 const label = 'Remirror editor';
@@ -128,5 +130,61 @@ describe('initialContent', () => {
       </Remirror>,
     );
     expect(container.innerHTML).toInclude('Hello');
+  });
+});
+
+describe.only('Remirror Controlled Component', () => {
+  const initialContent = `<p>Hello</p>`;
+  const expectedContent = `<p>World</p>`;
+  let props: RemirrorProviderProps;
+  beforeEach(() => {
+    props = {
+      label,
+      manager: createTestManager(),
+      initialContent,
+    };
+  });
+
+  it('should call onStateChange', () => {
+    let value: EditorState | null = null;
+    const onStateChange = jest.fn<void, [RemirrorEventListenerParams]>(params => {
+      value = params.state;
+    });
+    render(
+      <Remirror {...props} value={value} onStateChange={onStateChange}>
+        {() => <div />}
+      </Remirror>,
+    );
+
+    expect(onStateChange).toHaveBeenCalled();
+    expect(value).not.toBeNull();
+  });
+
+  it('should only update the state when value changes', () => {
+    let value: EditorState | null = null;
+    let setContent: InjectedRemirrorProps['setContent'] = jest.fn();
+    const onStateChange = jest.fn<void, [RemirrorEventListenerParams]>(params => {
+      value = params.state;
+    });
+
+    const mock = jest.fn((params: InjectedRemirrorProps) => {
+      setContent = params.setContent;
+      return <div />;
+    });
+
+    const Cmp = ({ value }: { value?: EditorState | null }) => (
+      <Remirror {...props} onStateChange={onStateChange} value={value}>
+        {mock}
+      </Remirror>
+    );
+    const { rerender, getByRole } = render(<Cmp value={null} />);
+
+    setContent(expectedContent, true);
+    rerender(<Cmp value={null} />);
+    expect(getByRole('textbox')).toContainHTML(initialContent);
+
+    setContent(expectedContent, true);
+    rerender(<Cmp value={value} />);
+    expect(getByRole('textbox')).toContainHTML(expectedContent);
   });
 });

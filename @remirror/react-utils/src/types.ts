@@ -2,6 +2,7 @@ import {
   CompareStateParams,
   EditorSchema,
   EditorState,
+  EditorStateParams,
   EditorViewParams,
   ElementParams,
   Extension,
@@ -120,14 +121,36 @@ export interface InjectedRemirrorProps {
 
 export type RenderPropFunction = (params: InjectedRemirrorProps) => JSX.Element;
 
-export interface RemirrorEventListenerParams {
-  state: EditorState<EditorSchema>;
-  view: EditorView<EditorSchema>;
+export interface RemirrorGetterParams {
+  /**
+   * Get the current HTML from the latest editor state.
+   */
   getHTML(): string;
+
+  /**
+   * Get the current raw text from the latest editor state.
+   */
   getText(lineBreakDivider?: string): string;
+
+  /**
+   * Get the full JSON representation of the state (including the selection information)
+   */
   getJSON(): ObjectNode;
+
+  /**
+   * Get the full JSON of the root node. This should be used when storing the JSON data in a database.
+   */
   getDocJSON(): ObjectNode;
 }
+
+export interface RemirrorEventListenerParams
+  extends EditorStateParams,
+    EditorViewParams,
+    RemirrorGetterParams {}
+export interface RemirrorEditorStateListenerParams
+  extends CompareStateParams,
+    EditorViewParams,
+    RemirrorGetterParams {}
 
 export type RemirrorEventListener = (params: RemirrorEventListenerParams) => void;
 
@@ -175,6 +198,23 @@ export interface RemirrorProps {
    * Called on every change in the Prosemirror state
    */
   onChange?: RemirrorEventListener;
+
+  // Controlled Remirror Components
+
+  /**
+   * If this exists the editor becomes a controlled component. Nothing will be updated unless you explicitly
+   * set the value prop to the updated state.
+   *
+   * Without a deep understanding of Prosemirror this is not recommended.
+   *
+   * @default undefined
+   */
+  onStateChange?(params: RemirrorEventListenerParams): void;
+
+  /**
+   * When onStateChange is defined this prop is used to set the next state value of the remirror editor.
+   */
+  value?: EditorState | null;
 
   /**
    * Method called onFocus

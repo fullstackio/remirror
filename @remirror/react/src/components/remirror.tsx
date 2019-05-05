@@ -47,6 +47,24 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
   public static defaultProps = defaultProps;
   public static $$remirrorType = RemirrorElementType.Editor;
 
+  /**
+   * Used to manage the controlled component value prop and pass it on to the state for internal usage
+   */
+  public static getDerivedStateFromProps(
+    props: RemirrorProps,
+    state: CompareStateParams,
+  ): CompareStateParams | null {
+    const { onStateChange, value: newState } = props;
+    const { newState: prevState } = state;
+    if (prevState && onStateChange && newState && newState !== prevState) {
+      return {
+        newState,
+        prevState,
+      };
+    }
+    return null;
+  }
+
   private editorRef?: HTMLElement;
   private positionerMap = new Map<string, PositionerMapValue>();
 
@@ -78,7 +96,8 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
     this.manager.initView(this.view);
   }
 
-  public updateManager() {
+  public updateExtensionManager() {
+    console.log('updateing extension manager');
     this.manager
       .init({ getEditorState: this.getEditorState, getPortalContainer: this.getPortalContainer })
       .initView(this.view);
@@ -291,24 +310,45 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
    * Part of the Prosemirror API and is called whenever there is state change in the editor.
    */
   private dispatchTransaction = (transaction: Transaction) => {
-    const { onChange, dispatchTransaction } = this.props;
+    const { dispatchTransaction } = this.props;
     if (dispatchTransaction) {
       dispatchTransaction(transaction);
     }
     const { state } = this.state.newState.applyTransaction(transaction);
-    this.setState(
-      ({ newState }) => {
-        return { prevState: newState, newState: state };
-      },
-      () => {
-        // For some reason moving the update state here fixes a bug
-        this.view.updateState(state);
-        if (onChange) {
-          onChange({ ...this.eventListenerParams, state });
-        }
-      },
-    );
+    this.updateState(state);
   };
+
+  private controlledComponentUpdateHandler?: (state: EditorState) => void;
+
+  /**
+   * Updates the state either by calling onStateChange when it exists or directly setting the state
+   */
+  private updateState(state: EditorState, triggerOnChange = true) {
+    const { onChange, onStateChange } = this.props;
+
+    const updateHandler = (updatedState?: EditorState) => {
+      // For some reason moving the view.updateState here fixes a bug
+      this.view.updateState(updatedState || state);
+      if (onChange && triggerOnChange) {
+        onChange({ ...this.eventListenerParams, state: updatedState || state });
+      }
+    };
+
+    // Check if this is a controlled component.
+    if (onStateChange) {
+      this.controlledComponentUpdateHandler = (updatedState: EditorState) => {
+        updateHandler(updatedState);
+        this.controlledComponentUpdateHandler = undefined;
+      };
+
+      onStateChange({ ...this.eventListenerParams, state });
+      return;
+    }
+
+    this.setState(({ newState }) => {
+      return { prevState: newState, newState: state };
+    }, updateHandler);
+  }
 
   private addProsemirrorViewToDom(reactRef: HTMLElement, viewDom: Element) {
     if (this.props.insertPosition === 'start') {
@@ -322,11 +362,17 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
     if (!this.editorRef) {
       throw Error('Something went wrong when initializing the text editor. Please check your setup.');
     }
-    const { autoFocus, onFirstRender } = this.props;
+    const { autoFocus, onFirstRender, onStateChange } = this.props;
     this.addProsemirrorViewToDom(this.editorRef, this.view.dom);
     if (autoFocus) {
       this.view.focus();
     }
+
+    // Handle setting the state when this is a controlled component
+    if (onStateChange) {
+      onStateChange(this.eventListenerParams);
+    }
+
     if (onFirstRender) {
       onFirstRender(this.eventListenerParams);
     }
@@ -341,8 +387,13 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
     }
 
     if (!manager.isEqual(this.props.manager)) {
-      this.updateManager();
+      this.updateExtensionManager();
       this.setContent(toHTML({ node: this.state.newState.doc, schema: this.manager.data.schema }), true);
+    }
+
+    // Handle controlled component post update handler
+    if (this.props.onStateChange && this.controlledComponentUpdateHandler && this.state.newState) {
+      this.controlledComponentUpdateHandler(this.state.newState);
     }
   }
 
@@ -385,16 +436,7 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
       plugins: this.plugins,
     });
 
-    const afterUpdate = () => {
-      this.view.updateState(editorState);
-
-      if (triggerOnChange && this.props.onChange) {
-        this.props.onChange({ ...this.eventListenerParams, state: editorState });
-      }
-    };
-
-    // ? Unsure of whether to ignore the previous state at this point or not
-    this.setState(({ newState }) => ({ prevState: newState, newState: editorState }), afterUpdate);
+    this.updateState(editorState, triggerOnChange);
   };
 
   /**
