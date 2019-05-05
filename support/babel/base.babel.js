@@ -8,13 +8,13 @@ const ignore = [
 ];
 
 const presets = [
-  '@babel/preset-env',
+  ['@babel/preset-env', { loose: true }],
   '@babel/preset-typescript',
   '@babel/preset-react',
   '@emotion/babel-preset-css-prop',
 ];
 
-const testBabelPresetEnv = ['@babel/preset-env', { targets: { node: '8' } }];
+const testBabelPresetEnv = ['@babel/preset-env', { targets: { node: '8' }, loose: true }];
 const nonTestEnv = { ignore, presets };
 
 module.exports = {
@@ -22,8 +22,8 @@ module.exports = {
   plugins: [
     '@babel/plugin-transform-typescript', // This is needed so that abstract classes are properly compiled
     ['@babel/plugin-transform-runtime', { regenerator: false }],
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-object-rest-spread',
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
+    ['@babel/plugin-proposal-object-rest-spread', { loose: true }],
     '@babel/plugin-syntax-dynamic-import',
     'lodash',
   ],
