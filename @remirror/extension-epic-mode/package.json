@@ -9,7 +9,7 @@
     "directory": "@remirror/extension-epic-mode"
   },
   "version": "0.0.1-alpha.11",
-  "main": "lib/index.js",
+  "main": "lib/dist/extension-epic-mode.cjs.js",
   "module": "lib/dist/extension-epic-mode.esm.js",
   "files": [
     "lib",
@@ -27,14 +27,12 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "@remirror/core": "0.0.1-alpha.11",
-    "@types/throttleit": "1.0.0",
-    "throttleit": "1.0.0"
-  },
-  "peerDependencies": {
-
     "@types/prosemirror-state": "^1.2.3",
-    "prosemirror-state": "^1.2.2"
+    "@types/throttleit": "1.0.0",
+    "prosemirror-state": "^1.2.2",
+    "throttleit": "1.0.0"
   },
   "publishConfig": {
     "access": "public"

@@ -10,7 +10,7 @@
     "directory": "@remirror/core"
   },
   "version": "0.0.1-alpha.11",
-  "main": "lib/index.js",
+  "main": "lib/dist/core.cjs.js",
   "module": "lib/dist/core.esm.js",
   "files": [
     "internal",
@@ -32,6 +32,7 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "@emotion/core": "^10.0.7",
     "@types/memoize-one": "4.1.1",
     "@types/min-document": "^2.19.0",

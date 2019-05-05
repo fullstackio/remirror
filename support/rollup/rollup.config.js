@@ -6,6 +6,7 @@ import extensionEnhancedLink from '../../@remirror/extension-enhanced-link/packa
 import extensionMention from '../../@remirror/extension-mention/package.json';
 import react from '../../@remirror/react/package.json';
 import reactSSR from '../../@remirror/react-ssr/package.json';
+import reactUtils from '../../@remirror/react-utils/package.json';
 import remirror from '../../packages/remirror/package.json';
 import rendererReact from '../../@remirror/renderer-react/package.json';
 import uiTwitter from '../../@remirror/ui-twitter/package.json';
@@ -19,6 +20,7 @@ const configurations = [
   ...factory(extensionMention, '@remirror'),
   ...factory(react, '@remirror'),
   ...factory(reactSSR, '@remirror'),
+  ...factory(reactUtils, '@remirror'),
   ...factory(remirror, 'packages'),
   ...factory(rendererReact, '@remirror'),
   ...factory(uiTwitter, '@remirror'),

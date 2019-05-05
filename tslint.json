@@ -53,7 +53,8 @@
       "lodash",
       "date-fns",
       "next",
-      "rxjs"
+      "rxjs",
+      "mz"
     ]
   }
 }

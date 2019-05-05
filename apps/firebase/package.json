@@ -11,17 +11,17 @@
     "lib"
   ],
   "scripts": {
-    "prebuild": "run-s clean lint",
     "_build": "run-s build:babel",
+    "_lint": "tslint --project tsconfig.json --config ../../tslint.json",
+    "_typecheck": "tsc -p ./tsconfig.json --noEmit",
+    "prebuild": "run-s clean lint",
     "build:babel": "babel src --out-dir lib --extensions \".ts\" --source-maps true",
     "clean": "rimraf lib secret.json",
     "copy:db": "cp ../support/secrets/db.json db.json",
     "copy:secret": "cp ../support/secrets/key.json secret.json",
     "dev": "run-p watch:*",
-    "_lint": "tslint --project tsconfig.json --config ../../tslint.json",
     "test": "jest",
     "test:live": "cross-env TEST_ENV=live jest",
-    "_typecheck": "tsc -p ./tsconfig.json --noEmit",
     "watch:babel": "babel src --out-dir lib --extensions \".ts\" --watch"
   },
   "dependencies": {

@@ -10,7 +10,7 @@
     "directory": "@remirror/react-components"
   },
   "version": "0.0.1-alpha.11",
-  "main": "lib/index.js",
+  "main": "lib/dist/react-components.cjs.js",
   "module": "lib/dist/react-components.esm.js",
   "files": [
     "lib",
@@ -28,13 +28,14 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "@remirror/core": "0.0.1-alpha.11",
     "@remirror/core-extensions": "0.0.1-alpha.11",
     "@remirror/react-ssr": "0.0.1-alpha.11",
     "@remirror/renderer-react": "0.0.1-alpha.11",
-    "@types/hoist-non-react-statics": "^3.3.0",
+    "@types/hoist-non-react-statics": "^3.3.1",
     "@types/prosemirror-commands": "^1.0.1",
     "@types/prosemirror-model": "^1.7.0",
     "@types/prosemirror-state": "^1.2.3",

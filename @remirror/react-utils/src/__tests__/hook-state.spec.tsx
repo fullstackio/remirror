@@ -30,7 +30,7 @@ const Counter = () => {
   );
 };
 
-const brokenStore = () => {};
+const brokenStore = () => undefined;
 
 const BrokenCounter = () => {
   // @ts-ignore
@@ -53,7 +53,7 @@ test('should increase/decrease state counter in hook', () => {
   expect(count).toBe(1);
 });
 
-test('should incresase/decrease state counter in container', () => {
+test('should increase/decrease state counter in container', () => {
   const { getByText } = render(
     <HookStateProvider stores={[counterStore]}>
       <Counter />
@@ -97,5 +97,5 @@ test('should throw error when store init fails', () => {
         <BrokenCounter />
       </HookStateProvider>,
     ),
-  ).toThrowError('Provided store instance did not initialized correctly!');
+  ).toThrowError('Provided store instance did not initialize correctly!');
 });

@@ -10,7 +10,7 @@
     "directory": "@remirror/renderer-react"
   },
   "version": "0.0.1-alpha.11",
-  "main": "lib/index.js",
+  "main": "lib/dist/renderer-react.cjs.js",
   "module": "lib/dist/renderer-react.esm.js",
   "files": [
     "lib",
@@ -28,11 +28,11 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "@emotion/core": "^10",
     "@remirror/core": "0.0.1-alpha.11"
   },
   "peerDependencies": {
-
-    "@emotion/core": "^10.0.7",
     "@types/react": "^16.8.0",
     "@types/react-dom": "^16.8.0",
     "react": "^16.8.0",

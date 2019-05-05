@@ -1,6 +1,9 @@
 import { toHTML } from '@remirror/core';
 import { Blockquote, Bold, Heading, Link } from '@remirror/core-extensions';
+import { cleanup } from 'react-testing-library';
 import { renderEditor } from '../render-editor';
+
+beforeEach(cleanup);
 
 test('renders an editor into the dom', () => {
   const {

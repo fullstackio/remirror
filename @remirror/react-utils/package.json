@@ -10,7 +10,7 @@
     "directory": "@remirror/react-utils"
   },
   "version": "0.0.1-alpha.11",
-  "main": "lib/index.js",
+  "main": "lib/dist/react-utils.cjs.js",
   "module": "lib/dist/react-utils.esm.js",
   "files": [
     "lib",
@@ -28,6 +28,7 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
     "@emotion/core": "^10.0.7",
     "@remirror/core": "0.0.1-alpha.11",
     "@remirror/core-extensions": "0.0.1-alpha.11",
@@ -60,6 +61,7 @@
     "react": "React",
     "react-dom": "ReactDOM",
     "@remirror/core": "RemirrorCore",
-    "@remirror/core-extensions": "RemirrorCoreExtensions"
+    "@remirror/core-extensions": "RemirrorCoreExtensions",
+    "@remirror/react-utils": "RemirrorReactUtils"
   }
 }

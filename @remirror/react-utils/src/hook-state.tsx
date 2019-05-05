@@ -3,7 +3,7 @@ import React, { createContext, FC, useContext } from 'react';
 import { AnyFunction } from '@remirror/core';
 
 // Create context for global store assignment
-const HookStateContext = createContext(new Map<AnyFunction, any>());
+const HookStateContext = createContext<Map<AnyFunction, any> | undefined>(undefined);
 
 interface HookStateProviderProps {
   stores: AnyFunction[];
@@ -39,7 +39,7 @@ export function useStore<GType extends AnyFunction>(hook: GType): ReturnType<GTy
 
   // complain if instance wasn't initialized
   if (!instance) {
-    throw new Error('Provided store instance did not initialized correctly!');
+    throw new Error('Provided store instance did not initialize correctly!');
   }
 
   return instance;

@@ -9,7 +9,7 @@
     "directory": "@remirror/extension-enhanced-link"
   },
   "version": "0.0.1-alpha.11",
-  "main": "lib/index.js",
+  "main": "lib/dist/extension-enhanced-link.cjs.js",
   "module": "lib/dist/extension-enhanced-link.esm.js",
   "files": [
     "lib",
@@ -27,10 +27,8 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@remirror/core": "0.0.1-alpha.11"
-  },
-  "peerDependencies": {
-
+    "@babel/runtime": "^7.0.0",
+    "@remirror/core": "0.0.1-alpha.11",
     "@types/prosemirror-state": "^1.2.3",
     "@types/prosemirror-transform": "^1.1.0",
     "prosemirror-state": "^1.2.2",

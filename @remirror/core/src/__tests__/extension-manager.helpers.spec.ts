@@ -25,7 +25,7 @@ describe('transformExtensionMap', () => {
     const doc = new Doc();
     const p = new Paragraph();
     const text = new Text();
-    const extensions = [{ extension: doc, priority: 1 }, new Paragraph(), { extension: text, priority: -1 }];
+    const extensions = [{ extension: doc, priority: 1 }, p, { extension: text, priority: -1 }];
     expect(transformExtensionMap(extensions)).toEqual([text, doc, p]);
   });
 });

@@ -1,0 +1,350 @@
+{
+  "@remirror/core/lib/dist/core.cjs.js": {
+    "bundled": 92314,
+    "minified": 34955,
+    "gzipped": 9615
+  },
+  "@remirror/core/lib/dist/core.esm.js": {
+    "bundled": 89526,
+    "minified": 31134,
+    "gzipped": 9084,
+    "treeshaked": {
+      "rollup": {
+        "code": 1394,
+        "import_statements": 800
+      },
+      "webpack": {
+        "code": 3400
+      }
+    }
+  },
+  "@remirror/core/lib/dist/core.umd.js": {
+    "bundled": 467316,
+    "minified": 157859,
+    "gzipped": 47996
+  },
+  "@remirror/core/lib/dist/core.umd.min.js": {
+    "bundled": 461406,
+    "minified": 154713,
+    "gzipped": 46603
+  },
+  "@remirror/core-extensions/lib/dist/core-extensions.cjs.js": {
+    "bundled": 51530,
+    "minified": 26265,
+    "gzipped": 5528
+  },
+  "@remirror/core-extensions/lib/dist/core-extensions.esm.js": {
+    "bundled": 49785,
+    "minified": 24590,
+    "gzipped": 5407,
+    "treeshaked": {
+      "rollup": {
+        "code": 4714,
+        "import_statements": 953
+      },
+      "webpack": {
+        "code": 8798
+      }
+    }
+  },
+  "@remirror/core-extensions/lib/dist/core-extensions.umd.js": {
+    "bundled": 589809,
+    "minified": 214521,
+    "gzipped": 61133
+  },
+  "@remirror/core-extensions/lib/dist/core-extensions.umd.min.js": {
+    "bundled": 589809,
+    "minified": 214521,
+    "gzipped": 61133
+  },
+  "@remirror/extension-emoji/lib/dist/extension-emoji.cjs.js": {
+    "bundled": 55341,
+    "minified": 26927,
+    "gzipped": 10192
+  },
+  "@remirror/extension-emoji/lib/dist/extension-emoji.esm.js": {
+    "bundled": 54748,
+    "minified": 26429,
+    "gzipped": 10090,
+    "treeshaked": {
+      "rollup": {
+        "code": 18629,
+        "import_statements": 572
+      },
+      "webpack": {
+        "code": 21639
+      }
+    }
+  },
+  "@remirror/extension-emoji/lib/dist/extension-emoji.umd.js": {
+    "bundled": 1271678,
+    "minified": 660054,
+    "gzipped": 124209
+  },
+  "@remirror/extension-emoji/lib/dist/extension-emoji.umd.min.js": {
+    "bundled": 1232828,
+    "minified": 646889,
+    "gzipped": 119935
+  },
+  "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.cjs.js": {
+    "bundled": 22455,
+    "minified": 17523,
+    "gzipped": 8156
+  },
+  "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.esm.js": {
+    "bundled": 22081,
+    "minified": 17230,
+    "gzipped": 8080,
+    "treeshaked": {
+      "rollup": {
+        "code": 503,
+        "import_statements": 503
+      },
+      "webpack": {
+        "code": 16030
+      }
+    }
+  },
+  "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.umd.js": {
+    "bundled": 284355,
+    "minified": 107161,
+    "gzipped": 33519
+  },
+  "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.umd.min.js": {
+    "bundled": 284355,
+    "minified": 107161,
+    "gzipped": 33519
+  },
+  "@remirror/extension-mention/lib/dist/extension-mention.cjs.js": {
+    "bundled": 18298,
+    "minified": 7553,
+    "gzipped": 2592
+  },
+  "@remirror/extension-mention/lib/dist/extension-mention.esm.js": {
+    "bundled": 17909,
+    "minified": 7144,
+    "gzipped": 2515,
+    "treeshaked": {
+      "rollup": {
+        "code": 556,
+        "import_statements": 451
+      },
+      "webpack": {
+        "code": 5786
+      }
+    }
+  },
+  "@remirror/extension-mention/lib/dist/extension-mention.umd.js": {
+    "bundled": 482366,
+    "minified": 173755,
+    "gzipped": 50592
+  },
+  "@remirror/extension-mention/lib/dist/extension-mention.umd.min.js": {
+    "bundled": 482366,
+    "minified": 173755,
+    "gzipped": 50592
+  },
+  "@remirror/react/lib/dist/react.cjs.js": {
+    "bundled": 72048,
+    "minified": 52012,
+    "gzipped": 15662
+  },
+  "@remirror/react/lib/dist/react.esm.js": {
+    "bundled": 70861,
+    "minified": 50987,
+    "gzipped": 15530,
+    "treeshaked": {
+      "rollup": {
+        "code": 12889,
+        "import_statements": 1642
+      },
+      "webpack": {
+        "code": 15341
+      }
+    }
+  },
+  "@remirror/react/lib/dist/react.umd.js": {
+    "bundled": 697682,
+    "minified": 293637,
+    "gzipped": 88791
+  },
+  "@remirror/react/lib/dist/react.umd.min.js": {
+    "bundled": 681134,
+    "minified": 286548,
+    "gzipped": 86577
+  },
+  "@remirror/react-ssr/lib/dist/react-ssr.cjs.js": {
+    "bundled": 47188,
+    "minified": 22624,
+    "gzipped": 8548
+  },
+  "@remirror/react-ssr/lib/dist/react-ssr.esm.js": {
+    "bundled": 46706,
+    "minified": 22219,
+    "gzipped": 8441,
+    "treeshaked": {
+      "rollup": {
+        "code": 18367,
+        "import_statements": 310
+      },
+      "webpack": {
+        "code": 19627
+      }
+    }
+  },
+  "@remirror/react-ssr/lib/dist/react-ssr.umd.js": {
+    "bundled": 547011,
+    "minified": 207210,
+    "gzipped": 62504
+  },
+  "@remirror/react-ssr/lib/dist/react-ssr.umd.min.js": {
+    "bundled": 540561,
+    "minified": 203783,
+    "gzipped": 60917
+  },
+  "packages/remirror/lib/dist/remirror.cjs.js": {
+    "bundled": 943,
+    "minified": 758,
+    "gzipped": 242
+  },
+  "packages/remirror/lib/dist/remirror.esm.js": {
+    "bundled": 149,
+    "minified": 134,
+    "gzipped": 82,
+    "treeshaked": {
+      "rollup": {
+        "code": 114,
+        "import_statements": 114
+      },
+      "webpack": {
+        "code": 1232
+      }
+    }
+  },
+  "packages/remirror/lib/dist/remirror.umd.js": {
+    "bundled": 1435,
+    "minified": 984,
+    "gzipped": 348
+  },
+  "packages/remirror/lib/dist/remirror.umd.min.js": {
+    "bundled": 1435,
+    "minified": 984,
+    "gzipped": 348
+  },
+  "@remirror/renderer-react/lib/dist/renderer-react.cjs.js": {
+    "bundled": 23579,
+    "minified": 15926,
+    "gzipped": 5567
+  },
+  "@remirror/renderer-react/lib/dist/renderer-react.esm.js": {
+    "bundled": 23039,
+    "minified": 15472,
+    "gzipped": 5464,
+    "treeshaked": {
+      "rollup": {
+        "code": 335,
+        "import_statements": 335
+      },
+      "webpack": {
+        "code": 1583
+      }
+    }
+  },
+  "@remirror/renderer-react/lib/dist/renderer-react.umd.js": {
+    "bundled": 74742,
+    "minified": 35424,
+    "gzipped": 13404
+  },
+  "@remirror/renderer-react/lib/dist/renderer-react.umd.min.js": {
+    "bundled": 68292,
+    "minified": 32007,
+    "gzipped": 11832
+  },
+  "@remirror/ui-twitter/lib/dist/ui-twitter.cjs.js": {
+    "bundled": 36474,
+    "minified": 25798,
+    "gzipped": 6438
+  },
+  "@remirror/ui-twitter/lib/dist/ui-twitter.esm.js": {
+    "bundled": 35576,
+    "minified": 25018,
+    "gzipped": 6319,
+    "treeshaked": {
+      "rollup": {
+        "code": 22245,
+        "import_statements": 1350
+      },
+      "webpack": {
+        "code": 24837
+      }
+    }
+  },
+  "@remirror/ui-twitter/lib/dist/ui-twitter.umd.js": {
+    "bundled": 1830010,
+    "minified": 943612,
+    "gzipped": 217232
+  },
+  "@remirror/ui-twitter/lib/dist/ui-twitter.umd.min.js": {
+    "bundled": 1758376,
+    "minified": 898302,
+    "gzipped": 202014
+  },
+  "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.cjs.js": {
+    "bundled": 18981,
+    "minified": 13259,
+    "gzipped": 3708
+  },
+  "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.esm.js": {
+    "bundled": 17768,
+    "minified": 12146,
+    "gzipped": 3675,
+    "treeshaked": {
+      "rollup": {
+        "code": 9656,
+        "import_statements": 1735
+      },
+      "webpack": {
+        "code": 12218
+      }
+    }
+  },
+  "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.umd.js": {
+    "bundled": 925127,
+    "minified": 390493,
+    "gzipped": 122087
+  },
+  "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.umd.min.js": {
+    "bundled": 862019,
+    "minified": 353701,
+    "gzipped": 109364
+  },
+  "@remirror/react-utils/lib/dist/react-utils.cjs.js": {
+    "bundled": 7030,
+    "minified": 3168,
+    "gzipped": 1107
+  },
+  "@remirror/react-utils/lib/dist/react-utils.esm.js": {
+    "bundled": 6523,
+    "minified": 2647,
+    "gzipped": 986,
+    "treeshaked": {
+      "rollup": {
+        "code": 657,
+        "import_statements": 225
+      },
+      "webpack": {
+        "code": 1779
+      }
+    }
+  },
+  "@remirror/react-utils/lib/dist/react.umd.js": {
+    "bundled": 54778,
+    "minified": 21847,
+    "gzipped": 8635
+  },
+  "@remirror/react-utils/lib/dist/react.umd.min.js": {
+    "bundled": 48328,
+    "minified": 18447,
+    "gzipped": 7060
+  }
+}
