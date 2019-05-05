@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
-import { renderHook } from 'react-hooks-testing-library';
-import { act, cleanup, fireEvent, render } from 'react-testing-library';
+import { act, renderHook } from 'react-hooks-testing-library';
+import { fireEvent, render } from 'react-testing-library';
 import { HookStateProvider, useStore } from '../hook-state';
 
 const counterStore = () => {
@@ -37,8 +37,6 @@ const BrokenCounter = () => {
   const { state } = useStore(brokenStore);
   return <div>{state}</div>;
 };
-
-afterEach(cleanup);
 
 test('should increase/decrease state counter in hook', () => {
   let count;

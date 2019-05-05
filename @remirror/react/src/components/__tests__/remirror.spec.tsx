@@ -133,7 +133,7 @@ describe('initialContent', () => {
   });
 });
 
-describe.only('Remirror Controlled Component', () => {
+describe('Remirror Controlled Component', () => {
   const initialContent = `<p>Hello</p>`;
   const expectedContent = `<p>World</p>`;
   let props: RemirrorProviderProps;
