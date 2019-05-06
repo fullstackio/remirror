@@ -28,7 +28,7 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
+    "@babel/runtime": "^7.4.4",
     "@remirror/core": "0.0.1-alpha.11",
     "@remirror/renderer-react": "0.0.1-alpha.11",
     "@types/min-document": "^2.19.0",

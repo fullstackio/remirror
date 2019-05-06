@@ -32,7 +32,7 @@
   },
   "types": "lib/index.d.ts",
   "dependencies": {
-    "@babel/runtime": "^7.0.0",
+    "@babel/runtime": "^7.4.4",
     "@emotion/core": "^10.0.7",
     "@types/memoize-one": "4.1.1",
     "@types/min-document": "^2.19.0",
