@@ -91,7 +91,7 @@ export class Mention extends NodeExtension<MentionOptions> {
   }
 
   /**
-   * TODO: Implement a past rule using the markPaste rule for inspiration
+   * TODO: Implement a paste rule using the markPaste rule for inspiration
    * ? Also create a test that uses the Clipboard event api to simulate pasting text
    */
   public pasteRules() {

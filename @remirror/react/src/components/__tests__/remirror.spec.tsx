@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import { fireEvent, render } from 'react-testing-library';
 
 import { EditorState } from '@remirror/core';
-import { InjectedRemirrorProps, RemirrorEventListenerParams, RemirrorProps } from '@remirror/react-utils';
+import { InjectedRemirrorProps, RemirrorEventListenerParams } from '@remirror/react-utils';
 import { createTestManager } from '@test-fixtures/schema-helpers';
 import { Remirror } from '../';
 import { RemirrorProviderProps } from '../providers';
@@ -161,10 +161,10 @@ describe('Remirror Controlled Component', () => {
   });
 
   it('should only update the state when value changes', () => {
-    let value: EditorState | null = null;
+    let testValue: EditorState | null = null;
     let setContent: InjectedRemirrorProps['setContent'] = jest.fn();
     const onStateChange = jest.fn<void, [RemirrorEventListenerParams]>(params => {
-      value = params.state;
+      testValue = params.state;
     });
 
     const mock = jest.fn((params: InjectedRemirrorProps) => {
@@ -184,7 +184,7 @@ describe('Remirror Controlled Component', () => {
     expect(getByRole('textbox')).toContainHTML(initialContent);
 
     setContent(expectedContent, true);
-    rerender(<Cmp value={value} />);
+    rerender(<Cmp value={testValue} />);
     expect(getByRole('textbox')).toContainHTML(expectedContent);
   });
 });

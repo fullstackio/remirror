@@ -11,6 +11,7 @@ import {
   ExtensionType,
   FlexibleConfig,
   KeyboardBindings,
+  NodeViewMethod,
   ProsemirrorPlugin,
   SchemaTypeParams,
 } from './types';
@@ -295,6 +296,16 @@ export interface Extension<GOptions extends BaseExtensionOptions = BaseExtension
    * @param params - schema params with type included
    */
   plugin?(params: SchemaTypeParams<GType>): ProsemirrorPlugin;
+
+  /**
+   * Registers a node view for the extension.
+   *
+   * This is a shorthand way of registering a nodeView without going using a prosemirror plugin.
+   * It allows for the registration of one nodeView which has the same name as the extension.
+   *
+   * @param params - schema params with type included
+   */
+  nodeView?(params: SchemaTypeParams<GType>): NodeViewMethod;
 
   /**
    * Allows the extension to modify the default attributes.

@@ -1,7 +1,8 @@
 import { MarkSpec, MarkType, Node as PMNode, NodeSpec, NodeType } from 'prosemirror-model';
 import { Plugin as PMPlugin } from 'prosemirror-state';
+import { Decoration } from 'prosemirror-view';
 import { NodeViewPortalContainer } from '../portal-container';
-import { EditorView, InputRule, Mark, Transaction } from './aliases';
+import { EditorView, InputRule, Mark, NodeView, Transaction } from './aliases';
 import { AnyFunction, Attrs, EditorSchema, EditorState, Omit, ProsemirrorNode } from './base';
 import { EditorViewParams, SchemaParams } from './builders';
 
@@ -114,6 +115,13 @@ export interface ActionMethods {
   isActive(attrs?: Attrs): boolean;
   isEnabled(attrs?: Attrs): boolean;
 }
+
+export type NodeViewMethod<GNodeView extends NodeView = NodeView> = (
+  node: ProsemirrorNode,
+  view: EditorView,
+  getPos: () => number,
+  decorations: Decoration[],
+) => GNodeView;
 
 export type RemirrorActions<GKeys extends string = string> = Record<GKeys, ActionMethods>;
 

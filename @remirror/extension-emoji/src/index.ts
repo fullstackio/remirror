@@ -1,2 +1,2 @@
-export * from './node-extension';
+export * from './extension';
 export * from './helpers';

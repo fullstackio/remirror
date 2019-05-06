@@ -1,27 +1,19 @@
 import {
-  Attrs,
   Cast,
   EDITOR_CLASS_NAME,
   ExtensionCommandFunction,
   NodeExtension,
-  NodeExtensionOptions,
   NodeExtensionSpec,
   replaceText,
   SchemaNodeTypeParams,
 } from '@remirror/core';
+import { ReactNodeView } from '@remirror/react';
+import { ObjectInterpolation } from 'emotion';
 import { DefaultEmoji } from './components/emoji';
 import { createEmojiPlugin } from './plugin';
-import { CreateEmojiPluginParams, EmojiNodeAttrs } from './types';
+import { EmojiAttrs, EmojiOptions } from './types';
 
-export interface EmojiNodeOptions
-  extends NodeExtensionOptions,
-    Pick<CreateEmojiPluginParams, 'set' | 'emojiData'>,
-    Partial<Pick<CreateEmojiPluginParams, 'size' | 'EmojiComponent' | 'style'>> {
-  transformAttrs?(attrs: Pick<EmojiNodeAttrs, 'name'>): Attrs;
-  className?: string;
-}
-
-export class EmojiNode extends NodeExtension<EmojiNodeOptions> {
+export class Emoji extends NodeExtension<EmojiOptions> {
   /**
    * The name is dynamically generated based on the passed in type.
    */
@@ -32,7 +24,7 @@ export class EmojiNode extends NodeExtension<EmojiNodeOptions> {
   get defaultOptions() {
     return {
       extraAttrs: [],
-      transformAttrs: (attrs: Pick<EmojiNodeAttrs, 'name'>) => ({
+      transformAttrs: (attrs: Pick<EmojiAttrs, 'name'>) => ({
         'aria-label': `Emoji: ${attrs.name}`,
         title: `Emoji: ${attrs.name}`,
         class: `${EDITOR_CLASS_NAME}-emoji-node${this.options.className ? ' ' + this.options.className : ''}`,
@@ -85,7 +77,7 @@ export class EmojiNode extends NodeExtension<EmojiNodeOptions> {
         },
       ],
       toDOM: node => {
-        const { id, name, native, colons, skin, useNative } = node.attrs as EmojiNodeAttrs;
+        const { id, name, native, colons, skin, useNative } = node.attrs as EmojiAttrs;
         const attrs = {
           'data-emoji-id': id,
           'data-emoji-colons': colons,
@@ -102,21 +94,41 @@ export class EmojiNode extends NodeExtension<EmojiNodeOptions> {
   }
 
   public commands = ({ type }: SchemaNodeTypeParams): ExtensionCommandFunction => attrs => {
-    attrs = { ...attrs, ...this.options.transformAttrs(Cast<EmojiNodeAttrs>(attrs)) };
+    attrs = { ...attrs, ...this.options.transformAttrs(Cast<EmojiAttrs>(attrs)) };
     return replaceText({ type, attrs });
   };
 
-  public plugin({ getPortalContainer, type }: SchemaNodeTypeParams) {
-    const { set, size, emojiData, EmojiComponent, style } = this.options;
+  public plugin({ type }: SchemaNodeTypeParams) {
+    const { emojiData } = this.options;
     return createEmojiPlugin({
       key: this.pluginKey,
-      style,
-      getPortalContainer,
-      set,
-      size,
       emojiData,
       type,
-      EmojiComponent,
+    });
+  }
+
+  public nodeView({ getPortalContainer }: SchemaNodeTypeParams) {
+    const { set, size, emojiData, EmojiComponent, style } = this.options;
+
+    const defaultStyle: ObjectInterpolation<undefined> = {
+      userSelect: 'all',
+      display: 'inline-block',
+      span: {
+        display: 'inline-block',
+        height: size,
+        width: size,
+      },
+    };
+
+    return ReactNodeView.createNodeView({
+      Component: EmojiComponent,
+      getPortalContainer,
+      props: {
+        set,
+        size,
+        emojiData,
+      },
+      style: [defaultStyle, style],
     });
   }
 }

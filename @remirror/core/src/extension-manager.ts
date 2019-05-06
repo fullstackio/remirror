@@ -14,7 +14,7 @@ import {
   isNodeExtension,
   transformExtensionMap,
 } from './extension-manager.helpers';
-import { bool, Cast, isEqual, isFunction, isObject } from './helpers';
+import { bool, isEqual, isFunction, isObject } from './helpers';
 import { getPluginState } from './helpers/document';
 import { NodeViewPortalContainer } from './portal-container';
 import {
@@ -29,6 +29,7 @@ import {
   ExtensionManagerParams,
   MarkExtensionSpec,
   NodeExtensionSpec,
+  NodeViewMethod,
   ProsemirrorPlugin,
   RemirrorActions,
 } from './types';
@@ -49,6 +50,7 @@ interface ExtensionManagerData {
   schema: EditorSchema;
   styles: Interpolation;
   plugins: ProsemirrorPlugin[];
+  nodeViews: Record<string, NodeViewMethod>;
   keymaps: ProsemirrorPlugin[];
   inputRules: ProsemirrorPlugin;
   pasteRules: ProsemirrorPlugin[];
@@ -70,7 +72,7 @@ export class ExtensionManager {
   public getPortalContainer!: () => NodeViewPortalContainer;
   public readonly extensions: AnyExtension[];
   private initialized = false;
-  private initData: ExtensionManagerData = Cast({});
+  private initData: ExtensionManagerData = {} as ExtensionManagerData;
 
   get data() {
     if (!this.initialized) {
@@ -101,6 +103,7 @@ export class ExtensionManager {
     this.initData.schema = this.createSchema();
     this.initData.styles = this.styles();
     this.initData.plugins = this.plugins();
+    this.initData.nodeViews = this.nodeViews();
     this.initData.keymaps = this.keymaps();
     this.initData.inputRules = this.inputRules();
     this.initData.pasteRules = this.pasteRules();
@@ -112,7 +115,7 @@ export class ExtensionManager {
   public initView(view: EditorView) {
     this.initData.view = view;
     this.initData.actions = this.actions({
-      ...this.schemaParams,
+      ...this.params,
       view,
       isEditable: () =>
         bool(
@@ -124,7 +127,7 @@ export class ExtensionManager {
   /**
    * Utility getter for accessing the schema params
    */
-  private get schemaParams(): ExtensionManagerParams {
+  private get params(): ExtensionManagerParams {
     return {
       schema: this.initData.schema,
       getEditorState: this.getEditorState,
@@ -225,7 +228,7 @@ export class ExtensionManager {
     this.extensions
       .filter(hasExtensionProperty('attributes'))
       .filter(extension => extension.options.includeOnInitView)
-      .map(extension => extension.attributes(this.schemaParams))
+      .map(extension => extension.attributes(this.params))
       .reverse()
       .forEach(attrs => {
         combinedAttributes = {
@@ -247,7 +250,7 @@ export class ExtensionManager {
     const extensionPlugins = this.extensions
       .filter(hasExtensionProperty('plugin'))
       .filter(extension => extension.options.includePlugin)
-      .map(extensionPropertyMapper('plugin', this.schemaParams)) as ProsemirrorPlugin[];
+      .map(extensionPropertyMapper('plugin', this.params)) as ProsemirrorPlugin[];
 
     extensionPlugins.forEach(plugin => {
       plugins.push(plugin);
@@ -257,13 +260,31 @@ export class ExtensionManager {
   }
 
   /**
+   * Retrieve the nodeView created on the extensions for use within prosemirror state
+   */
+  public nodeViews() {
+    this.checkInitialized();
+    const nodeViews: Record<string, NodeViewMethod> = {};
+    return this.extensions
+      .filter(hasExtensionProperty('nodeView'))
+      .filter(extension => extension.options.includeNodeView)
+      .reduce(
+        (prevNodeViews, extension) => ({
+          ...prevNodeViews,
+          [extension.name]: extensionPropertyMapper('nodeView', this.params)(extension) as NodeViewMethod,
+        }),
+        nodeViews,
+      );
+  }
+
+  /**
    * Extensions can register custom styles for the editor. This retrieves them.
    */
   public styles(): Interpolation[] {
     const extensionStyles = this.extensions
       .filter(hasExtensionProperty('styles'))
       .filter(extension => extension.options.includeStyles)
-      .map(extensionPropertyMapper('styles', this.schemaParams));
+      .map(extensionPropertyMapper('styles', this.params));
 
     return extensionStyles;
   }
@@ -274,7 +295,7 @@ export class ExtensionManager {
   public keymaps() {
     const extensionKeymaps = this.extensions
       .filter(hasExtensionProperty('keys'))
-      .map(extensionPropertyMapper('keys', this.schemaParams));
+      .map(extensionPropertyMapper('keys', this.params));
 
     const mappedKeys: Record<string, CommandFunction> = {};
 
@@ -304,7 +325,7 @@ export class ExtensionManager {
     const extensionInputRules = this.extensions
       .filter(hasExtensionProperty('inputRules'))
       .filter(extension => extension.options.includeInputRules)
-      .map(extensionPropertyMapper('inputRules', this.schemaParams)) as InputRule[][];
+      .map(extensionPropertyMapper('inputRules', this.params)) as InputRule[][];
 
     extensionInputRules.forEach(rule => {
       rules.push(...rule);
@@ -321,7 +342,7 @@ export class ExtensionManager {
     const extensionPasteRules = this.extensions
       .filter(hasExtensionProperty('pasteRules'))
       .filter(extension => extension.options.includePasteRules)
-      .map(extensionPropertyMapper('pasteRules', this.schemaParams)) as ProsemirrorPlugin[][];
+      .map(extensionPropertyMapper('pasteRules', this.params)) as ProsemirrorPlugin[][];
 
     extensionPasteRules.forEach(rules => {
       pasteRules.push(...rules);

@@ -222,7 +222,7 @@ export const hasExtensionProperty = <GExt extends AnyExtension, GKey extends key
 /**
  * Keys for the methods available on an extension (useful for filtering)
  */
-type ExtensionMethodProperties = 'inputRules' | 'pasteRules' | 'keys' | 'plugin' | 'styles';
+type ExtensionMethodProperties = 'inputRules' | 'pasteRules' | 'keys' | 'plugin' | 'styles' | 'nodeView';
 
 /**
  * Looks at the passed property and calls the extension with the required parameters.

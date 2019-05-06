@@ -189,10 +189,19 @@ export interface BaseExtensionOptions {
   includePlugin?: boolean;
 
   /**
+   * Whether to include the extension's nodeView
+   */
+  includeNodeView?: boolean;
+
+  /**
    * Whether to use the attributes provided by this extension
    */
   includeAttributes?: boolean;
 }
 
-export type NodeExtensionOptions = BaseExtensionOptions;
-export type MarkExtensionOptions = BaseExtensionOptions;
+export interface NodeExtensionOptions<GComponent = any> extends BaseExtensionOptions {
+  SSRComponent?: GComponent;
+}
+export interface MarkExtensionOptions<GComponent = any> extends BaseExtensionOptions {
+  SSRComponent?: GComponent;
+}

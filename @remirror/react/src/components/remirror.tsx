@@ -97,7 +97,6 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
   }
 
   public updateExtensionManager() {
-    console.log('updateing extension manager');
     this.manager
       .init({ getEditorState: this.getEditorState, getPortalContainer: this.getPortalContainer })
       .initView(this.view);
@@ -143,6 +142,7 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
       undefined,
       {
         state: this.state.newState,
+        nodeViews: this.manager.data.nodeViews,
         dispatchTransaction: this.dispatchTransaction,
         attributes: this.getAttributes,
         editable: () => {
@@ -388,6 +388,7 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
 
     if (!manager.isEqual(this.props.manager)) {
       this.updateExtensionManager();
+      this.view.setProps({ ...this.view.props, nodeViews: this.manager.data.nodeViews });
       this.setContent(toHTML({ node: this.state.newState.doc, schema: this.manager.data.schema }), true);
     }
 
