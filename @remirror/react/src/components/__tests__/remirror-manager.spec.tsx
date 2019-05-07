@@ -84,7 +84,7 @@ describe('manager prop', () => {
     );
 
     expect(manager).not.toEqual(firstManager);
-    expect(manager.data.plugins).not.toEqual(firstManager.data.plugins);
+    expect(manager.data.directPlugins).not.toEqual(firstManager.data.directPlugins);
     expect(initSpy).toHaveBeenCalled();
     expect(initViewSpy).toHaveBeenCalledWith(expect.any(EditorView));
   });

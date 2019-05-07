@@ -7,7 +7,7 @@ import { EditorState } from '@remirror/core';
 import { InjectedRemirrorProps, RemirrorEventListenerParams } from '@remirror/react-utils';
 import { createTestManager } from '@test-fixtures/schema-helpers';
 import { Remirror } from '../';
-import { RemirrorProviderProps } from '../providers';
+import { RemirrorEditorProps } from '../providers';
 
 const textContent = `This is editor text`;
 const label = 'Remirror editor';
@@ -136,7 +136,7 @@ describe('initialContent', () => {
 describe('Remirror Controlled Component', () => {
   const initialContent = `<p>Hello</p>`;
   const expectedContent = `<p>World</p>`;
-  let props: RemirrorProviderProps;
+  let props: RemirrorEditorProps;
   beforeEach(() => {
     props = {
       label,

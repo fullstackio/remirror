@@ -49,6 +49,7 @@ interface ExtensionManagerInitParams {
 interface ExtensionManagerData {
   schema: EditorSchema;
   styles: Interpolation;
+  directPlugins: ProsemirrorPlugin[];
   plugins: ProsemirrorPlugin[];
   nodeViews: Record<string, NodeViewMethod>;
   keymaps: ProsemirrorPlugin[];
@@ -74,6 +75,10 @@ export class ExtensionManager {
   private initialized = false;
   private initData: ExtensionManagerData = {} as ExtensionManagerData;
 
+  get schema() {
+    return this.initData.schema;
+  }
+
   get data() {
     if (!this.initialized) {
       throw new Error('Extension Manager must  be initialized before attempting to access the data');
@@ -84,6 +89,9 @@ export class ExtensionManager {
 
   constructor(extensionMapValues: FlexibleExtension[]) {
     this.extensions = transformExtensionMap(extensionMapValues);
+
+    // Initialize the schema immediately since this doesn't ever change.
+    this.initData.schema = this.createSchema();
   }
 
   /**
@@ -100,14 +108,20 @@ export class ExtensionManager {
     this.getPortalContainer = getPortalContainer;
     this.initialized = true;
 
-    this.initData.schema = this.createSchema();
     this.initData.styles = this.styles();
-    this.initData.plugins = this.plugins();
+    this.initData.directPlugins = this.plugins();
     this.initData.nodeViews = this.nodeViews();
     this.initData.keymaps = this.keymaps();
     this.initData.inputRules = this.inputRules();
     this.initData.pasteRules = this.pasteRules();
     this.initData.attributes = this.attributes();
+
+    this.initData.plugins = [
+      ...this.initData.directPlugins,
+      this.initData.inputRules,
+      ...this.initData.pasteRules,
+      ...this.initData.keymaps,
+    ];
 
     return this;
   }

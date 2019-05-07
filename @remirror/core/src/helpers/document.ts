@@ -627,7 +627,7 @@ export const createDocumentNode = ({ content, schema, doc = document }: CreateDo
     return fromHTML({ doc, content, schema });
   }
 
-  return null;
+  return schema.nodeFromJSON(EMPTY_PARAGRAPH_NODE);
 };
 
 interface CustomDocParams {

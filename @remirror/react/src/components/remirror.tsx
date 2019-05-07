@@ -83,11 +83,6 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
     return this.props.manager;
   }
 
-  private get plugins(): ProsemirrorPlugin[] {
-    const { plugins, inputRules, pasteRules, keymaps } = this.manager.data;
-    return [...plugins, inputRules, ...pasteRules, ...keymaps];
-  }
-
   constructor(props: RemirrorProps) {
     super(props);
     this.manager.init({ getEditorState: this.getEditorState, getPortalContainer: this.getPortalContainer });
@@ -119,13 +114,15 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
    * It this point both prevState and newState point to the same state object.
    */
   private createInitialState(): CompareStateParams {
+    const { schema, plugins } = this.manager.data;
     const newState = EditorState.create({
+      schema,
       doc: createDocumentNode({
         content: this.props.initialContent,
         doc: this.doc,
-        schema: this.manager.data.schema,
+        schema,
       }),
-      plugins: this.plugins,
+      plugins,
     });
 
     return {
@@ -430,11 +427,11 @@ export class Remirror extends Component<RemirrorProps, CompareStateParams> {
    * @param triggerOnChange
    */
   private setContent = (content: RemirrorContentType, triggerOnChange = false) => {
-    const { schema } = this.manager.data;
+    const { schema, plugins } = this.manager.data;
     const editorState = EditorState.create({
       schema,
       doc: createDocumentNode({ content, schema, doc: this.doc }),
-      plugins: this.plugins,
+      plugins,
     });
 
     this.updateState(editorState, triggerOnChange);
