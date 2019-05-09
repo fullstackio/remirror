@@ -35,8 +35,8 @@
     "keycode": "^2.2.0",
     "lolex": "^4.0.1",
     "prosemirror-model": "^1.7.0",
-    "prosemirror-state": "^1.2.2",
-    "prosemirror-view": "^1.9.1",
+    "prosemirror-state": "^1.2.3",
+    "prosemirror-view": "^1.9.2",
     "react-testing-library": "7.0.0"
   },
   "peerDependencies": {

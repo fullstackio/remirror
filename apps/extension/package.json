@@ -28,7 +28,7 @@
     "dom-chef": "3.6.0",
     "dom-loaded": "1.2.0",
     "element-ready": "3.1.0",
-    "firebase": "5.11.1",
+    "firebase": "6.0.1",
     "github-reserved-names": "1.1.5",
     "ramda": "0.26.1",
     "react": "16.8.6",
@@ -53,13 +53,13 @@
     "copy-webpack-plugin": "5.0.3",
     "dot-json": "1.1.0",
     "extract-text-webpack-plugin": "3.0.2",
-    "glob": "7.1.3",
+    "glob": "7.1.4",
     "html-webpack-exclude-empty-assets-plugin": "0.1.1",
     "html-webpack-plugin": "3.2.0",
     "jest-webextension-mock": "3.5.0",
     "purifycss-webpack": "0.7.0",
     "web-ext-submit": "3.0.0",
-    "webpack": "4.30.0",
+    "webpack": "4.31.0",
     "webpack-chrome-extension-reloader": "1.3.0"
   }
 }

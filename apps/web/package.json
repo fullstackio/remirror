@@ -45,9 +45,9 @@
     "dotenv": "8.0.0",
     "emoji-mart": "2.9.2",
     "express": "4.16.4",
-    "firebase": "5.11.1",
+    "firebase": "6.0.1",
     "firebase-admin": "7.3.0",
-    "firebase-functions": "2.3.0",
+    "firebase-functions": "2.3.1",
     "formik": "1.5.4",
     "hoist-non-react-statics": "3.3.0",
     "ky": "0.10.0",
@@ -56,16 +56,16 @@
     "nanoid": "2.0.1",
     "next": "8.1.0",
     "next-compose-plugins": "2.2.0",
-    "next-offline": "3.3.8",
+    "next-offline": "3.4.0",
     "next-routes": "1.4.2",
     "react": "16.8.4",
     "react-albus": "2.0.0",
     "react-dom": "16.8.4",
     "react-spring": "8.0.20",
-    "rxfire": "3.4.3",
+    "rxfire": "3.4.5",
     "rxjs": "6.5.1",
     "semantic-ui-css": "2.4.1",
-    "semantic-ui-react": "0.86.0",
+    "semantic-ui-react": "0.87.1",
     "source-map-support": "0.5.12",
     "stylis-plugin-extra-scope": "0.1.1",
     "unstated-debug": "0.3.2",
@@ -73,7 +73,7 @@
   },
   "devDependencies": {
     "@types/hoist-non-react-statics": "3.3.1",
-    "@types/lodash": "4.14.123",
+    "@types/lodash": "4.14.125",
     "@types/next": "8.0.5",
     "@types/styled-jsx": "2.2.8",
     "@zeit/next-bundle-analyzer": "0.1.2",
@@ -86,6 +86,6 @@
     "ts-node": "8.1.0",
     "tsconfig-paths": "3.8.0",
     "url-loader": "1.1.2",
-    "webpack": "4.30.0"
+    "webpack": "4.31.0"
   }
 }
