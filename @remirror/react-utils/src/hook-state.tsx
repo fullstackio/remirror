@@ -1,12 +1,12 @@
 import React, { createContext, FC, useContext } from 'react';
 
-import { AnyFunction } from '@remirror/core';
+export type StateHook<GType = any> = () => GType;
 
 // Create context for global store assignment
-const HookStateContext = createContext<Map<AnyFunction, any> | undefined>(undefined);
+const HookStateContext = createContext<Map<StateHook, any>>(null);
 
 interface HookStateProviderProps {
-  stores: AnyFunction[];
+  stores: StateHook[];
 }
 
 export const HookStateProvider: FC<HookStateProviderProps> = ({ stores, children }) => {
@@ -27,7 +27,7 @@ export const HookStateProvider: FC<HookStateProviderProps> = ({ stores, children
   return <HookStateContext.Provider value={storesMap}>{children}</HookStateContext.Provider>;
 };
 
-export function useStore<GType extends AnyFunction>(hook: GType): ReturnType<GType> {
+export function useStore<GType extends StateHook>(hook: GType): ReturnType<GType> {
   const map = useContext(HookStateContext);
 
   // complain if no map is given
