@@ -89,9 +89,6 @@ export class ExtensionManager {
 
   constructor(extensionMapValues: FlexibleExtension[]) {
     this.extensions = transformExtensionMap(extensionMapValues);
-
-    // Initialize the schema immediately since this doesn't ever change.
-    this.initData.schema = this.createSchema();
   }
 
   /**
@@ -108,6 +105,7 @@ export class ExtensionManager {
     this.getPortalContainer = getPortalContainer;
     this.initialized = true;
 
+    this.initData.schema = this.createSchema();
     this.initData.styles = this.styles();
     this.initData.directPlugins = this.plugins();
     this.initData.nodeViews = this.nodeViews();
