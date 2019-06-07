@@ -16,13 +16,11 @@ import { CodeBlock } from '@remirror/extension-code-block';
 import {
   ManagedRemirrorEditor,
   ManagedRemirrorEditorProps,
-  Remirror,
   RemirrorEditor,
   RemirrorEditorProps,
   RemirrorEventListener,
   RemirrorExtension,
   RemirrorManager,
-  useRemirror,
 } from '@remirror/react';
 import React, { FC, useCallback, useMemo, useState } from 'react';
 import { fromMarkdown, toMarkdown } from './markdown';
@@ -107,7 +105,7 @@ interface Content {
 export const Editor: FC<EditorProps> = ({ initialValue = '', editor }) => {
   const manager = useWysiwygManager();
   const initialContent = createInitialContent({ content: initialValue, schema: manager.schema });
-  const [content, setContent] = useState<Content>(initialContent);
+  // const [content, setContent] = useState<Content>(initialContent);
   // const [markdownContent, setMarkdownContent] = useState<string>(initialMarkdown);
   // const [pmContent, setPMContent] = useState<ProsemirrorNode>(createDocumentNode({content: }));
   return editor === 'markdown' ? (

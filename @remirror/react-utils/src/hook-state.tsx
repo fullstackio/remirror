@@ -3,7 +3,7 @@ import React, { createContext, FC, useContext } from 'react';
 export type StateHook<GType = any> = () => GType;
 
 // Create context for global store assignment
-const HookStateContext = createContext<Map<StateHook, any>>(null);
+const HookStateContext = createContext<Map<StateHook, any> | null>(null);
 
 interface HookStateProviderProps {
   stores: StateHook[];

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 import { Attrs, omit } from '@remirror/core';
 import { InlineCursorTarget } from '@remirror/core-extensions';
-import { EmojiNode, EmojiNodeOptions, isBaseEmoji } from '@remirror/extension-emoji';
+import { Emoji as EmojiNode, EmojiOptions as EmojiNodeOptions, isBaseEmoji } from '@remirror/extension-emoji';
 import { EnhancedLink, EnhancedLinkOptions } from '@remirror/extension-enhanced-link';
 import {
   ActionTaken,

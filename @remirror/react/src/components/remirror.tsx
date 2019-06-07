@@ -12,7 +12,6 @@ import {
   NodeViewPortalContainer,
   ObjectNode,
   Position,
-  ProsemirrorPlugin,
   RemirrorContentType,
   toHTML,
   Transaction,

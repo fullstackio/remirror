@@ -5,8 +5,7 @@
     "packages": [
       "@remirror/*",
       "packages/*",
-      "docs",
-      "apps/*"
+      "docs"
     ]
   },
   "scripts": {
@@ -85,7 +84,7 @@
     "@types/node": "12.0.0",
     "@types/prosemirror-test-builder": "1.0.1",
     "@types/puppeteer": "1.12.4",
-    "@types/react": "16.8.17",
+    "@types/react": "16.8.19",
     "@types/react-dom": "16.8.4",
     "@types/yargs": "13.0.0",
     "audit-ci": "1.7.0",
@@ -300,6 +299,7 @@
     "typescript": "3.4.5",
     "jsdom": "15.0.0",
     "hoist-non-react-statics": "3.3.0",
-    "@microsoft/tsdoc": "0.12.9"
+    "@microsoft/tsdoc": "0.12.9",
+    "@types/react": "16.8.6"
   }
 }

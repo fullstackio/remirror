@@ -1,206 +1,206 @@
 {
   "@remirror/core/lib/dist/core.cjs.js": {
-    "bundled": 92314,
-    "minified": 34955,
-    "gzipped": 9615
+    "bundled": 89911,
+    "minified": 33520,
+    "gzipped": 9528
   },
   "@remirror/core/lib/dist/core.esm.js": {
-    "bundled": 89526,
-    "minified": 31134,
-    "gzipped": 9084,
+    "bundled": 87263,
+    "minified": 29804,
+    "gzipped": 8989,
     "treeshaked": {
       "rollup": {
-        "code": 1394,
-        "import_statements": 800
+        "code": 1067,
+        "import_statements": 473
       },
       "webpack": {
-        "code": 3400
+        "code": 2796
       }
     }
   },
   "@remirror/core/lib/dist/core.umd.js": {
-    "bundled": 467316,
-    "minified": 157859,
-    "gzipped": 47996
+    "bundled": 450326,
+    "minified": 155760,
+    "gzipped": 47524
   },
   "@remirror/core/lib/dist/core.umd.min.js": {
-    "bundled": 461406,
-    "minified": 154713,
-    "gzipped": 46603
+    "bundled": 444544,
+    "minified": 152614,
+    "gzipped": 46119
   },
   "@remirror/core-extensions/lib/dist/core-extensions.cjs.js": {
-    "bundled": 51530,
-    "minified": 26265,
-    "gzipped": 5528
+    "bundled": 47945,
+    "minified": 23783,
+    "gzipped": 5358
   },
   "@remirror/core-extensions/lib/dist/core-extensions.esm.js": {
-    "bundled": 49785,
-    "minified": 24590,
-    "gzipped": 5407,
+    "bundled": 46300,
+    "minified": 22203,
+    "gzipped": 5229,
     "treeshaked": {
       "rollup": {
-        "code": 4714,
-        "import_statements": 953
+        "code": 4247,
+        "import_statements": 677
       },
       "webpack": {
-        "code": 8798
+        "code": 8078
       }
     }
   },
   "@remirror/core-extensions/lib/dist/core-extensions.umd.js": {
-    "bundled": 589809,
-    "minified": 214521,
-    "gzipped": 61133
+    "bundled": 585245,
+    "minified": 212954,
+    "gzipped": 60873
   },
   "@remirror/core-extensions/lib/dist/core-extensions.umd.min.js": {
-    "bundled": 589809,
-    "minified": 214521,
-    "gzipped": 61133
+    "bundled": 585245,
+    "minified": 212954,
+    "gzipped": 60873
   },
   "@remirror/extension-emoji/lib/dist/extension-emoji.cjs.js": {
-    "bundled": 55341,
-    "minified": 26927,
-    "gzipped": 10192
+    "bundled": 54190,
+    "minified": 26097,
+    "gzipped": 9986
   },
   "@remirror/extension-emoji/lib/dist/extension-emoji.esm.js": {
-    "bundled": 54748,
-    "minified": 26429,
-    "gzipped": 10090,
+    "bundled": 53681,
+    "minified": 25659,
+    "gzipped": 9872,
     "treeshaked": {
       "rollup": {
-        "code": 18629,
-        "import_statements": 572
+        "code": 18381,
+        "import_statements": 324
       },
       "webpack": {
-        "code": 21639
+        "code": 21139
       }
     }
   },
   "@remirror/extension-emoji/lib/dist/extension-emoji.umd.js": {
-    "bundled": 1271678,
-    "minified": 660054,
-    "gzipped": 124209
+    "bundled": 1211760,
+    "minified": 658566,
+    "gzipped": 123754
   },
   "@remirror/extension-emoji/lib/dist/extension-emoji.umd.min.js": {
-    "bundled": 1232828,
-    "minified": 646889,
-    "gzipped": 119935
+    "bundled": 1173816,
+    "minified": 645424,
+    "gzipped": 119452
   },
   "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.cjs.js": {
-    "bundled": 22455,
-    "minified": 17523,
-    "gzipped": 8156
+    "bundled": 21388,
+    "minified": 16779,
+    "gzipped": 7994
   },
   "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.esm.js": {
-    "bundled": 22081,
-    "minified": 17230,
-    "gzipped": 8080,
+    "bundled": 21134,
+    "minified": 16577,
+    "gzipped": 7903,
     "treeshaked": {
       "rollup": {
-        "code": 503,
-        "import_statements": 503
+        "code": 206,
+        "import_statements": 206
       },
       "webpack": {
-        "code": 16030
+        "code": 15419
       }
     }
   },
   "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.umd.js": {
-    "bundled": 284355,
-    "minified": 107161,
-    "gzipped": 33519
+    "bundled": 274630,
+    "minified": 105521,
+    "gzipped": 33084
   },
   "@remirror/extension-enhanced-link/lib/dist/extension-enhanced-link.umd.min.js": {
-    "bundled": 284355,
-    "minified": 107161,
-    "gzipped": 33519
+    "bundled": 274630,
+    "minified": 105521,
+    "gzipped": 33084
   },
   "@remirror/extension-mention/lib/dist/extension-mention.cjs.js": {
-    "bundled": 18298,
-    "minified": 7553,
-    "gzipped": 2592
+    "bundled": 17032,
+    "minified": 6801,
+    "gzipped": 2449
   },
   "@remirror/extension-mention/lib/dist/extension-mention.esm.js": {
-    "bundled": 17909,
-    "minified": 7144,
-    "gzipped": 2515,
+    "bundled": 16723,
+    "minified": 6453,
+    "gzipped": 2373,
     "treeshaked": {
       "rollup": {
-        "code": 556,
-        "import_statements": 451
+        "code": 366,
+        "import_statements": 261
       },
       "webpack": {
-        "code": 5786
+        "code": 5204
       }
     }
   },
   "@remirror/extension-mention/lib/dist/extension-mention.umd.js": {
-    "bundled": 482366,
-    "minified": 173755,
-    "gzipped": 50592
+    "bundled": 479160,
+    "minified": 172390,
+    "gzipped": 50241
   },
   "@remirror/extension-mention/lib/dist/extension-mention.umd.min.js": {
-    "bundled": 482366,
-    "minified": 173755,
-    "gzipped": 50592
+    "bundled": 479160,
+    "minified": 172390,
+    "gzipped": 50241
   },
   "@remirror/react/lib/dist/react.cjs.js": {
-    "bundled": 72048,
-    "minified": 52012,
-    "gzipped": 15662
+    "bundled": 71245,
+    "minified": 51178,
+    "gzipped": 15756
   },
   "@remirror/react/lib/dist/react.esm.js": {
-    "bundled": 70861,
-    "minified": 50987,
-    "gzipped": 15530,
+    "bundled": 70218,
+    "minified": 50275,
+    "gzipped": 15617,
     "treeshaked": {
       "rollup": {
-        "code": 12889,
-        "import_statements": 1642
+        "code": 12301,
+        "import_statements": 1210
       },
       "webpack": {
-        "code": 15341
+        "code": 14303
       }
     }
   },
   "@remirror/react/lib/dist/react.umd.js": {
-    "bundled": 697682,
-    "minified": 293637,
-    "gzipped": 88791
+    "bundled": 390797,
+    "minified": 164875,
+    "gzipped": 51222
   },
   "@remirror/react/lib/dist/react.umd.min.js": {
-    "bundled": 681134,
-    "minified": 286548,
-    "gzipped": 86577
+    "bundled": 376432,
+    "minified": 158597,
+    "gzipped": 48916
   },
   "@remirror/react-ssr/lib/dist/react-ssr.cjs.js": {
-    "bundled": 47188,
-    "minified": 22624,
-    "gzipped": 8548
+    "bundled": 46578,
+    "minified": 22173,
+    "gzipped": 8463
   },
   "@remirror/react-ssr/lib/dist/react-ssr.esm.js": {
-    "bundled": 46706,
-    "minified": 22219,
-    "gzipped": 8441,
+    "bundled": 46156,
+    "minified": 21813,
+    "gzipped": 8356,
     "treeshaked": {
       "rollup": {
-        "code": 18367,
-        "import_statements": 310
+        "code": 18232,
+        "import_statements": 175
       },
       "webpack": {
-        "code": 19627
+        "code": 19393
       }
     }
   },
   "@remirror/react-ssr/lib/dist/react-ssr.umd.js": {
-    "bundled": 547011,
-    "minified": 207210,
-    "gzipped": 62504
+    "bundled": 688136,
+    "minified": 239208,
+    "gzipped": 70460
   },
   "@remirror/react-ssr/lib/dist/react-ssr.umd.min.js": {
-    "bundled": 540561,
-    "minified": 203783,
-    "gzipped": 60917
+    "bundled": 681402,
+    "minified": 235785,
+    "gzipped": 68880
   },
   "packages/remirror/lib/dist/remirror.cjs.js": {
     "bundled": 943,
@@ -232,119 +232,119 @@
     "gzipped": 348
   },
   "@remirror/renderer-react/lib/dist/renderer-react.cjs.js": {
-    "bundled": 23579,
-    "minified": 15926,
-    "gzipped": 5567
+    "bundled": 22918,
+    "minified": 15481,
+    "gzipped": 5480
   },
   "@remirror/renderer-react/lib/dist/renderer-react.esm.js": {
-    "bundled": 23039,
-    "minified": 15472,
-    "gzipped": 5464,
+    "bundled": 22458,
+    "minified": 15087,
+    "gzipped": 5376,
     "treeshaked": {
       "rollup": {
-        "code": 335,
-        "import_statements": 335
+        "code": 158,
+        "import_statements": 158
       },
       "webpack": {
-        "code": 1583
+        "code": 1274
       }
     }
   },
   "@remirror/renderer-react/lib/dist/renderer-react.umd.js": {
-    "bundled": 74742,
-    "minified": 35424,
-    "gzipped": 13404
+    "bundled": 71208,
+    "minified": 33926,
+    "gzipped": 12940
   },
   "@remirror/renderer-react/lib/dist/renderer-react.umd.min.js": {
-    "bundled": 68292,
-    "minified": 32007,
-    "gzipped": 11832
+    "bundled": 64758,
+    "minified": 30526,
+    "gzipped": 11361
   },
   "@remirror/ui-twitter/lib/dist/ui-twitter.cjs.js": {
-    "bundled": 36474,
-    "minified": 25798,
-    "gzipped": 6438
+    "bundled": 34948,
+    "minified": 24590,
+    "gzipped": 6281
   },
   "@remirror/ui-twitter/lib/dist/ui-twitter.esm.js": {
-    "bundled": 35576,
-    "minified": 25018,
-    "gzipped": 6319,
+    "bundled": 34166,
+    "minified": 23897,
+    "gzipped": 6160,
     "treeshaked": {
       "rollup": {
-        "code": 22245,
-        "import_statements": 1350
+        "code": 13765,
+        "import_statements": 661
       },
       "webpack": {
-        "code": 24837
+        "code": 23930
       }
     }
   },
   "@remirror/ui-twitter/lib/dist/ui-twitter.umd.js": {
-    "bundled": 1830010,
-    "minified": 943612,
-    "gzipped": 217232
+    "bundled": 2204709,
+    "minified": 1053867,
+    "gzipped": 248236
   },
   "@remirror/ui-twitter/lib/dist/ui-twitter.umd.min.js": {
-    "bundled": 1758376,
-    "minified": 898302,
-    "gzipped": 202014
+    "bundled": 2132529,
+    "minified": 1007865,
+    "gzipped": 233702
   },
   "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.cjs.js": {
-    "bundled": 18981,
-    "minified": 13259,
-    "gzipped": 3708
+    "bundled": 17864,
+    "minified": 12373,
+    "gzipped": 3528
   },
   "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.esm.js": {
-    "bundled": 17768,
-    "minified": 12146,
-    "gzipped": 3675,
+    "bundled": 16791,
+    "minified": 11366,
+    "gzipped": 3490,
     "treeshaked": {
       "rollup": {
-        "code": 9656,
-        "import_statements": 1735
+        "code": 9122,
+        "import_statements": 1358
       },
       "webpack": {
-        "code": 12218
+        "code": 11378
       }
     }
   },
   "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.umd.js": {
-    "bundled": 925127,
-    "minified": 390493,
-    "gzipped": 122087
+    "bundled": 1221338,
+    "minified": 499373,
+    "gzipped": 152931
   },
   "@remirror/ui-wysiwyg/lib/dist/ui-wysiwyg.umd.min.js": {
-    "bundled": 862019,
-    "minified": 353701,
-    "gzipped": 109364
+    "bundled": 1158607,
+    "minified": 461985,
+    "gzipped": 140366
   },
   "@remirror/react-utils/lib/dist/react-utils.cjs.js": {
-    "bundled": 7030,
-    "minified": 3168,
-    "gzipped": 1107
+    "bundled": 6839,
+    "minified": 2985,
+    "gzipped": 1075
   },
   "@remirror/react-utils/lib/dist/react-utils.esm.js": {
-    "bundled": 6523,
-    "minified": 2647,
-    "gzipped": 986,
+    "bundled": 6352,
+    "minified": 2479,
+    "gzipped": 959,
     "treeshaked": {
       "rollup": {
-        "code": 657,
-        "import_statements": 225
+        "code": 601,
+        "import_statements": 171
       },
       "webpack": {
-        "code": 1779
+        "code": 1690
       }
     }
   },
   "@remirror/react-utils/lib/dist/react.umd.js": {
-    "bundled": 54778,
-    "minified": 21847,
-    "gzipped": 8635
+    "bundled": 52141,
+    "minified": 21300,
+    "gzipped": 8420
   },
   "@remirror/react-utils/lib/dist/react.umd.min.js": {
-    "bundled": 48328,
-    "minified": 18447,
-    "gzipped": 7060
+    "bundled": 45833,
+    "minified": 17900,
+    "gzipped": 6857
   }
 }
