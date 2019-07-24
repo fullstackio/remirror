@@ -1,9 +1,8 @@
-import React, { FC, MouseEventHandler, useState } from 'react';
+import React, { FC, useState } from 'react';
 
-import { memoize } from '@remirror/core';
+import { NodeExtension, NodeExtensionOptions, NodeExtensionSpec } from '@remirror/core';
 import { BoldExtension, ItalicExtension, UnderlineExtension } from '@remirror/core-extensions';
 import {
-  bubblePositioner,
   ManagedRemirrorProvider,
   RemirrorEventListener,
   RemirrorExtension,
@@ -11,62 +10,39 @@ import {
   useRemirror,
 } from '@remirror/react';
 
-const SillyMenu: FC = () => {
-  const { getPositionerProps, actions } = useRemirror();
+export class FooExtension extends NodeExtension<NodeExtensionOptions, 'foo', {}> {
+  get name() {
+    return 'foo';
+  }
 
-  const runAction = memoize(
-    (method: () => void): MouseEventHandler<HTMLElement> => e => {
-      e.preventDefault();
-      method();
-    },
-  );
+  get schema(): NodeExtensionSpec {
+    return {
+      attrs: {
+        ...this.extraAttrs(),
+      },
+      content: 'block*',
+      group: 'block',
+      parseDOM: [
+        {
+          tag: 'div[data-foo-type]',
+        },
+      ],
+      toDOM() {
+        const attrs = {
+          'data-foo-type': 'true',
+        };
+        return ['div', attrs, ['div', { class: 'inside' }, 0]];
+      },
+    };
+  }
+}
 
-  const props = getPositionerProps({
-    positionerId: 'bubble',
-    ...bubblePositioner,
-  });
+const InnerEditor: FC = () => {
+  const { getRootProps } = useRemirror();
   return (
-    <div>
-      <div
-        style={{
-          position: 'absolute',
-          bottom: props.isActive ? props.bottom : -9999,
-          left: props.isActive ? props.left : -9999,
-        }}
-        ref={props.ref}
-      >
-        <button
-          style={{
-            backgroundColor: actions.bold.isActive() ? 'white' : 'pink',
-            fontWeight: actions.bold.isActive() ? 600 : 300,
-          }}
-          disabled={!actions.bold.isEnabled()}
-          onClick={runAction(actions.bold)}
-        >
-          b
-        </button>
-        <button
-          style={{
-            backgroundColor: actions.italic.isActive() ? 'white' : 'pink',
-            fontWeight: actions.italic.isActive() ? 600 : 300,
-          }}
-          disabled={!actions.italic.isEnabled()}
-          onClick={runAction(actions.italic)}
-        >
-          i
-        </button>
-        <button
-          style={{
-            backgroundColor: actions.underline.isActive() ? 'white' : 'pink',
-            fontWeight: actions.underline.isActive() ? 600 : 300,
-          }}
-          disabled={!actions.underline.isEnabled()}
-          onClick={runAction(actions.underline)}
-        >
-          u
-        </button>
-      </div>
-    </div>
+    <>
+      <div {...getRootProps()}></div>;
+    </>
   );
 };
 
@@ -91,13 +67,14 @@ export default () => {
           <RemirrorExtension Constructor={BoldExtension} />
           <RemirrorExtension Constructor={ItalicExtension} />
           <RemirrorExtension Constructor={UnderlineExtension} />
+          <RemirrorExtension Constructor={FooExtension} />
           <ManagedRemirrorProvider
             attributes={{ 'data-testid': 'editor-instance' }}
             onChange={onChange}
             autoFocus={true}
             initialContent={initialJson}
           >
-            <SillyMenu />
+            <InnerEditor />
           </ManagedRemirrorProvider>
         </RemirrorManager>
       </div>
@@ -140,6 +117,20 @@ const initialJson = {
         {
           type: 'text',
           text: 'However for now it is important that something is in place.',
+        },
+      ],
+    },
+    {
+      type: 'foo',
+      content: [
+        {
+          type: 'paragraph',
+          content: [
+            {
+              type: 'text',
+              text: 'This is the foo thing',
+            },
+          ],
         },
       ],
     },
